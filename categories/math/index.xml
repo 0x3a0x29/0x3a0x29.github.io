@@ -7,7 +7,297 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>0x3a0x29的博客</copyright>
-        <lastBuildDate>Sun, 17 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x3a0x29.github.io/categories/math/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 19 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x3a0x29.github.io/categories/math/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ND(自然演绎推理系统)及其相关定理</title>
+        <link>https://0x3a0x29.github.io/p/naturaldeduction/</link>
+        <pubDate>Tue, 19 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://0x3a0x29.github.io/p/naturaldeduction/</guid>
+        <description>&lt;img src="https://0x3a0x29.github.io/p/naturaldeduction/image.png" alt="Featured image of post ND(自然演绎推理系统)及其相关定理" /&gt;&lt;h1 id=&#34;nd及其相关定理&#34;&gt;ND及其相关定理
+&lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;基础知识&#34;&gt;基础知识
+&lt;/h2&gt;&lt;p&gt;命题：能唯一确定真假值的陈述句。&lt;/p&gt;
+&lt;p&gt;原子命题：不能分解为更简单的陈述句的命题。&lt;/p&gt;
+&lt;p&gt;复合命题：由联结词及简单命题构成的命题。&lt;/p&gt;
+&lt;p&gt;命题变元：用来表示命题的英文字母。&lt;/p&gt;
+&lt;p&gt;联结词：（下列的$A,B$为命题变元）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;否定词$\neg$：表示“非”，如$\neg A$表示“对$A$的否定”。&lt;/li&gt;
+&lt;li&gt;合取词$\wedge$：表示“与”，如$A\wedge B$表示“$A$与$B$”。&lt;/li&gt;
+&lt;li&gt;析取词$\vee$：表示“或”，如$A\vee B$表示“$A$或$B$”。&lt;/li&gt;
+&lt;li&gt;蕴涵词$\rightarrow$：表示“如果……那么”，如$A\rightarrow B$表示“如果$A$，那么$B$”，其中$A$被称为前件，$B$被称为后件。&lt;/li&gt;
+&lt;li&gt;双条件词$\leftrightarrow$：表示“当且仅当”，如$A\leftrightarrow B$表示“$A$当且仅当$B$”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为表示方便，我们约定联结词的运算优先级从高到低为$\neg,(\wedge,\vee),\rightarrow,\leftrightarrow$&lt;/p&gt;
+&lt;p&gt;命题公式的定义：&lt;/p&gt;
+&lt;p&gt;（1）原子命题是命题公式&lt;/p&gt;
+&lt;p&gt;（2）若$A,B$是命题公式，那么$\neg A,A\wedge B,A\vee B,A\rightarrow B,A\leftrightarrow B$也是命题公式&lt;/p&gt;
+&lt;p&gt;（3）有限次的使用（1）（2）进行复合得到的结果也是命题公式&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;自然演绎推理系统nd的简单介绍&#34;&gt;自然演绎推理系统ND的简单介绍
+&lt;/h2&gt;&lt;p&gt;与之前介绍的PC一样，自然演绎推理系统ND（natural deduction）也是一种形式系统，相较于PC而言，ND是一个更加实用、比较符合人的思维模式的推理演算系统，ND的规则和直观含义都比较明显，我们先简单介绍一下ND的组成部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集${\neg,\wedge,\vee,\rightarrow,\leftrightarrow}$、辅助符号$(,)$&lt;/li&gt;
+&lt;li&gt;形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义&lt;/li&gt;
+&lt;li&gt;公理：设$A$为可以表达任意命题公式的语法变元，$\Gamma$是一个公式集，在ND中只有一个公理（也有人把这个公理变形为推理规则，这样的ND的公理集就是$\varnothing$）：
+$\Gamma;A\vdash A(\in)$&lt;/li&gt;
+&lt;li&gt;推理规则：用于从已有的公理和已推出的结论来推理另一结论。相较于PC，在ND中多了很多推理规则，这也使得ND更加符合我们的思维模式。
+&lt;ol&gt;
+&lt;li&gt;假设引入规则$\displaystyle{\frac{\Gamma\vdash B}{\Gamma;A\vdash B}}(+)$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;假设消除规则&lt;/strong&gt;$\displaystyle{\frac{\Gamma;A\vdash B,\Gamma;\neg A\vdash B}{\Gamma\vdash B}}(-)$&lt;/li&gt;
+&lt;li&gt;$\vee$引入规则$\displaystyle{\frac{\Gamma\vdash A}{\Gamma\vdash A\vee B},\frac{\Gamma\vdash A}{\Gamma\vdash B\vee A}}(\vee+)$&lt;/li&gt;
+&lt;li&gt;$\vee$&lt;strong&gt;消除规则&lt;/strong&gt;$\displaystyle{\frac{\Gamma;A\vdash C,\Gamma;B\vdash C,\Gamma\vdash A\vee B}{\Gamma\vdash C}}(\vee-)$&lt;/li&gt;
+&lt;li&gt;$\wedge$引入规则$\displaystyle{\frac{\Gamma\vdash A,\Gamma\vdash B}{\Gamma\vdash A\wedge B}}(\wedge+)$&lt;/li&gt;
+&lt;li&gt;$\wedge$消除规则$\displaystyle{\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A},\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}}(\wedge -)$&lt;/li&gt;
+&lt;li&gt;$\rightarrow$引入规则$\displaystyle{\frac{\Gamma;A\vdash B}{\Gamma\vdash A\rightarrow B}}(\rightarrow+)$&lt;/li&gt;
+&lt;li&gt;$\rightarrow$消除规则$\displaystyle{\frac{\Gamma\vdash A,\Gamma\vdash A\rightarrow B}{\Gamma\vdash B}}(\rightarrow-)$&lt;/li&gt;
+&lt;li&gt;$\neg$&lt;strong&gt;引入规则&lt;/strong&gt;$\displaystyle{\frac{\Gamma;A\vdash B,\Gamma;A\vdash\neg B}{\Gamma\vdash\neg A}}(\neg+)$&lt;/li&gt;
+&lt;li&gt;$\neg$消除规则$\displaystyle{\frac{\Gamma\vdash A,\Gamma\vdash\neg A}{\Gamma\vdash B}}(\neg-)$&lt;/li&gt;
+&lt;li&gt;$\neg\neg$引入规则$\displaystyle{\frac{\Gamma\vdash A}{\Gamma\vdash\neg\neg A}}(\neg\neg+)$&lt;/li&gt;
+&lt;li&gt;$\neg\neg$消除规则$\displaystyle{\frac{\Gamma\vdash\neg\neg A}{\Gamma\vdash A}}(\neg\neg-)$&lt;/li&gt;
+&lt;li&gt;$\leftrightarrow$引入规则$\displaystyle{\frac{\Gamma\vdash A\rightarrow B,\Gamma\vdash B\rightarrow A}{\Gamma\vdash A\leftrightarrow B}}(\leftrightarrow+)$&lt;/li&gt;
+&lt;li&gt;$\leftrightarrow$消除规则$\displaystyle{\frac{\Gamma\vdash A\leftrightarrow B}{\Gamma\vdash A\rightarrow B},\frac{\Gamma\vdash A\leftrightarrow B}{\Gamma\vdash B\rightarrow A}}(\leftrightarrow-)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;定理推导：包括所有的推理结论及其推理过程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们现在对这里的14个推理规则的意义进行解释：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(+)$规则：考虑重言式$B\rightarrow(A\rightarrow B)$&lt;/li&gt;
+&lt;li&gt;$(-)$规则：人在推理中引入假设$A$或者引入假设$\neg A$并不影响$B$的推导&lt;/li&gt;
+&lt;li&gt;$(\vee+)$规则：考虑重言式$A\rightarrow A\vee B$和$A\rightarrow B\vee A$&lt;/li&gt;
+&lt;li&gt;$(\vee-)$规则：考虑重言式$(A\rightarrow C)\wedge(B\rightarrow C)(A\vee B)\rightarrow C$&lt;/li&gt;
+&lt;li&gt;$(\wedge+)$规则：考虑重言式$A\rightarrow(B\rightarrow A\wedge B)$&lt;/li&gt;
+&lt;li&gt;$(\wedge-)$规则：考虑重言式$A\wedge B\rightarrow A$和$A\wedge B\rightarrow B$&lt;/li&gt;
+&lt;li&gt;$(\rightarrow+)$规则：考虑PC中的演绎定理&lt;/li&gt;
+&lt;li&gt;$(\rightarrow-)$规则：考虑PC中的分离规则&lt;/li&gt;
+&lt;li&gt;$(\neg+)$规则：实际上就是反证法&lt;/li&gt;
+&lt;li&gt;$(\neg-)$规则：考虑重言式$\neg A\rightarrow(A\rightarrow B)$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg+)$规则：考虑重言式$A\rightarrow\neg\neg A$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg-)$规则：考虑重言式$\neg\neg A\rightarrow A$&lt;/li&gt;
+&lt;li&gt;$(\leftrightarrow+)$规则：考虑重言式$((A\rightarrow B)\wedge(B\rightarrow A))\rightarrow(A\leftrightarrow B)$&lt;/li&gt;
+&lt;li&gt;$(\leftrightarrow-)$规则：考虑重言式$(A\leftrightarrow B)\rightarrow((A\rightarrow B)\wedge(B\rightarrow A))$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;逻辑推理相关的基本定义&#34;&gt;逻辑推理相关的基本定义
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;演绎&lt;/strong&gt;：在ND中，若有$\Gamma\vdash_{ND}A$，即存在序列：$\Gamma_1\vdash A_1,\Gamma_2\vdash A_2,\cdots,\Gamma_m\vdash A_m$使得$\Gamma_i\vdash A_i$或为ND的公理，或为$\Gamma_i\vdash A_i(j&amp;lt; i)$，或为$\Gamma_{j_1}\vdash A_{j_1},\cdots,\Gamma_{j_k}\vdash A_{j_k}(j_1,\cdots,j_k&amp;lt; i)$使用推理规则导出的。当$\Gamma=\varnothing$时我们记作$\vdash_{ND}A$，称$A$为ND的&lt;strong&gt;定理&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;例：证明$A\vdash_{ND}B\rightarrow A$（这个定理说明了我们对一个定理增添前件后任旧是一个定理）。也就是说我们已经知道$A$成立了，现在要推出$B\rightarrow A$也成立，这个过程都要在ND中进行，故我们要在ND中构造一个演绎序列使得最后一个是$\vdash A\rightarrow(B\rightarrow A)$，一个可行的序列如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A,B\vdash A$,$(\in)$                                    （这是公理$(\in)$）&lt;/li&gt;
+&lt;li&gt;$A\vdash B\rightarrow A$,$(\rightarrow+)(1)$             （对$(1)$使用$\rightarrow+$规则）&lt;/li&gt;
+&lt;li&gt;$\vdash A\rightarrow(B\rightarrow A)$,$(\rightarrow)(2)$ （对$(2)$使用$\rightarrow+$规则）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;nd中的基本定理&#34;&gt;ND中的基本定理
+&lt;/h2&gt;&lt;p&gt;在ND中直接使用公理和推理规则得出ND中的定理会非常繁琐，其中有不少步骤遵循相同的模式，下列总结了ND中10个基本定理，用于帮助寻找ND的定理：&lt;/p&gt;
+&lt;p&gt;$Th1$：$\vdash_{ND}A\vee\neg A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vdash A\wedge\neg A$,$(\vee+)(1)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vdash A\vee\neg A$,$(\vee+)(3)$&lt;/li&gt;
+&lt;li&gt;$\vdash A\vee\neg A$,$(-)(2)(4)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th2$：$\vdash_{ND}\neg(A\vee B)\leftrightarrow(\neg A\wedge\neg B)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg(A\vee B),A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\vee B),A\vdash A\vee B$,$(\vee+)(1)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\vee B),A\vdash\neg(A\vee B)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\vee B)\vdash\neg A$,$(\neg+)(2)(3)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\vee B),B\vdash B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\vee B),B\vdash A\vee B$,$(\vee+)(5)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\vee B),B\vdash\neg(A\vee B)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\vee B)\vdash\neg B$,$(\neg+)(6)(7)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\vee B)\vdash\neg A\wedge\neg B$,$(\wedge+)(4)(8)$&lt;/li&gt;
+&lt;li&gt;$\vdash\neg(A\vee B)\rightarrow(\neg A\wedge\neg B)$,$(\rightarrow+)(9)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B,A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B,A\vdash\neg A\wedge\neg B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B,A\vdash\neg A$,$(\wedge-)(12)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B,A\vdash A\wedge\neg A$,$(\wedge+)(11)(13)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B,B\vdash B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B,B\vdash\neg A\wedge\neg B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B,B\vdash\neg B$,$(\wedge-)(16)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B,A\vdash A\wedge\neg A$,$(\neg-)(15)(17)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B\vdash A\vee B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B\vdash A\wedge\neg A$,$(\vee-)(14)(18)(19)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B\vdash A$,$(\wedge-)(20)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B,A\vee B\vdash\neg A$,$(\wedge-)(20)$&lt;/li&gt;
+&lt;li&gt;$\neg A\wedge\neg B\vdash\neg(A\vee B)$,$(\neg+)(21)(22)$&lt;/li&gt;
+&lt;li&gt;$\vdash(\neg A\wedge\neg B)\rightarrow\neg(A\vee B)$,$(\rightarrow+)(23)$&lt;/li&gt;
+&lt;li&gt;$\vdash\neg(A\vee B)\leftrightarrow(\neg A\wedge\neg B)$,$(\leftrightarrow+)(10)(24)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th3$：$\vdash_{ND}\neg(A\wedge B)\leftrightarrow(\neg A\vee\neg B)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg(A\wedge B),A,B\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\wedge B),A,B\vdash B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\wedge B),A,B\vdash A\wedge B$,$(\wedge+)(1)(2)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\wedge B),A,B\vdash\neg(A\wedge B)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\wedge B),A\vdash\neg B$,$(\neg+)(3)(4)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\wedge B),A\vdash\neg A\vee\neg B$,$(\vee+)(5)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\wedge B),\neg A\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\wedge B),\neg A\vdash\neg A\vee\neg B$,$(\vee+)(7)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\wedge B)\vdash\neg A\vee\neg B$,$(-)(6)(8)$&lt;/li&gt;
+&lt;li&gt;$\vdash\neg(A\wedge B)\rightarrow(\neg A\vee\neg B)$,$(\rightarrow+)(9)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B,\neg A,A\wedge B\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B,\neg A,A\wedge B\vdash A\wedge B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B,\neg A,A\wedge B\vdash A$,$(\wedge-)(12)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B,\neg A\vdash\neg(A\wedge B)$,$(\neg+)(11)(13)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B,\neg B,A\wedge B\vdash\neg B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B,\neg B,A\wedge B\vdash A\wedge B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B,\neg B,A\wedge B\vdash B$,$(\wedge-)(16)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B,\neg B\vdash\neg(A\wedge B)$,$(\neg+)(15)(17)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B\vdash\neg A\vee\neg B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee\neg B\vdash\neg(A\wedge B)$,$(\vee-)(14)(18)(19)$&lt;/li&gt;
+&lt;li&gt;$\vdash(\neg A\vee\neg B)\rightarrow\neg(A\wedge B)$,$(\rightarrow+)(20)$&lt;/li&gt;
+&lt;li&gt;$\vdash(\neg A\vee\neg b)\leftrightarrow\neg(A\wedge B)$,$(\leftrightarrow+)(10)(21)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th4$：$\neg A\rightarrow B\vdash\dashv_{ND} A\vee B$，这里的$P\vdash\dashv_{ND}Q$当且仅当$P\vdash_{ND}Q$且$Q\vdash_{ND}P$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg A\rightarrow B,\neg A\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow B,\neg A\vdash\neg A\rightarrow B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow B,\neg A\vdash B$,$(\rightarrow-)(1)(2)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow B,\neg A\vdash A\vee B$,$(\vee+)(3)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow B,A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow B,A\vdash A\vee B$,$(\vee+)(5)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow B\vdash A\vee B$,$(-)(4)(6)$&lt;/li&gt;
+&lt;li&gt;$A\vee B,\neg A,A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vee B,\neg A,A\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vee B,\neg A,A\vdash B$,$(\neg-)(8)(9)$&lt;/li&gt;
+&lt;li&gt;$A\vee B,\neg A,B\vdash B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vee B,\neg A\vdash A\vee B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vee B,\neg A\vdash B$,$(\vee-)(8)(11)(12)$&lt;/li&gt;
+&lt;li&gt;$A\vee B\vdash \neg A\rightarrow B$,$(\rightarrow+)(13)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th5$：$A\rightarrow B\vdash\dashv_{ND}\neg A\vee B$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow B,A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow B,A\vdash A\rightarrow B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow B,A\vdash B$,$(\rightarrow-)(1)(2)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow B,A\vdash\neg A\vee B$,$(\vee+)(3)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow B,\neg A\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow B,\neg A\vdash\neg A\vee B$,$(\vee+)(5)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow B\vdash\neg A\vee B$,$(-)(4)(6)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee B,\neg A,A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee B,\neg A,A\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee B,\neg A,A\vdash B$,$(\neg-)(8)(9)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee B,A,B\vdash B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee B,A\vdash\neg A\vee B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee B,A\vdash B$,$(\vee-)(8)(11)(12)$&lt;/li&gt;
+&lt;li&gt;$\neg A\vee B\vdash A\rightarrow B$,$(\rightarrow+)(13)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th6$：$\vdash_{ND}A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\wedge(B\vee C),B\vdash A\wedge(B\vee C)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),B\vdash A$,$(\wedge-)(1)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),B\vdash B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),B\vdash A\wedge B$,$(\wedge+)(2)(3)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),B\vdash(A\wedge B)\vee(A\wedge C)$,$(\vee+)(4)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),C\vdash A\wedge(B\vee C)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),C\vdash A$,$(\wedge-)(6)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),C\vdash C$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),C\vdash A\wedge C$,$(\wedge+)(7)(8)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C),C\vdash(A\wedge B)\vee(A\wedge C)$,$(\vee+)(9)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C)\vdash A\wedge(B\vee C)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C)\vdash B\vee C$,$(\wedge-)(11)$&lt;/li&gt;
+&lt;li&gt;$A\wedge(B\vee C)\vdash(A\wedge B)\vee(A\wedge C)$,$(\vee-)(5)(10)(12)$&lt;/li&gt;
+&lt;li&gt;$\vdash A\wedge(B\vee C)\rightarrow(A\wedge B)\vee(A\wedge C)$,$(\rightarrow+)(13)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge B\vdash A\wedge B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge B\vdash B$,$(\wedge-)(15)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge B\vdash B\vee C$,$(\vee+)(16)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge B\vdash A$,$(\wedge-)(15)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge B\vdash A\wedge(B\vee C)$,$(\wedge+)(17)(18)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge C\vdash A\wedge C$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge C\vdash C$,$(\wedge-)(20)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge C\vdash B\vee C$,$(\vee+)(21)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge C\vdash A$,$(\wedge-)(20)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C),A\wedge C\vdash A\wedge(B\vee C)$,$(\wedge+)(22)(23)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C)\vdash(A\wedge B)\vee(A\wedge C)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B)\vee(A\wedge C)\vdash A\wedge(B\vee C)$,$(\vee-)(19)(24)(25)$&lt;/li&gt;
+&lt;li&gt;$\vdash(A\wedge B)\vee(A\wedge C)\rightarrow A\wedge(B\vee C)$,$(\rightarrow+)(26)$&lt;/li&gt;
+&lt;li&gt;$\vdash A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$,$(\leftrightarrow+)(14)(27)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th7$：$\vdash_{HD}A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash B\wedge C$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash B$,$(\wedge-)(1)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash A\vee B$,$(\vee+)(2)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash C$,$(\wedge-)(1)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash A\vee C$,$(\vee+)(4)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash (A\vee B)\wedge(A\vee C)$,$(\wedge+)(3)(5)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),A\vdash A\vee B$,$(\vee+)(7)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),A\vdash A\vee C$,$(\vee+)(7)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C),A\vdash(A\vee B)\wedge(A\vee C)$,$(\wedge+)(8)(9)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C)\vdash A\vee(B\wedge C)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vee(B\wedge C)\vdash(A\vee B)\wedge(A\vee C)$,$(\vee-)(6)(10)(11)$&lt;/li&gt;
+&lt;li&gt;$\vdash A\vee(B\wedge C)\rightarrow(A\vee B)\wedge(A\vee C)$,$(\rightarrow+)(12)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A,A\vee B\vdash\neg A\rightarrow B$,$Th4$（这里存在着一个对应的演绎序列，这里实际上是一种简写，后面的证明中我们也这样简写）&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash(A\vee B)\rightarrow(\neg A\rightarrow B)$,$(\rightarrow+)(14)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash(A\vee B)\wedge(A\vee C)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash A\vee B$,$(\wedge-)(16)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash\neg A\rightarrow B$,$(\rightarrow-)(15)(17)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash B$,$(\rightarrow-)(18)(19)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A,A\vee C\vdash\neg A\rightarrow C$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash(A\vee C)\rightarrow(\neg A\rightarrow C)$,$(\rightarrow+)(21)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash A\vee C$,$(\wedge-)(16)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash\neg A\rightarrow C$,$(\rightarrow-)(22)(23)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash C$,$(\rightarrow-)(19)(24)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash B\wedge C$,$(\wedge+)(20)(25)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\neg A\vdash A\vee(B\wedge C)$,$(\vee+)(26)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),A\vdash A\vee(B\wedge C)$,$(\vee+)(28)$&lt;/li&gt;
+&lt;li&gt;$(A\vee B)\wedge(A\vee C),\vdash A\vee(B\wedge C)$,$(-)(27)(29)$&lt;/li&gt;
+&lt;li&gt;$\vdash(A\vee B)\wedge(A\vee C)\rightarrow A\vee(B\wedge C)$,$(\rightarrow+)(30)$&lt;/li&gt;
+&lt;li&gt;$\vdash A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$,$(\leftrightarrow+)(13)(31)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;从上面的7个定理的证明中我们可以发现，和PC相比，ND的证明思路更加符合我们的思维模式，事实上能通过PC证明的定理在ND中也可以证明出来，为了证明这个事实，我们不妨在ND中尝试证明PC中使用到的3个公理。&lt;/p&gt;
+&lt;p&gt;$Th8$：$\vdash_{ND}A\rightarrow(B\rightarrow A)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A,B\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\vdash B\rightarrow A$,$(\rightarrow+)(1)$&lt;/li&gt;
+&lt;li&gt;$\vdash A\rightarrow(B\rightarrow A)$,$(\rightarrow+)(2)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th9$：$\vdash_{ND}(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A\rightarrow B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash B$,$(\rightarrow-)(1)(2)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A\rightarrow(B\rightarrow C)$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash B\rightarrow C$,$(\rightarrow-)(1)(4)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash C$,$(\rightarrow-)(3)(5)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B\vdash A\rightarrow C$,$(\rightarrow+)(6)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C),\vdash(A\rightarrow B)\rightarrow(A\rightarrow C)$,$(\rightarrow+)(7)$&lt;/li&gt;
+&lt;li&gt;$\vdash(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$(\rightarrow+)(8)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th10$：$\vdash_{ND}(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash\neg A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash\neg A\rightarrow\neg B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash\neg B$,$(\rightarrow-)(1)(2)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash B$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash A$,$(\neg-)(3)(4)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow\neg B,A,B\vdash A$,$(\in)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow\neg B,B\vdash A$,$(-)(5)(6)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow\neg B\vdash B\rightarrow A$,$(\rightarrow+)(7)$&lt;/li&gt;
+&lt;li&gt;$\vdash(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$,$(\rightarrow+)(8)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;nd定理证明习题选&#34;&gt;ND定理证明习题选
+&lt;/h2&gt;&lt;p&gt;下面给出了六道ND定理习题供读者练习使用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;证明：$\vdash_{ND}A\rightarrow(B\rightarrow C)\leftrightarrow(A\wedge B\rightarrow C)$&lt;/li&gt;
+&lt;li&gt;证明：$A\rightarrow B,\neg(B\rightarrow C)\rightarrow\neg A\vdash_{ND}A\rightarrow C$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{ND}(A\vee B)\wedge(\neg B\vee C)\rightarrow A\vee C$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{ND}(A\wedge B)\leftrightarrow A\wedge(\neg A\vee B)$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{ND}((A\leftrightarrow B)\leftrightarrow A)\leftrightarrow B$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{ND}(A\leftrightarrow\neg B)\leftrightarrow\neg(A\leftrightarrow B)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>PC(命题逻辑演算形式系统)及其相关定理</title>
         <link>https://0x3a0x29.github.io/p/propositionalcalculus/</link>
         <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
@@ -18,11 +308,11 @@
 &lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;基础知识&#34;&gt;基础知识
-&lt;/h2&gt;&lt;p&gt;命题：能唯一确定真假值的陈述句。
-原子命题：不能分解为更简单的陈述句的命题。
-复合命题：由联结词及简单命题构成的命题。
-命题变元：用来表示命题的英文字母。（下列的$A,B$为命题变元）
-联结词：有五种常用的联结词，如下所示。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;命题：能唯一确定真假值的陈述句。&lt;/p&gt;
+&lt;p&gt;原子命题：不能分解为更简单的陈述句的命题。&lt;/p&gt;
+&lt;p&gt;复合命题：由联结词及简单命题构成的命题。&lt;/p&gt;
+&lt;p&gt;命题变元：用来表示命题的英文字母。（下列的$A,B$为命题变元）&lt;/p&gt;
+&lt;p&gt;联结词：有五种常用的联结词，如下所示。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;否定词&lt;/strong&gt;$\neg$：表示“非”，如$\neg A$表示“对$A$的否定”。&lt;/li&gt;
 &lt;li&gt;合取词$\wedge$：表示“与”，如$A\wedge B$表示“$A$与$B$”。&lt;/li&gt;
@@ -30,11 +320,11 @@
 &lt;li&gt;&lt;strong&gt;蕴涵词&lt;/strong&gt;$\rightarrow$：表示“如果……那么”，如$A\rightarrow B$表示“如果$A$，那么$B$”，其中$A$被称为前件，$B$被称为后件。&lt;/li&gt;
 &lt;li&gt;双条件词$\leftrightarrow$：表示“当且仅当”，如$A\leftrightarrow B$表示“$A$当且仅当$B$”。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;为表示方便，我们约定联结词的运算优先级从高到低为$\neg,(\wedge,\vee),\rightarrow,\leftrightarrow$
-命题公式的定义：
-（1）原子命题是命题公式。
-（2）若$A,B$是命题公式，那么$\neg A,A\wedge B,A\vee B,A\rightarrow B,A\leftrightarrow B$也是命题公式。
-（3）有限次的使用（1）（2）进行复合得到的结果也是命题公式。&lt;/p&gt;
+&lt;p&gt;为表示方便，我们约定联结词的运算优先级从高到低为$\neg,(\wedge,\vee),\rightarrow,\leftrightarrow$&lt;/p&gt;
+&lt;p&gt;命题公式的定义：&lt;/p&gt;
+&lt;p&gt;（1）原子命题是命题公式。&lt;/p&gt;
+&lt;p&gt;（2）若$A,B$是命题公式，那么$\neg A,A\wedge B,A\vee B,A\rightarrow B,A\leftrightarrow B$也是命题公式。&lt;/p&gt;
+&lt;p&gt;（3）有限次的使用（1）（2）进行复合得到的结果也是命题公式。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;命题逻辑演算形式系统pc的简单介绍&#34;&gt;命题逻辑演算形式系统PC的简单介绍
 &lt;/h2&gt;&lt;p&gt;命题逻辑演算形式系统PC（propositional calculus）是一种形式系统，我们先简单介绍一下PC的组成部分：&lt;/p&gt;
