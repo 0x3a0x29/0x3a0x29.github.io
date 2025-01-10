@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>First on 0x3a0x29的博客</title>
+        <link>http://localhost:40117/tags/first/</link>
+        <description>Recent content in First on 0x3a0x29的博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>0x3a0x29的博客</copyright>
+        <lastBuildDate>Tue, 20 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:40117/tags/first/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PC(命题逻辑演算形式系统)及其相关定理</title>
+        <link>http://localhost:40117/p/propositionalcalculus/</link>
+        <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:40117/p/propositionalcalculus/</guid>
+        <description>&lt;h1 id=&#34;第一篇博客&#34;&gt;第一篇博客
+&lt;/h1&gt;&lt;h2 id=&#34;theme-stack&#34;&gt;Theme Stack
+&lt;/h2&gt;&lt;p&gt;我爱hugo&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

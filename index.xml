@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>0x3a0x29的博客</title>
+        <link>https://0x3a0x29.github.io/</link>
+        <description>Recent content on 0x3a0x29的博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>0x3a0x29的博客</copyright>
+        <lastBuildDate>Fri, 10 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://0x3a0x29.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>文章</title>
+        <link>https://0x3a0x29.github.io/%E6%96%87%E7%AB%A0/</link>
+        <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://0x3a0x29.github.io/%E6%96%87%E7%AB%A0/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>PC(命题逻辑演算形式系统)及其相关定理</title>
+        <link>https://0x3a0x29.github.io/p/propositionalcalculus/</link>
+        <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://0x3a0x29.github.io/p/propositionalcalculus/</guid>
+        <description>&lt;img src="https://0x3a0x29.github.io/p/propositionalcalculus/23.png" alt="Featured image of post PC(命题逻辑演算形式系统)及其相关定理" /&gt;&lt;h1 id=&#34;pc及其相关定理&#34;&gt;PC及其相关定理
+&lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;基础知识&#34;&gt;基础知识
+&lt;/h2&gt;&lt;p&gt;命题：能唯一确定真假值的陈述句。
+原子命题：不能分解为更简单的陈述句的命题。
+复合命题：由联结词及简单命题构成的命题。
+命题变元：用来表示命题的英文字母。（下列的$A,B$为命题变元）
+联结词：有五种常用的联结词，如下所示。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;否定词&lt;/strong&gt;$\neg$：表示“非”，如$\neg A$表示“对$A$的否定”。&lt;/li&gt;
+&lt;li&gt;合取词$\wedge$：表示“与”，如$A\wedge B$表示“$A$与$B$”。&lt;/li&gt;
+&lt;li&gt;析取词$\vee$：表示“或”，如$A\vee B$表示“$A$或$B$”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;蕴涵词&lt;/strong&gt;$\rightarrow$：表示“如果……那么”，如$A\rightarrow B$表示“如果$A$，那么$B$”，其中$A$被称为前件，$B$被称为后件。&lt;/li&gt;
+&lt;li&gt;双条件词$\leftrightarrow$：表示“当且仅当”，如$A\leftrightarrow B$表示“$A$当且仅当$B$”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为表示方便，我们约定联结词的运算优先级从高到低为$\neg,(\wedge,\vee),\rightarrow,\leftrightarrow$
+命题公式的定义：
+（1）原子命题是命题公式。
+（2）若$A,B$是命题公式，那么$\neg A,A\wedge B,A\vee B,A\rightarrow B,A\leftrightarrow B$也是命题公式。
+（3）有限次的使用（1）（2）进行复合得到的结果也是命题公式。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;命题逻辑演算形式系统pc的简单介绍&#34;&gt;命题逻辑演算形式系统PC的简单介绍
+&lt;/h2&gt;&lt;p&gt;命题逻辑演算形式系统PC（propositional calculus）是一种形式系统，我们先简单介绍一下PC的组成部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集${\neg,\rightarrow}$、辅助符号$(,)$&lt;/li&gt;
+&lt;li&gt;形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义&lt;/li&gt;
+&lt;li&gt;公理：设$A,B,C$为可以表达任意命题公式的语法变元，那么PC中有三个公理
+$A1:A\rightarrow (B\rightarrow A)$
+$A2:(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$
+$A3:(\neg A\rightarrow\neg B)\rightarrow (B\rightarrow A)$
+$A1$的含义是：如果$A$成立，那么已知$B$成立的前提下$A$任旧成立。
+$A2$的含义是：如果$A$成立能使得只需要$B$成立那么$C$就会成立，那么如果$A$能推出$B$、$A$就能推出$C$。
+$A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就能推出$A$成立。&lt;/li&gt;
+&lt;li&gt;推理规则：用于从已有的公理和已推出的结论来推理另一结论。
+在PC中只有分离规则$r_{mp}$：即若有$A$和$A\rightarrow B$成立，那么$B$也成立，形式化的推理序列为：$A,A\rightarrow B,B$。
+可以记作$\displaystyle{\frac{A,A\rightarrow B}{B}}$&lt;/li&gt;
+&lt;li&gt;定理推导：包括所有的推理结论及其推理过程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;逻辑推理相关的基本定义&#34;&gt;逻辑推理相关的基本定义
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;证明&lt;/strong&gt;：称以下公式序列为公式$A$在PC中的一个证明：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过形成规则得到的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定理&lt;/strong&gt;：公式$A$在PC中有一个证明序列，那么它就是PC的定理，我们记为$\vdash_{PC}A$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;演绎&lt;/strong&gt;：设$\Gamma$为PC中若干公式构成的公式集，则称下列公式序列为公式$A$以$\Gamma$为前提的演绎：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$\Gamma$中的成员、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过分离规则得到的。我们可以记为$\Gamma\vdash_{PC}A$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;例：证明$A\vdash_{PC}B\rightarrow A$（这个定理说明了我们对一个定理增添前件后任旧是一个定理）。也就是说我们已经知道$A$成立了，现在要推出$B\rightarrow A$也成立，这个过程都要在PC中进行，故我们要在PC中构造一个演绎序列使得最后一个公式是$B\rightarrow A$，一个可行的公式序列如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A$                              （$A$是演绎前提中的成员）&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow A)$,$A1$  （$A\rightarrow(B\rightarrow A)$是公理中的$A1$）&lt;/li&gt;
+&lt;li&gt;$B\rightarrow A$,$r_{mp}(1)(2)$   （对公式序列中的$(1)(2)$使用分离规则得到结论$B\rightarrow A$）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;上面我们成功构造了一个符合演绎要求的公式序列，也就是说有$A\vdash_{PC}B\rightarrow A$，我们完成了这个例子的证明。&lt;/p&gt;
+&lt;p&gt;实际上我们可以证明PC有合理性、一致性、完备性，这表明PC中的定理是永真的、从$\Gamma$演绎出$A$就会有$\Gamma\Rightarrow A$（合理性），PC不会推出相互矛盾的结论（一致性），任何PC中的永真式都是PC的定理（完备性）。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;pc的基本定理&#34;&gt;PC的基本定理
+&lt;/h2&gt;&lt;p&gt;在PC中直接使用公理和推理规则得出PC中的定理会非常繁琐，其中有不少步骤遵循相同的模式，下列总结了PC中35个基本定理（其中7个定理较为重要），用于帮助寻找PC的定理：&lt;/p&gt;
+&lt;p&gt;$Th1$：$\vdash_{PC}A\rightarrow A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow A)$,$A1$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow((B\rightarrow A)\rightarrow A)$,$A1$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow((B\rightarrow A)\rightarrow A))\rightarrow((A\rightarrow(B\rightarrow A))\rightarrow(A\rightarrow A))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(B\rightarrow A))\rightarrow(A\rightarrow A)$,$r_{mp}(2)(3)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow A$,$r_{mp}(1)(4)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;前件互换定理&#34;&gt;前件互换定理
+&lt;/h3&gt;&lt;p&gt;$Th2$：若$\vdash_{PC}A\rightarrow(B\rightarrow C)$，则$\vdash_{PC}B\rightarrow(A\rightarrow C)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow(A\rightarrow C)$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow B)\rightarrow(A\rightarrow C))\rightarrow(B\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))$,$A1$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$r_{mp}(3)(4)$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))\rightarrow((B\rightarrow(A\rightarrow B))\rightarrow(B\rightarrow(A\rightarrow C)))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow(A\rightarrow B))\rightarrow(B\rightarrow(A\rightarrow C))$,$r_{mp}(5)(6)$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow(A\rightarrow B)$,$A1$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow(A\rightarrow C)$,$r_{mp}(7)(8)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th3$：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A1$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))$,$Th2$（因为这是PC中的一个定理，所以它存在一个对应的证明序列，这里实际上是一种简写，不将这个定理对应的证明序列写出，后续的证明中我们也这样简写）&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C)))\rightarrow(B\rightarrow((A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))))$,$A1$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow((A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C)))$,$r_{mp}(2)(3)$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow((A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))))\rightarrow((B\rightarrow(A\rightarrow B))\rightarrow(B\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow(A\rightarrow B))\rightarrow(B\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C)))$,$r_{mp}(4)(5)$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow(A\rightarrow B)$,$A1$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))$,$r_{mp}(6)(7)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$,$Th2$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;加前件定理&#34;&gt;加前件定理
+&lt;/h3&gt;&lt;p&gt;$Th4$：$\vdash_{PC}(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A2$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))\rightarrow((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))))$,$A1$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))))\rightarrow(((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))))\rightarrow((B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))))$,$A2$&lt;/li&gt;
+&lt;li&gt;$((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))))\rightarrow((B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))$,$r_{mp}(3)(4)$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C)))$,$A1$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$r_{mp}(5)(6)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;加后件定理&#34;&gt;加后件定理
+&lt;/h3&gt;&lt;p&gt;$Th5$：$\vdash_{PC}(A\rightarrow B)\rightarrow((B\rightarrow C)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow((B\rightarrow C)\rightarrow(A\rightarrow C))$,$Th2$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;三段论定理&#34;&gt;三段论定理
+&lt;/h3&gt;&lt;p&gt;$Th6$：$\vdash_{PC}A\rightarrow B,\vdash_{PC}B\rightarrow C$，那么$\vdash_{PC}A\rightarrow C$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow C$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow(A\rightarrow C)$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow B$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow C$,$r_{mp}(3)(4)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th7$：$\vdash_{PC}\neg A\rightarrow (A\rightarrow B)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg A\rightarrow(\neg B\rightarrow\neg A)$,$A1$&lt;/li&gt;
+&lt;li&gt;$(\neg B\rightarrow\neg A)\rightarrow (A\rightarrow B)$,$A3$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow(A\rightarrow B)$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th8$：$\vdash_{PC}A\rightarrow(\neg A\rightarrow B)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg A\rightarrow (A\rightarrow B)$,$Th7$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(\neg A\rightarrow B)$,$Th2$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th9$：$\vdash_{PC}(\neg A\rightarrow A)\rightarrow A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg A\rightarrow(A\rightarrow\neg(\neg A\rightarrow A))$,$Th7$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(A\rightarrow\neg(\neg A\rightarrow A)))\rightarrow((\neg A\rightarrow A)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow A)))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow A)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow A))$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow\neg(\neg A\rightarrow A))\rightarrow((\neg A\rightarrow A)\rightarrow A)$,$A3$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow A)\rightarrow((\neg A\rightarrow A)\rightarrow A)$,$Th6$&lt;/li&gt;
+&lt;li&gt;$((\neg A\rightarrow A)\rightarrow((\neg A\rightarrow A)\rightarrow A))\rightarrow(((\neg A\rightarrow A)\rightarrow(\neg A\rightarrow A))\rightarrow((\neg A\rightarrow A)\rightarrow A))$,$A2$&lt;/li&gt;
+&lt;li&gt;$((\neg A\rightarrow A)\rightarrow(\neg A\rightarrow A))\rightarrow((\neg A\rightarrow A)\rightarrow A)$,$r_{mp}(5)(6)$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow A)\rightarrow(\neg A\rightarrow A)$,$Th1$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow A)\rightarrow A$,$r_{mp}(7)(8)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th10$：$\vdash_{PC}\neg\neg A\rightarrow A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg\neg A\rightarrow(\neg A\rightarrow\neg\neg\neg A)$,$Th7$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow\neg\neg\neg A)\rightarrow(\neg\neg A\rightarrow A)$,$A3$&lt;/li&gt;
+&lt;li&gt;$\neg\neg A\rightarrow(\neg\neg A\rightarrow A)$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow(\neg\neg A\rightarrow A))\rightarrow((\neg\neg A\rightarrow\neg\neg A)\rightarrow(\neg\neg A\rightarrow A))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow\neg\neg A)\rightarrow(\neg\neg A\rightarrow A)$,$r_{mp}(3)(4)$&lt;/li&gt;
+&lt;li&gt;$\neg\neg A\rightarrow\neg\neg A$,$Th1$&lt;/li&gt;
+&lt;li&gt;$\neg\neg A\rightarrow A$,$r_{mp}(5)(6)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th11$：$\vdash_{PC}(A\rightarrow\neg A)\rightarrow\neg A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg\neg A\rightarrow A$,$Th10$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow A)\rightarrow((A\rightarrow\neg A)\rightarrow(\neg\neg A\rightarrow\neg A))$,$Th5$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg A)\rightarrow(\neg\neg A\rightarrow\neg A)$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow\neg A)\rightarrow\neg A$,$Th9$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg A)\rightarrow\neg A$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th12$：$\vdash_{PC}A\rightarrow\neg\neg A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(\neg A\rightarrow\neg\neg A)$,$Th8$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow\neg\neg A)\rightarrow\neg\neg A$,$Th11$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow\neg\neg A$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th13$：$\vdash_{PC}(A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow\neg\neg B)\rightarrow(\neg B\rightarrow\neg A)$,$A3$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow\neg\neg B$,$Th12$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow\neg\neg B)\rightarrow((\neg\neg A\rightarrow B)\rightarrow(\neg\neg A\rightarrow\neg\neg B))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow B)\rightarrow(\neg\neg A\rightarrow\neg\neg B)$,$r_{mp}(2)(3)$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$,$Th6$&lt;/li&gt;
+&lt;li&gt;$\neg\neg A\rightarrow A$,$Th10$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow A)\rightarrow((A\rightarrow B)\rightarrow(\neg\neg A\rightarrow B))$,$Th5$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow(\neg\neg A\rightarrow B)$,$r_{mp}(6)(7)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th14$：$\vdash_{PC}(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(\neg A\rightarrow\neg\neg B)\rightarrow(\neg B\rightarrow A)$,$A3$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow\neg\neg B$,$Th12$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow\neg\neg B)\rightarrow((\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg\neg B))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg\neg B)$,$r_{mp}(2)(3)$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th15$：$\vdash_{PC}(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$A3$&lt;/li&gt;
+&lt;li&gt;$\neg\neg A\rightarrow A$,$Th10$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg A\rightarrow A)\rightarrow((A\rightarrow\neg B)\rightarrow(\neg\neg A\rightarrow\neg B))$,$Th5$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg B)\rightarrow(\neg\neg A\rightarrow\neg B)$,$r_{mp}(2)(3)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;反证法&#34;&gt;反证法
+&lt;/h3&gt;&lt;p&gt;$Th16$：$\vdash_{PC}(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$,$A3$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$Th2$&lt;/li&gt;
+&lt;li&gt;$((\neg A\rightarrow\neg B)\rightarrow A)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))$,$Th13$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))$,$r_{mp}(2)(3)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow(B\rightarrow\neg(\neg A\rightarrow\neg B))$,$Th2$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(B\rightarrow\neg(\neg A\rightarrow\neg B)))\rightarrow((\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow\neg B)))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))$,$r_{mp}(5)(6)$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$A3$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th17$：$\vdash_{PC}(A\rightarrow B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(A\rightarrow\neg B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th15$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th3$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg B)\rightarrow\neg A)\rightarrow(A\rightarrow\neg(A\rightarrow\neg B))$,$Th15$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow(A\rightarrow\neg(A\rightarrow\neg B))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow\neg(A\rightarrow\neg B))$,$Th2$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(B\rightarrow\neg(A\rightarrow\neg B)))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow\neg(A\rightarrow\neg B)))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow(A\rightarrow\neg(A\rightarrow\neg B))$,$r_{mp}(5)(6)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg(A\rightarrow\neg B))\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th15$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;拆分&#34;&gt;→拆分
+&lt;/h3&gt;&lt;p&gt;$Th18$：$\vdash_{PC}\neg A\rightarrow C,\vdash_{PC}B\rightarrow C$当且仅当$\vdash_{PC}(A\rightarrow B)\rightarrow C$&lt;/p&gt;
+&lt;p&gt;当$\vdash_{PC}(A\rightarrow B)\rightarrow C$时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow C$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow(A\rightarrow B)$,$A1$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow C$,$Th6$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow(A\rightarrow B)$,$Th7$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow C$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当$\vdash_{PC}\neg A\rightarrow C,\vdash_{PC}B\rightarrow C$时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg A\rightarrow C$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow C$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow(A\rightarrow C)$,$r_{mp}(2)(3)$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow C)\rightarrow(\neg C\rightarrow A)$,$Th14$&lt;/li&gt;
+&lt;li&gt;$\neg C\rightarrow A$,$r_{mp}(1)(5)$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow A)\rightarrow((A\rightarrow C)\rightarrow(\neg C\rightarrow C))$,$Th5$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow C)\rightarrow(\neg C\rightarrow C)$,$r_{mp}(6)(7)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow(\neg C\rightarrow C)$,$Th2$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow C)\rightarrow C$,$Th9$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow C$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th19$：定义$A\vee B =_ {df}\neg A\rightarrow B$，$\vdash_{PC}A\rightarrow A\vee B$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(\neg A\rightarrow B)$,$Th8$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th20$：$\vdash_{PC}A\rightarrow B\vee A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(\neg B\rightarrow A)$,$A1$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th21$：如果$\vdash_{PC}P\rightarrow Q,\vdash_{PC}R\rightarrow S$，那么$\vdash_{PC}(Q\rightarrow R)\rightarrow(P\rightarrow S)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$P\rightarrow Q$&lt;/li&gt;
+&lt;li&gt;$(P\rightarrow Q)\rightarrow((Q\rightarrow R)\rightarrow(P\rightarrow R))$,$Th5$&lt;/li&gt;
+&lt;li&gt;$(Q\rightarrow R)\rightarrow(P\rightarrow R)$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$R\rightarrow S$&lt;/li&gt;
+&lt;li&gt;$(R\rightarrow S)\rightarrow((P\rightarrow R)\rightarrow(P\rightarrow S))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(P\rightarrow R)\rightarrow(P\rightarrow S)$,$r_{mp}(4)(5)$&lt;/li&gt;
+&lt;li&gt;$(Q\rightarrow R)\rightarrow(P\rightarrow S)$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th22$：$\vdash_{PC}(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow((A\vee B)\rightarrow C))$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow B)$,$Th1$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow((\neg A\rightarrow B)\rightarrow B)$,$Th2$&lt;/li&gt;
+&lt;li&gt;$((\neg A\rightarrow B)\rightarrow B)\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B)))\rightarrow(\neg C\rightarrow(\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))))$,$A1$&lt;/li&gt;
+&lt;li&gt;$\neg C\rightarrow(\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B)))$,$r_{mp}(4)(5)$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow(\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))))\rightarrow((\neg C\rightarrow\neg A)\rightarrow(\neg C\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow\neg A)\rightarrow(\neg C\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B)))$,$r_{mp}(6)(7)$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B)))\rightarrow((\neg C\rightarrow\neg B)\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow\neg A)\rightarrow((\neg C\rightarrow\neg B)\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow C)\rightarrow(\neg C\rightarrow\neg A)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow C)\rightarrow((\neg C\rightarrow\neg B)\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow C)\rightarrow(\neg C\rightarrow\neg B)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow\neg(\neg A\rightarrow B))\rightarrow((\neg A\rightarrow B)\rightarrow C)$,$A3$&lt;/li&gt;
+&lt;li&gt;$((\neg C\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))\rightarrow(\neg C\rightarrow\neg B))\rightarrow((B\rightarrow C)\rightarrow((\neg A\rightarrow B)\rightarrow C))$,$Th21$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow((\neg A\rightarrow B)\rightarrow C))$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th23$：
+定义$A\wedge B =_ {df} \neg(A\rightarrow\neg B)$，那么$\vdash_{PC}A\wedge B\rightarrow C$当且仅当$\vdash_{PC}A\rightarrow(B\rightarrow C)$&lt;/p&gt;
+&lt;p&gt;当$\vdash_{PC}A\wedge B\rightarrow C$时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow C$&lt;/li&gt;
+&lt;li&gt;$(\neg(A\rightarrow\neg B)\rightarrow C)\rightarrow(\neg C\rightarrow(A\rightarrow\neg B))$,$Th14$&lt;/li&gt;
+&lt;li&gt;$\neg C\rightarrow(A\rightarrow\neg B)$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(\neg C\rightarrow\neg B)$,$Th2$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow\neg B)\rightarrow(B\rightarrow C)$,$A3$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C)$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当$\vdash_{PC}A\rightarrow(B\rightarrow C)$时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C)$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow C)\rightarrow(\neg C\rightarrow\neg B)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(\neg C\rightarrow\neg B)$,$Th6$&lt;/li&gt;
+&lt;li&gt;$\neg C\rightarrow(A\rightarrow\neg B)$,$Th2$&lt;/li&gt;
+&lt;li&gt;$(\neg C\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow C)$,$Th14$&lt;/li&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow C$,$r_{mp}(4)(5)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th24$：$\vdash_{PC}A\wedge B\rightarrow A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg A\rightarrow(A\rightarrow\neg B)$,$Th7$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow A)$,$Th14$&lt;/li&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow A$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th25$：$\vdash_{PC}B\wedge A\rightarrow A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\neg B\rightarrow(A\rightarrow\neg B)$,$A1$&lt;/li&gt;
+&lt;li&gt;$(\neg B\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow B)$,$Th14$&lt;/li&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow B$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th26$：$\vdash_{PC}A\rightarrow(B\rightarrow A\wedge B)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\wedge B\rightarrow A\wedge B$,$Th1$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow A\wedge B)$,$Th23$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th27$：$\vdash_{PC}(A\rightarrow B)\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$B\rightarrow(C\rightarrow B\wedge C)$,$Th26$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow(C\rightarrow B\wedge C))\rightarrow(A\rightarrow(B\rightarrow(C\rightarrow B\wedge C)))$,$A1$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow(C\rightarrow B\wedge C))$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(B\rightarrow(C\rightarrow B\wedge C)))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow(C\rightarrow B\wedge C)))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow B)\rightarrow(A\rightarrow(C\rightarrow B\wedge C))$,$r_{mp}(3)(4)$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow((A\rightarrow B)\rightarrow(C\rightarrow B\wedge C))$,$Th2$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow B)\rightarrow(C\rightarrow B\wedge C))\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$,$A2$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th28$：我们将$\vdash_{PC}P\rightarrow Q,\vdash_{PC}Q\rightarrow P$记作$\vdash_{PC}P\leftrightarrow Q$，那么有$\vdash_{PC}A\vee B\leftrightarrow B\vee A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$Th14$&lt;/li&gt;
+&lt;li&gt;$(\neg B\rightarrow A)\rightarrow(\neg A\rightarrow B)$,$Th14$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th29$：$\vdash_{PC}A\wedge B\leftrightarrow B\wedge A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$Th15$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow\neg A)\rightarrow(A\rightarrow\neg B)$,$Th15$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th30$：$\vdash_{PC}(A\vee B)\vee C\leftrightarrow A\vee(B\vee C)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$B\rightarrow(\neg B\rightarrow C)$,$Th8$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow(\neg B\rightarrow C))\rightarrow((\neg A\rightarrow B)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C)))$,$A2$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C))$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$\neg\neg(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow B)$,$Th10$&lt;/li&gt;
+&lt;li&gt;$\neg\neg(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$C\rightarrow(\neg B\rightarrow C)$,$A1$&lt;/li&gt;
+&lt;li&gt;$(C\rightarrow(\neg B\rightarrow C))\rightarrow(\neg A\rightarrow(C\rightarrow(\neg B\rightarrow C)))$,$A1$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow(C\rightarrow(\neg B\rightarrow C))$,$r_{mp}(6)(7)$&lt;/li&gt;
+&lt;li&gt;$C\rightarrow(\neg A\rightarrow(\neg B\rightarrow C))$,$Th2$&lt;/li&gt;
+&lt;li&gt;$(\neg(\neg A\rightarrow B)\rightarrow C)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C))$,$Th18$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow(\neg A\rightarrow B)$,$A1$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow(\neg A\rightarrow B))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg B)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(\neg A\rightarrow B)\rightarrow\neg B$,$r_{mp}(11)(12)$&lt;/li&gt;
+&lt;li&gt;$(\neg(\neg A\rightarrow B)\rightarrow\neg B)\rightarrow((\neg B\rightarrow C)\rightarrow(\neg(\neg A\rightarrow B)\rightarrow C))$,$Th5$&lt;/li&gt;
+&lt;li&gt;$(\neg B\rightarrow C)\rightarrow(\neg(\neg A\rightarrow B)\rightarrow C)$,$r_{mp}(13)(14)$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow(A\rightarrow C)$,$Th7$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(\neg A\rightarrow B)$,$Th8$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(\neg A\rightarrow B))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(\neg A\rightarrow B)\rightarrow\neg A$,$r_{mp}(17)(18)$&lt;/li&gt;
+&lt;li&gt;$(\neg(\neg A\rightarrow B)\rightarrow\neg A)\rightarrow(A\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A))$,$A1$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$r_{mp}(19)(20)$&lt;/li&gt;
+&lt;li&gt;$\neg\neg A\rightarrow A$,$Th10$&lt;/li&gt;
+&lt;li&gt;$\neg\neg A\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow C)$,$Th18$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th31$：$\vdash_{PC}(A\wedge B)\wedge C\leftrightarrow A\wedge(B\wedge C)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(B\rightarrow\neg C)\rightarrow(C\rightarrow\neg B)$,$Th15$&lt;/li&gt;
+&lt;li&gt;$((B\rightarrow\neg C)\rightarrow(C\rightarrow\neg B))\rightarrow((A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow(C\rightarrow\neg B)))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow(C\rightarrow\neg B))$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(C\rightarrow\neg B))\rightarrow(C\rightarrow(A\rightarrow\neg B))$,$Th3$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(B\rightarrow\neg C))\rightarrow(C\rightarrow(A\rightarrow\neg B))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$\neg\neg(B\rightarrow\neg C)\rightarrow(B\rightarrow\neg C)$,$Th10$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg(B\rightarrow\neg C)\rightarrow(B\rightarrow\neg C))\rightarrow((A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(A\rightarrow(B\rightarrow\neg C)))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(A\rightarrow(B\rightarrow\neg C))$,$r_{mp}(6)(7)$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(C\rightarrow(A\rightarrow\neg B))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(C\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow\neg C)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow\neg C)$,$Th6$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow\neg C))\rightarrow(\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow\neg(A\rightarrow\neg\neg(B\rightarrow\neg C)))$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))$,$r_{mp}(11)(12)$&lt;/li&gt;
+&lt;li&gt;$(C\rightarrow\neg B)\rightarrow(B\rightarrow\neg C)$,$Th15$&lt;/li&gt;
+&lt;li&gt;$((C\rightarrow\neg B)\rightarrow(B\rightarrow\neg C))\rightarrow((A\rightarrow(C\rightarrow\neg B))\rightarrow(A\rightarrow(B\rightarrow\neg C)))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(C\rightarrow\neg B))\rightarrow(A\rightarrow(B\rightarrow\neg C))$,$r_{mp}(14)(15)$&lt;/li&gt;
+&lt;li&gt;$(C\rightarrow(A\rightarrow\neg B))\rightarrow(A\rightarrow(C\rightarrow\neg B))$,$Th3$&lt;/li&gt;
+&lt;li&gt;$(C\rightarrow(A\rightarrow\neg B))\rightarrow(A\rightarrow(B\rightarrow\neg C))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow\neg C)\rightarrow\neg\neg(B\rightarrow\neg C)$,$Th12$&lt;/li&gt;
+&lt;li&gt;$((B\rightarrow\neg C)\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow((A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C)))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C))$,$r_{mp}(19)(20)$&lt;/li&gt;
+&lt;li&gt;$(C\rightarrow(A\rightarrow\neg B))\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow(C\rightarrow(A\rightarrow\neg B))$,$A3$&lt;/li&gt;
+&lt;li&gt;$(\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$((\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C)))\rightarrow(\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C))$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C)$,$r_{mp}(24)(25)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th32$：$\vdash_{PC}A\wedge(A\vee B)\leftrightarrow A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(A\vee B\rightarrow A)$,$A1$&lt;/li&gt;
+&lt;li&gt;$A\wedge(A \vee B)\rightarrow A$,$Th23$&lt;/li&gt;
+&lt;li&gt;$\neg A\rightarrow\neg A$,$Th1$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(\neg A\rightarrow B)$,$Th8$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(\neg A\rightarrow B))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(\neg A\rightarrow B)\rightarrow\neg A$,$r_{mp}(4)(5)$&lt;/li&gt;
+&lt;li&gt;$((\neg A\rightarrow B)\rightarrow\neg A)\rightarrow\neg A$,$Th18$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg(\neg A\rightarrow B))\rightarrow((\neg A\rightarrow B)\rightarrow\neg A)$,$Th15$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg(\neg A\rightarrow B))\rightarrow\neg A$,$Th6$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg(\neg A\rightarrow B))\rightarrow\neg A)\rightarrow(A\rightarrow\neg(A\rightarrow\neg(\neg A\rightarrow B)))$,$Th15$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow\neg(A\rightarrow\neg(\neg A\rightarrow B))$,$r_{mp}(9)(10)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th33$：$\vdash_{PC}A\vee(A\wedge B)\leftrightarrow A$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A\rightarrow(\neg A\rightarrow(A\wedge B))$,$Th8$&lt;/li&gt;
+&lt;li&gt;$A\wedge B\rightarrow A$,$Th24$&lt;/li&gt;
+&lt;li&gt;$(A\wedge B\rightarrow A)\rightarrow((\neg A\rightarrow(A\wedge B))\rightarrow(\neg A\rightarrow A))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(A\wedge B))\rightarrow(\neg A\rightarrow A)$,$r_{mp}(2)(3)$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow A)\rightarrow A$,$Th9$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(A\wedge B))\rightarrow A$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th34$：$\vdash_{PC}A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$B\rightarrow(\neg B\rightarrow C)$,$Th8$&lt;/li&gt;
+&lt;li&gt;$(B\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg B\rightarrow C)\rightarrow\neg B)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(\neg B\rightarrow C)\rightarrow\neg B$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$(\neg(\neg B\rightarrow C)\rightarrow\neg B)\rightarrow((A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg B))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg B)$,$r_{mp}(3)(4)$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C)))$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C))$,$r_{mp}(5)(6)$&lt;/li&gt;
+&lt;li&gt;$C\rightarrow(\neg B\rightarrow C)$,$A1$&lt;/li&gt;
+&lt;li&gt;$(C\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg B\rightarrow C)\rightarrow\neg C)$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(\neg B\rightarrow C)\rightarrow\neg C$,$r_{mp}(8)(9)$&lt;/li&gt;
+&lt;li&gt;$(\neg(\neg B\rightarrow C)\rightarrow\neg C)\rightarrow((A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg C))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg C)$,$r_{mp}(10)(11)$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg C))\rightarrow(\neg(A\rightarrow\neg C)\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C)))$,$Th13$&lt;/li&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg C)\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C))$,$r_{mp}(12)(13)$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C))$,$Th18$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg B)\rightarrow\neg\neg(A\rightarrow\neg B)$,$Th12$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg B)\rightarrow\neg\neg(A\rightarrow\neg B))\rightarrow((\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C)))$,$Th5$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$r_{mp}(16)(17)$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg B)\rightarrow((A\rightarrow\neg C)\rightarrow(A\rightarrow\neg(\neg B\rightarrow C)))$,$Th23$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg C)\rightarrow(A\rightarrow\neg(\neg B\rightarrow C)))\rightarrow(\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow\neg(A\rightarrow\neg C))$,$Th13$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow\neg B)\rightarrow(\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow\neg(A\rightarrow\neg C))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$Th2$&lt;/li&gt;
+&lt;li&gt;$\neg\neg(A\rightarrow\neg B)\rightarrow(A\rightarrow\neg B)$,$Th10$&lt;/li&gt;
+&lt;li&gt;$(\neg\neg(A\rightarrow\neg B)\rightarrow(A\rightarrow\neg B))\rightarrow(((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C)))$,$Th5$&lt;/li&gt;
+&lt;li&gt;$((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$r_{mp}(24)(25)$&lt;/li&gt;
+&lt;li&gt;$\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$Th6$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$Th35$：$\vdash_{PC}A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$B\wedge C\rightarrow B$,$Th24$&lt;/li&gt;
+&lt;li&gt;$(B\wedge C\rightarrow B)\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B)$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B))\rightarrow(((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow C))\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B)\wedge(\neg A\rightarrow C)))$&lt;/li&gt;
+&lt;li&gt;$((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow C))\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B)\wedge(\neg A\rightarrow C))$,$r_{mp}(3)(4)$&lt;/li&gt;
+&lt;li&gt;$B\wedge C\rightarrow C$,$Th25$&lt;/li&gt;
+&lt;li&gt;$(B\wedge C\rightarrow C)\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow C))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow C)$,$r_{mp}(6)(7)$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B)\wedge(\neg A\rightarrow C)$,$r_{mp}(5)(8)$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow C)\rightarrow(\neg A\rightarrow B\wedge C))$,$Th27$&lt;/li&gt;
+&lt;li&gt;$(\neg A\rightarrow B)\wedge(\neg A\rightarrow C)\rightarrow(\neg A\rightarrow B\wedge C)$,$Th23$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;上述的35个PC的定理都是十分重要和有用的，其中定理$Th16$（反证法）和$Th18$（→拆分法）可以帮助我们将定理更加系统地证明，下面我们举两个例子进行说明。&lt;/p&gt;
+&lt;h2 id=&#34;pc的基本定理的运用&#34;&gt;PC的基本定理的运用
+&lt;/h2&gt;&lt;p&gt;运用$Th16$证明：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow A$&lt;/p&gt;
+&lt;p&gt;如果我们要运用$Th16$，我们就需要假设这个定理不成立从而推出矛盾，不妨证明：&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}\neg(((A\rightarrow B)\rightarrow A)\rightarrow A)\rightarrow(A\rightarrow B)$&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}\neg(((A\rightarrow B)\rightarrow A)\rightarrow A)\rightarrow\neg(A\rightarrow B)$&lt;/p&gt;
+&lt;p&gt;后者即证：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow((A\rightarrow B)\rightarrow A)$，结论是显然的。&lt;/p&gt;
+&lt;p&gt;前者即证：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow(\neg(A\rightarrow B)\rightarrow A)$&lt;/p&gt;
+&lt;p&gt;后件可以由$\neg A\rightarrow(A\rightarrow B)$变形得到，所以得证。&lt;/p&gt;
+&lt;p&gt;运用$Th18$证明：$\vdash_{PC}(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;运用$Th18$证明这个定理等价于证明：&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}\neg A\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}C\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;后者即证：$\vdash_{PC}(B\rightarrow C)\rightarrow(C\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;其后件是$A1$，故结论是显然的。&lt;/p&gt;
+&lt;p&gt;现在我们只需要证明：$\vdash_{PC}\neg A\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;即证：$\vdash_{PC}(B\rightarrow C)\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;再次运用$Th18$，即证：&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}\neg B\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}C\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;后者即证$\vdash_{PC}\neg A\rightarrow(C\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;其后件是$A1$，故结论是显然的。&lt;/p&gt;
+&lt;p&gt;现在我们只需要证明：$\vdash_{PC}\neg B\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;即证：$\vdash_{PC}((A\rightarrow B)\rightarrow B)\rightarrow(\neg B\rightarrow(\neg A\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;再次运用$Th18$，即证：&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}\neg(A\rightarrow B)\rightarrow(\neg B\rightarrow(\neg A\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}B\rightarrow(\neg B\rightarrow(\neg A\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;后者是$Th8$，故结论是显然的。&lt;/p&gt;
+&lt;p&gt;现在我们只需要证明：$\vdash_{PC}\neg(A\rightarrow B)\rightarrow(\neg B\rightarrow(\neg A\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;即证：$\vdash_{PC}\neg B\rightarrow(\neg A\rightarrow(\neg C\rightarrow (A\rightarrow B)))$&lt;/p&gt;
+&lt;p&gt;不妨证：$\vdash_{PC}\neg A\rightarrow(\neg C\rightarrow (A\rightarrow B))$&lt;/p&gt;
+&lt;p&gt;可知有：&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}\neg A\rightarrow(A\rightarrow B)$&lt;/p&gt;
+&lt;p&gt;$\vdash_{PC}(A\rightarrow B)\rightarrow(\neg C\rightarrow(A\rightarrow B))$&lt;/p&gt;
+&lt;p&gt;按照上述思路将对应的证明序列写出即可证明该定理。&lt;/p&gt;
+&lt;h2 id=&#34;演绎定理&#34;&gt;演绎定理
+&lt;/h2&gt;&lt;p&gt;证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(C\rightarrow D)\rightarrow((B\rightarrow C)\rightarrow(B\rightarrow D))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$((B\rightarrow C)\rightarrow(B\rightarrow D))\rightarrow((A\rightarrow(B\rightarrow C))\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th4$&lt;/li&gt;
+&lt;li&gt;$(C\rightarrow D)\rightarrow((A\rightarrow(B\rightarrow C))\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th6$&lt;/li&gt;
+&lt;li&gt;$(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th2$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;上面这个例子表明，在PC中证明定理的这个过程中的公式序列的公式长度通常较长，为了缩短公式序列的长度，我们现在给出PC中一个重要方便的定理：&lt;strong&gt;演绎定理&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;演绎定理&lt;/strong&gt;：对PC中任意公式集合$\Gamma$和公式$A,B$，$\Gamma\cup{A}\vdash_{PC}B$（或记为$\Gamma;A\vdash_{PC}B$）当且仅当$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;证明：（充分性）&lt;/p&gt;
+&lt;p&gt;已知$\Gamma\vdash_{PC}A\rightarrow B$&lt;/p&gt;
+&lt;p&gt;从$\Gamma$出发在PC可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup{A}$出发在PC也可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup{A}$出发在PC中可以得到$B$的一个演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B),A,B$&lt;/p&gt;
+&lt;p&gt;也就是说有$\Gamma;A\vdash_{PC}B$。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;证明：（必要性）&lt;/p&gt;
+&lt;p&gt;已知$\Gamma\cup{A}\vdash_{PC}B$&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup{A}$出发在PC可以得到一个$B$的演绎序列$B_1,B_2,\cdots,B_k(=B)$，我们对演绎序列的长度$k$使用数学归纳法：&lt;/p&gt;
+&lt;p&gt;当$k=1$时可知$B$或是公理、或有$B\in\Gamma\cup{A}$：&lt;/p&gt;
+&lt;p&gt;当$B$是公理时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
+&lt;p&gt;当$B\in\Gamma$时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
+&lt;p&gt;当$B=A$时，$A\rightarrow B$也即$A\rightarrow A$，也就是$Th1$，那么有$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
+&lt;p&gt;假设$k&amp;lt; n$时原命题成立，那么对于$B$的演绎序列中的公式有$\Gamma\vdash_{PC}A\rightarrow B_i,i&amp;lt; n$。&lt;/p&gt;
+&lt;p&gt;那么$k=n$时$B$或为公理、或有$B\in\Gamma\cup{A}$，或由$B_i,B_j(i,j&amp;lt; n)$通过$r_{mp}$得到。&lt;/p&gt;
+&lt;p&gt;当$B$是公理时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
+&lt;p&gt;当$B\in\Gamma$时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
+&lt;p&gt;当$B=A$时，$A\rightarrow B$也即$A\rightarrow A$，也就是$Th1$，那么有$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
+&lt;p&gt;当$B$由$B_i,B_j(i,j&amp;lt; n)$通过$r_{mp}$得到时，我们设$B_j=B_i\rightarrow B$。&lt;/p&gt;
+&lt;p&gt;那么有：$\Gamma\vdash_{PC}A\rightarrow B_i,\Gamma\vdash_{PC}A\rightarrow B_j$&lt;/p&gt;
+&lt;p&gt;也就是说：$\Gamma\vdash_{PC}A\rightarrow B_i,\Gamma\vdash_{PC}A\rightarrow(B_i\rightarrow B)$&lt;/p&gt;
+&lt;p&gt;由$A2$知：$(A\rightarrow(B_i\rightarrow B))\rightarrow((A\rightarrow B_i)\rightarrow(A\rightarrow B))$&lt;/p&gt;
+&lt;p&gt;故：$\vdash_{PC}(A\rightarrow B_i)\rightarrow(A\rightarrow B)$，则$\Gamma\vdash_{PC}A\rightarrow B$&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;我们现在回到上面那个例子，现在使用演绎定理解决这个问题。&lt;/p&gt;
+&lt;p&gt;证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$&lt;/p&gt;
+&lt;p&gt;即证：$A\rightarrow(B\rightarrow C)\vdash_{PC}(C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D))$&lt;/p&gt;
+&lt;p&gt;即证：$A\rightarrow(B\rightarrow C),C\rightarrow D\vdash_{PC}A\rightarrow(B\rightarrow D)$&lt;/p&gt;
+&lt;p&gt;即证：$A\rightarrow(B\rightarrow C),C\rightarrow D,A\vdash_{PC}B\rightarrow D$&lt;/p&gt;
+&lt;p&gt;即证：$A\rightarrow(B\rightarrow C),C\rightarrow D,A,B\vdash_{PC}D$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A$&lt;/li&gt;
+&lt;li&gt;$A\rightarrow(B\rightarrow C)$&lt;/li&gt;
+&lt;li&gt;$B\rightarrow C$,$r_{mp}(1)(2)$&lt;/li&gt;
+&lt;li&gt;$B$&lt;/li&gt;
+&lt;li&gt;$C$,$r_{mp}(3)(4)$&lt;/li&gt;
+&lt;li&gt;$C\rightarrow D$&lt;/li&gt;
+&lt;li&gt;$D$,$r_{mp}(5)(6)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;不难发现，在使用了演绎定理之后，我们的证明过程中涉及的公式变得更加简单了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;pc定理证明习题选&#34;&gt;PC定理证明习题选
+&lt;/h2&gt;&lt;p&gt;下面给出了六道PC定理习题供读者练习使用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow(D\rightarrow B))\rightarrow(A\rightarrow(D\rightarrow C)))$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{PC}(((A\rightarrow B)\rightarrow C)\rightarrow D)\rightarrow((B\rightarrow D)\rightarrow(A\rightarrow D))$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{PC}(A\rightarrow(\neg B\rightarrow(\neg D\rightarrow C)))\rightarrow((B\rightarrow\neg A)\rightarrow((C\rightarrow\neg A)\rightarrow(A\rightarrow D)))$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{PC}((D\rightarrow B)\rightarrow((C\rightarrow G)\rightarrow A))\rightarrow((E\rightarrow((C\rightarrow G)\rightarrow A))\rightarrow((D\rightarrow E)\rightarrow(G\rightarrow A)))$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{PC}(C\rightarrow(\neg A\rightarrow(\neg D\rightarrow A)))\rightarrow((B\rightarrow A)\rightarrow((\neg B\rightarrow C)\rightarrow(\neg A\rightarrow D)))$&lt;/li&gt;
+&lt;li&gt;证明：$\vdash_{PC}((B\rightarrow C)\rightarrow(D\rightarrow E))\rightarrow(((B\rightarrow C)\rightarrow(G\rightarrow H))\rightarrow(((A\rightarrow B)\rightarrow C)\rightarrow\neg(((E\rightarrow G)\rightarrow(D\rightarrow H))\rightarrow\neg((G\rightarrow\neg H)\rightarrow\neg G))))$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>关于我</title>
+        <link>https://0x3a0x29.github.io/%E5%85%B3%E4%BA%8E%E6%88%91/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://0x3a0x29.github.io/%E5%85%B3%E4%BA%8E%E6%88%91/</guid>
+        <description>&lt;p&gt;一个喜欢做些自己最近感兴趣的事情的人。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>搜索</title>
+        <link>https://0x3a0x29.github.io/%E6%90%9C%E7%B4%A2/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://0x3a0x29.github.io/%E6%90%9C%E7%B4%A2/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>

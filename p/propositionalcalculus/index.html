@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="介绍了PC及其相关定理">
+<title>PC(命题逻辑演算形式系统)及其相关定理</title>
+
+<link rel='canonical' href='https://0x3a0x29.github.io/p/propositionalcalculus/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="PC(命题逻辑演算形式系统)及其相关定理">
+<meta property='og:description' content="介绍了PC及其相关定理">
+<meta property='og:url' content='https://0x3a0x29.github.io/p/propositionalcalculus/'>
+<meta property='og:site_name' content='0x3a0x29的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='数理逻辑' /><meta property='article:published_time' content='2023-12-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-12-17T00:00:00&#43;00:00'/><meta property='og:image' content='https://0x3a0x29.github.io/p/propositionalcalculus/23.png' />
+<meta name="twitter:title" content="PC(命题逻辑演算形式系统)及其相关定理">
+<meta name="twitter:description" content="介绍了PC及其相关定理"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://0x3a0x29.github.io/p/propositionalcalculus/23.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/preview_hu12876420758783534955.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">📖</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0x3a0x29的博客</a></h1>
+            <h2 class="site-description">有时会分享一些感兴趣的事情</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0x3a0x29'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%96%87%E7%AB%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>文章</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%90%9C%E7%B4%A2/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://0x3a0x29.github.io/en/" >English</option>
+                                
+                                    <option value="https://0x3a0x29.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#基础知识">基础知识</a></li>
+    <li><a href="#命题逻辑演算形式系统pc的简单介绍">命题逻辑演算形式系统PC的简单介绍</a></li>
+    <li><a href="#逻辑推理相关的基本定义">逻辑推理相关的基本定义</a></li>
+    <li><a href="#pc的基本定理">PC的基本定理</a>
+      <ol>
+        <li><a href="#前件互换定理">前件互换定理</a></li>
+        <li><a href="#加前件定理">加前件定理</a></li>
+        <li><a href="#加后件定理">加后件定理</a></li>
+        <li><a href="#三段论定理">三段论定理</a></li>
+        <li><a href="#反证法">反证法</a></li>
+        <li><a href="#拆分">→拆分</a></li>
+      </ol>
+    </li>
+    <li><a href="#pc的基本定理的运用">PC的基本定理的运用</a></li>
+    <li><a href="#演绎定理">演绎定理</a></li>
+    <li><a href="#pc定理证明习题选">PC定理证明习题选</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/propositionalcalculus/">
+                <img src="/p/propositionalcalculus/23_hu9331500675481150108.png"
+                        srcset="/p/propositionalcalculus/23_hu9331500675481150108.png 800w, /p/propositionalcalculus/23_hu4170285206921561052.png 1600w"
+                        width="800" 
+                        height="324" 
+                        loading="lazy"
+                        alt="Featured image of post PC(命题逻辑演算形式系统)及其相关定理" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/math/" style="background-color: #ffffff; color: #fff;">
+                离散数学
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/propositionalcalculus/">PC(命题逻辑演算形式系统)及其相关定理</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            介绍了PC及其相关定理
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 17, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 16 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="pc及其相关定理">PC及其相关定理
+</h1><h2 id="前言">前言
+</h2><p>本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。</p>
+<hr>
+<h2 id="基础知识">基础知识
+</h2><p>命题：能唯一确定真假值的陈述句。
+原子命题：不能分解为更简单的陈述句的命题。
+复合命题：由联结词及简单命题构成的命题。
+命题变元：用来表示命题的英文字母。（下列的$A,B$为命题变元）
+联结词：有五种常用的联结词，如下所示。</p>
+<ol>
+<li><strong>否定词</strong>$\neg$：表示“非”，如$\neg A$表示“对$A$的否定”。</li>
+<li>合取词$\wedge$：表示“与”，如$A\wedge B$表示“$A$与$B$”。</li>
+<li>析取词$\vee$：表示“或”，如$A\vee B$表示“$A$或$B$”。</li>
+<li><strong>蕴涵词</strong>$\rightarrow$：表示“如果……那么”，如$A\rightarrow B$表示“如果$A$，那么$B$”，其中$A$被称为前件，$B$被称为后件。</li>
+<li>双条件词$\leftrightarrow$：表示“当且仅当”，如$A\leftrightarrow B$表示“$A$当且仅当$B$”。</li>
+</ol>
+<p>为表示方便，我们约定联结词的运算优先级从高到低为$\neg,(\wedge,\vee),\rightarrow,\leftrightarrow$
+命题公式的定义：
+（1）原子命题是命题公式。
+（2）若$A,B$是命题公式，那么$\neg A,A\wedge B,A\vee B,A\rightarrow B,A\leftrightarrow B$也是命题公式。
+（3）有限次的使用（1）（2）进行复合得到的结果也是命题公式。</p>
+<hr>
+<h2 id="命题逻辑演算形式系统pc的简单介绍">命题逻辑演算形式系统PC的简单介绍
+</h2><p>命题逻辑演算形式系统PC（propositional calculus）是一种形式系统，我们先简单介绍一下PC的组成部分：</p>
+<ol>
+<li>字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集${\neg,\rightarrow}$、辅助符号$(,)$</li>
+<li>形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义</li>
+<li>公理：设$A,B,C$为可以表达任意命题公式的语法变元，那么PC中有三个公理
+$A1:A\rightarrow (B\rightarrow A)$
+$A2:(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$
+$A3:(\neg A\rightarrow\neg B)\rightarrow (B\rightarrow A)$
+$A1$的含义是：如果$A$成立，那么已知$B$成立的前提下$A$任旧成立。
+$A2$的含义是：如果$A$成立能使得只需要$B$成立那么$C$就会成立，那么如果$A$能推出$B$、$A$就能推出$C$。
+$A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就能推出$A$成立。</li>
+<li>推理规则：用于从已有的公理和已推出的结论来推理另一结论。
+在PC中只有分离规则$r_{mp}$：即若有$A$和$A\rightarrow B$成立，那么$B$也成立，形式化的推理序列为：$A,A\rightarrow B,B$。
+可以记作$\displaystyle{\frac{A,A\rightarrow B}{B}}$</li>
+<li>定理推导：包括所有的推理结论及其推理过程。</li>
+</ol>
+<hr>
+<h2 id="逻辑推理相关的基本定义">逻辑推理相关的基本定义
+</h2><ol>
+<li><strong>证明</strong>：称以下公式序列为公式$A$在PC中的一个证明：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$A_j(j&lt; i)$、或为$A_j,A_k(j,k&lt; i)$通过形成规则得到的。</li>
+<li><strong>定理</strong>：公式$A$在PC中有一个证明序列，那么它就是PC的定理，我们记为$\vdash_{PC}A$。</li>
+<li><strong>演绎</strong>：设$\Gamma$为PC中若干公式构成的公式集，则称下列公式序列为公式$A$以$\Gamma$为前提的演绎：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$\Gamma$中的成员、或为$A_j(j&lt; i)$、或为$A_j,A_k(j,k&lt; i)$通过分离规则得到的。我们可以记为$\Gamma\vdash_{PC}A$。</li>
+</ol>
+<p>例：证明$A\vdash_{PC}B\rightarrow A$（这个定理说明了我们对一个定理增添前件后任旧是一个定理）。也就是说我们已经知道$A$成立了，现在要推出$B\rightarrow A$也成立，这个过程都要在PC中进行，故我们要在PC中构造一个演绎序列使得最后一个公式是$B\rightarrow A$，一个可行的公式序列如下：</p>
+<ol>
+<li>$A$                              （$A$是演绎前提中的成员）</li>
+<li>$A\rightarrow(B\rightarrow A)$,$A1$  （$A\rightarrow(B\rightarrow A)$是公理中的$A1$）</li>
+<li>$B\rightarrow A$,$r_{mp}(1)(2)$   （对公式序列中的$(1)(2)$使用分离规则得到结论$B\rightarrow A$）</li>
+</ol>
+<p>上面我们成功构造了一个符合演绎要求的公式序列，也就是说有$A\vdash_{PC}B\rightarrow A$，我们完成了这个例子的证明。</p>
+<p>实际上我们可以证明PC有合理性、一致性、完备性，这表明PC中的定理是永真的、从$\Gamma$演绎出$A$就会有$\Gamma\Rightarrow A$（合理性），PC不会推出相互矛盾的结论（一致性），任何PC中的永真式都是PC的定理（完备性）。</p>
+<hr>
+<h2 id="pc的基本定理">PC的基本定理
+</h2><p>在PC中直接使用公理和推理规则得出PC中的定理会非常繁琐，其中有不少步骤遵循相同的模式，下列总结了PC中35个基本定理（其中7个定理较为重要），用于帮助寻找PC的定理：</p>
+<p>$Th1$：$\vdash_{PC}A\rightarrow A$</p>
+<ol>
+<li>$A\rightarrow(B\rightarrow A)$,$A1$</li>
+<li>$A\rightarrow((B\rightarrow A)\rightarrow A)$,$A1$</li>
+<li>$(A\rightarrow((B\rightarrow A)\rightarrow A))\rightarrow((A\rightarrow(B\rightarrow A))\rightarrow(A\rightarrow A))$,$A2$</li>
+<li>$(A\rightarrow(B\rightarrow A))\rightarrow(A\rightarrow A)$,$r_{mp}(2)(3)$</li>
+<li>$A\rightarrow A$,$r_{mp}(1)(4)$</li>
+</ol>
+<h3 id="前件互换定理">前件互换定理
+</h3><p>$Th2$：若$\vdash_{PC}A\rightarrow(B\rightarrow C)$，则$\vdash_{PC}B\rightarrow(A\rightarrow C)$</p>
+<ol>
+<li>$A\rightarrow(B\rightarrow C)$</li>
+<li>$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A2$</li>
+<li>$(A\rightarrow B)\rightarrow(A\rightarrow C)$,$r_{mp}(1)(2)$</li>
+<li>$((A\rightarrow B)\rightarrow(A\rightarrow C))\rightarrow(B\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))$,$A1$</li>
+<li>$B\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$r_{mp}(3)(4)$</li>
+<li>$(B\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))\rightarrow((B\rightarrow(A\rightarrow B))\rightarrow(B\rightarrow(A\rightarrow C)))$,$A2$</li>
+<li>$(B\rightarrow(A\rightarrow B))\rightarrow(B\rightarrow(A\rightarrow C))$,$r_{mp}(5)(6)$</li>
+<li>$B\rightarrow(A\rightarrow B)$,$A1$</li>
+<li>$B\rightarrow(A\rightarrow C)$,$r_{mp}(7)(8)$</li>
+</ol>
+<p>$Th3$：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$</p>
+<ol>
+<li>$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A1$</li>
+<li>$(A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))$,$Th2$（因为这是PC中的一个定理，所以它存在一个对应的证明序列，这里实际上是一种简写，不将这个定理对应的证明序列写出，后续的证明中我们也这样简写）</li>
+<li>$((A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C)))\rightarrow(B\rightarrow((A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))))$,$A1$</li>
+<li>$B\rightarrow((A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C)))$,$r_{mp}(2)(3)$</li>
+<li>$(B\rightarrow((A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))))\rightarrow((B\rightarrow(A\rightarrow B))\rightarrow(B\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))))$,$A2$</li>
+<li>$(B\rightarrow(A\rightarrow B))\rightarrow(B\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C)))$,$r_{mp}(4)(5)$</li>
+<li>$B\rightarrow(A\rightarrow B)$,$A1$</li>
+<li>$B\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))$,$r_{mp}(6)(7)$</li>
+<li>$(A\rightarrow (B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$,$Th2$</li>
+</ol>
+<h3 id="加前件定理">加前件定理
+</h3><p>$Th4$：$\vdash_{PC}(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$</p>
+<ol>
+<li>$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A2$</li>
+<li>$((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))\rightarrow((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))))$,$A1$</li>
+<li>$(B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))$,$r_{mp}(1)(2)$</li>
+<li>$((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))))\rightarrow(((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))))\rightarrow((B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))))$,$A2$</li>
+<li>$((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))))\rightarrow((B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))$,$r_{mp}(3)(4)$</li>
+<li>$(B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C)))$,$A1$</li>
+<li>$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$r_{mp}(5)(6)$</li>
+</ol>
+<h3 id="加后件定理">加后件定理
+</h3><p>$Th5$：$\vdash_{PC}(A\rightarrow B)\rightarrow((B\rightarrow C)\rightarrow(A\rightarrow C))$</p>
+<ol>
+<li>$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$</li>
+<li>$(A\rightarrow B)\rightarrow((B\rightarrow C)\rightarrow(A\rightarrow C))$,$Th2$</li>
+</ol>
+<h3 id="三段论定理">三段论定理
+</h3><p>$Th6$：$\vdash_{PC}A\rightarrow B,\vdash_{PC}B\rightarrow C$，那么$\vdash_{PC}A\rightarrow C$</p>
+<ol>
+<li>$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$</li>
+<li>$B\rightarrow C$</li>
+<li>$(A\rightarrow B)\rightarrow(A\rightarrow C)$,$r_{mp}(1)(2)$</li>
+<li>$A\rightarrow B$</li>
+<li>$A\rightarrow C$,$r_{mp}(3)(4)$</li>
+</ol>
+<p>$Th7$：$\vdash_{PC}\neg A\rightarrow (A\rightarrow B)$</p>
+<ol>
+<li>$\neg A\rightarrow(\neg B\rightarrow\neg A)$,$A1$</li>
+<li>$(\neg B\rightarrow\neg A)\rightarrow (A\rightarrow B)$,$A3$</li>
+<li>$\neg A\rightarrow(A\rightarrow B)$,$Th6$</li>
+</ol>
+<p>$Th8$：$\vdash_{PC}A\rightarrow(\neg A\rightarrow B)$</p>
+<ol>
+<li>$\neg A\rightarrow (A\rightarrow B)$,$Th7$</li>
+<li>$A\rightarrow(\neg A\rightarrow B)$,$Th2$</li>
+</ol>
+<p>$Th9$：$\vdash_{PC}(\neg A\rightarrow A)\rightarrow A$</p>
+<ol>
+<li>$\neg A\rightarrow(A\rightarrow\neg(\neg A\rightarrow A))$,$Th7$</li>
+<li>$(\neg A\rightarrow(A\rightarrow\neg(\neg A\rightarrow A)))\rightarrow((\neg A\rightarrow A)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow A)))$,$A2$</li>
+<li>$(\neg A\rightarrow A)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow A))$,$r_{mp}(1)(2)$</li>
+<li>$(\neg A\rightarrow\neg(\neg A\rightarrow A))\rightarrow((\neg A\rightarrow A)\rightarrow A)$,$A3$</li>
+<li>$(\neg A\rightarrow A)\rightarrow((\neg A\rightarrow A)\rightarrow A)$,$Th6$</li>
+<li>$((\neg A\rightarrow A)\rightarrow((\neg A\rightarrow A)\rightarrow A))\rightarrow(((\neg A\rightarrow A)\rightarrow(\neg A\rightarrow A))\rightarrow((\neg A\rightarrow A)\rightarrow A))$,$A2$</li>
+<li>$((\neg A\rightarrow A)\rightarrow(\neg A\rightarrow A))\rightarrow((\neg A\rightarrow A)\rightarrow A)$,$r_{mp}(5)(6)$</li>
+<li>$(\neg A\rightarrow A)\rightarrow(\neg A\rightarrow A)$,$Th1$</li>
+<li>$(\neg A\rightarrow A)\rightarrow A$,$r_{mp}(7)(8)$</li>
+</ol>
+<p>$Th10$：$\vdash_{PC}\neg\neg A\rightarrow A$</p>
+<ol>
+<li>$\neg\neg A\rightarrow(\neg A\rightarrow\neg\neg\neg A)$,$Th7$</li>
+<li>$(\neg A\rightarrow\neg\neg\neg A)\rightarrow(\neg\neg A\rightarrow A)$,$A3$</li>
+<li>$\neg\neg A\rightarrow(\neg\neg A\rightarrow A)$,$Th6$</li>
+<li>$(\neg\neg A\rightarrow(\neg\neg A\rightarrow A))\rightarrow((\neg\neg A\rightarrow\neg\neg A)\rightarrow(\neg\neg A\rightarrow A))$,$A2$</li>
+<li>$(\neg\neg A\rightarrow\neg\neg A)\rightarrow(\neg\neg A\rightarrow A)$,$r_{mp}(3)(4)$</li>
+<li>$\neg\neg A\rightarrow\neg\neg A$,$Th1$</li>
+<li>$\neg\neg A\rightarrow A$,$r_{mp}(5)(6)$</li>
+</ol>
+<p>$Th11$：$\vdash_{PC}(A\rightarrow\neg A)\rightarrow\neg A$</p>
+<ol>
+<li>$\neg\neg A\rightarrow A$,$Th10$</li>
+<li>$(\neg\neg A\rightarrow A)\rightarrow((A\rightarrow\neg A)\rightarrow(\neg\neg A\rightarrow\neg A))$,$Th5$</li>
+<li>$(A\rightarrow\neg A)\rightarrow(\neg\neg A\rightarrow\neg A)$,$r_{mp}(1)(2)$</li>
+<li>$(\neg\neg A\rightarrow\neg A)\rightarrow\neg A$,$Th9$</li>
+<li>$(A\rightarrow\neg A)\rightarrow\neg A$,$Th6$</li>
+</ol>
+<p>$Th12$：$\vdash_{PC}A\rightarrow\neg\neg A$</p>
+<ol>
+<li>$A\rightarrow(\neg A\rightarrow\neg\neg A)$,$Th8$</li>
+<li>$(\neg A\rightarrow\neg\neg A)\rightarrow\neg\neg A$,$Th11$</li>
+<li>$A\rightarrow\neg\neg A$,$r_{mp}(1)(2)$</li>
+</ol>
+<p>$Th13$：$\vdash_{PC}(A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$</p>
+<ol>
+<li>$(\neg\neg A\rightarrow\neg\neg B)\rightarrow(\neg B\rightarrow\neg A)$,$A3$</li>
+<li>$B\rightarrow\neg\neg B$,$Th12$</li>
+<li>$(B\rightarrow\neg\neg B)\rightarrow((\neg\neg A\rightarrow B)\rightarrow(\neg\neg A\rightarrow\neg\neg B))$,$A2$</li>
+<li>$(\neg\neg A\rightarrow B)\rightarrow(\neg\neg A\rightarrow\neg\neg B)$,$r_{mp}(2)(3)$</li>
+<li>$(\neg\neg A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$,$Th6$</li>
+<li>$\neg\neg A\rightarrow A$,$Th10$</li>
+<li>$(\neg\neg A\rightarrow A)\rightarrow((A\rightarrow B)\rightarrow(\neg\neg A\rightarrow B))$,$Th5$</li>
+<li>$(A\rightarrow B)\rightarrow(\neg\neg A\rightarrow B)$,$r_{mp}(6)(7)$</li>
+<li>$(A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$,$Th6$</li>
+</ol>
+<p>$Th14$：$\vdash_{PC}(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$</p>
+<ol>
+<li>$(\neg A\rightarrow\neg\neg B)\rightarrow(\neg B\rightarrow A)$,$A3$</li>
+<li>$B\rightarrow\neg\neg B$,$Th12$</li>
+<li>$(B\rightarrow\neg\neg B)\rightarrow((\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg\neg B))$,$Th4$</li>
+<li>$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg\neg B)$,$r_{mp}(2)(3)$</li>
+<li>$(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$Th6$</li>
+</ol>
+<p>$Th15$：$\vdash_{PC}(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$</p>
+<ol>
+<li>$(\neg\neg A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$A3$</li>
+<li>$\neg\neg A\rightarrow A$,$Th10$</li>
+<li>$(\neg\neg A\rightarrow A)\rightarrow((A\rightarrow\neg B)\rightarrow(\neg\neg A\rightarrow\neg B))$,$Th5$</li>
+<li>$(A\rightarrow\neg B)\rightarrow(\neg\neg A\rightarrow\neg B)$,$r_{mp}(2)(3)$</li>
+<li>$(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$Th6$</li>
+</ol>
+<h3 id="反证法">反证法
+</h3><p>$Th16$：$\vdash_{PC}(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$</p>
+<ol>
+<li>$(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$,$A3$</li>
+<li>$B\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$Th2$</li>
+<li>$((\neg A\rightarrow\neg B)\rightarrow A)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))$,$Th13$</li>
+<li>$B\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))$,$r_{mp}(2)(3)$</li>
+<li>$\neg A\rightarrow(B\rightarrow\neg(\neg A\rightarrow\neg B))$,$Th2$</li>
+<li>$(\neg A\rightarrow(B\rightarrow\neg(\neg A\rightarrow\neg B)))\rightarrow((\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow\neg B)))$,$A2$</li>
+<li>$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))$,$r_{mp}(5)(6)$</li>
+<li>$(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$A3$</li>
+<li>$(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$Th6$</li>
+</ol>
+<p>$Th17$：$\vdash_{PC}(A\rightarrow B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$</p>
+<ol>
+<li>$(A\rightarrow\neg B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th15$</li>
+<li>$B\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th3$</li>
+<li>$((A\rightarrow\neg B)\rightarrow\neg A)\rightarrow(A\rightarrow\neg(A\rightarrow\neg B))$,$Th15$</li>
+<li>$B\rightarrow(A\rightarrow\neg(A\rightarrow\neg B))$,$Th6$</li>
+<li>$A\rightarrow(B\rightarrow\neg(A\rightarrow\neg B))$,$Th2$</li>
+<li>$(A\rightarrow(B\rightarrow\neg(A\rightarrow\neg B)))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow\neg(A\rightarrow\neg B)))$,$A2$</li>
+<li>$(A\rightarrow B)\rightarrow(A\rightarrow\neg(A\rightarrow\neg B))$,$r_{mp}(5)(6)$</li>
+<li>$(A\rightarrow\neg(A\rightarrow\neg B))\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th15$</li>
+<li>$(A\rightarrow B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th6$</li>
+</ol>
+<h3 id="拆分">→拆分
+</h3><p>$Th18$：$\vdash_{PC}\neg A\rightarrow C,\vdash_{PC}B\rightarrow C$当且仅当$\vdash_{PC}(A\rightarrow B)\rightarrow C$</p>
+<p>当$\vdash_{PC}(A\rightarrow B)\rightarrow C$时：</p>
+<ol>
+<li>$(A\rightarrow B)\rightarrow C$</li>
+<li>$B\rightarrow(A\rightarrow B)$,$A1$</li>
+<li>$B\rightarrow C$,$Th6$</li>
+<li>$\neg A\rightarrow(A\rightarrow B)$,$Th7$</li>
+<li>$\neg A\rightarrow C$,$Th6$</li>
+</ol>
+<p>当$\vdash_{PC}\neg A\rightarrow C,\vdash_{PC}B\rightarrow C$时：</p>
+<ol>
+<li>$\neg A\rightarrow C$</li>
+<li>$B\rightarrow C$</li>
+<li>$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$</li>
+<li>$(A\rightarrow B)\rightarrow(A\rightarrow C)$,$r_{mp}(2)(3)$</li>
+<li>$(\neg A\rightarrow C)\rightarrow(\neg C\rightarrow A)$,$Th14$</li>
+<li>$\neg C\rightarrow A$,$r_{mp}(1)(5)$</li>
+<li>$(\neg C\rightarrow A)\rightarrow((A\rightarrow C)\rightarrow(\neg C\rightarrow C))$,$Th5$</li>
+<li>$(A\rightarrow C)\rightarrow(\neg C\rightarrow C)$,$r_{mp}(6)(7)$</li>
+<li>$(A\rightarrow B)\rightarrow(\neg C\rightarrow C)$,$Th2$</li>
+<li>$(\neg C\rightarrow C)\rightarrow C$,$Th9$</li>
+<li>$(A\rightarrow B)\rightarrow C$,$Th6$</li>
+</ol>
+<p>$Th19$：定义$A\vee B =_ {df}\neg A\rightarrow B$，$\vdash_{PC}A\rightarrow A\vee B$</p>
+<ol>
+<li>$A\rightarrow(\neg A\rightarrow B)$,$Th8$</li>
+</ol>
+<p>$Th20$：$\vdash_{PC}A\rightarrow B\vee A$</p>
+<ol>
+<li>$A\rightarrow(\neg B\rightarrow A)$,$A1$</li>
+</ol>
+<p>$Th21$：如果$\vdash_{PC}P\rightarrow Q,\vdash_{PC}R\rightarrow S$，那么$\vdash_{PC}(Q\rightarrow R)\rightarrow(P\rightarrow S)$</p>
+<ol>
+<li>$P\rightarrow Q$</li>
+<li>$(P\rightarrow Q)\rightarrow((Q\rightarrow R)\rightarrow(P\rightarrow R))$,$Th5$</li>
+<li>$(Q\rightarrow R)\rightarrow(P\rightarrow R)$,$r_{mp}(1)(2)$</li>
+<li>$R\rightarrow S$</li>
+<li>$(R\rightarrow S)\rightarrow((P\rightarrow R)\rightarrow(P\rightarrow S))$,$Th4$</li>
+<li>$(P\rightarrow R)\rightarrow(P\rightarrow S)$,$r_{mp}(4)(5)$</li>
+<li>$(Q\rightarrow R)\rightarrow(P\rightarrow S)$,$Th6$</li>
+</ol>
+<p>$Th22$：$\vdash_{PC}(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow((A\vee B)\rightarrow C))$</p>
+<ol>
+<li>$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow B)$,$Th1$</li>
+<li>$\neg A\rightarrow((\neg A\rightarrow B)\rightarrow B)$,$Th2$</li>
+<li>$((\neg A\rightarrow B)\rightarrow B)\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))$,$Th13$</li>
+<li>$\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))$,$Th6$</li>
+<li>$(\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B)))\rightarrow(\neg C\rightarrow(\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))))$,$A1$</li>
+<li>$\neg C\rightarrow(\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B)))$,$r_{mp}(4)(5)$</li>
+<li>$(\neg C\rightarrow(\neg A\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))))\rightarrow((\neg C\rightarrow\neg A)\rightarrow(\neg C\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B))))$,$A2$</li>
+<li>$(\neg C\rightarrow\neg A)\rightarrow(\neg C\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B)))$,$r_{mp}(6)(7)$</li>
+<li>$(\neg C\rightarrow(\neg B\rightarrow\neg(\neg A\rightarrow B)))\rightarrow((\neg C\rightarrow\neg B)\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))$,$A2$</li>
+<li>$(\neg C\rightarrow\neg A)\rightarrow((\neg C\rightarrow\neg B)\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))$,$Th6$</li>
+<li>$(A\rightarrow C)\rightarrow(\neg C\rightarrow\neg A)$,$Th13$</li>
+<li>$(A\rightarrow C)\rightarrow((\neg C\rightarrow\neg B)\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))$,$Th6$</li>
+<li>$(B\rightarrow C)\rightarrow(\neg C\rightarrow\neg B)$,$Th13$</li>
+<li>$(\neg C\rightarrow\neg(\neg A\rightarrow B))\rightarrow((\neg A\rightarrow B)\rightarrow C)$,$A3$</li>
+<li>$((\neg C\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))\rightarrow(\neg C\rightarrow\neg B))\rightarrow((B\rightarrow C)\rightarrow((\neg A\rightarrow B)\rightarrow C))$,$Th21$</li>
+<li>$(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow((\neg A\rightarrow B)\rightarrow C))$,$Th6$</li>
+</ol>
+<p>$Th23$：
+定义$A\wedge B =_ {df} \neg(A\rightarrow\neg B)$，那么$\vdash_{PC}A\wedge B\rightarrow C$当且仅当$\vdash_{PC}A\rightarrow(B\rightarrow C)$</p>
+<p>当$\vdash_{PC}A\wedge B\rightarrow C$时：</p>
+<ol>
+<li>$\neg(A\rightarrow\neg B)\rightarrow C$</li>
+<li>$(\neg(A\rightarrow\neg B)\rightarrow C)\rightarrow(\neg C\rightarrow(A\rightarrow\neg B))$,$Th14$</li>
+<li>$\neg C\rightarrow(A\rightarrow\neg B)$,$r_{mp}(1)(2)$</li>
+<li>$A\rightarrow(\neg C\rightarrow\neg B)$,$Th2$</li>
+<li>$(\neg C\rightarrow\neg B)\rightarrow(B\rightarrow C)$,$A3$</li>
+<li>$A\rightarrow(B\rightarrow C)$,$Th6$</li>
+</ol>
+<p>当$\vdash_{PC}A\rightarrow(B\rightarrow C)$时：</p>
+<ol>
+<li>$A\rightarrow(B\rightarrow C)$</li>
+<li>$(B\rightarrow C)\rightarrow(\neg C\rightarrow\neg B)$,$Th13$</li>
+<li>$A\rightarrow(\neg C\rightarrow\neg B)$,$Th6$</li>
+<li>$\neg C\rightarrow(A\rightarrow\neg B)$,$Th2$</li>
+<li>$(\neg C\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow C)$,$Th14$</li>
+<li>$\neg(A\rightarrow\neg B)\rightarrow C$,$r_{mp}(4)(5)$</li>
+</ol>
+<p>$Th24$：$\vdash_{PC}A\wedge B\rightarrow A$</p>
+<ol>
+<li>$\neg A\rightarrow(A\rightarrow\neg B)$,$Th7$</li>
+<li>$(\neg A\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow A)$,$Th14$</li>
+<li>$\neg(A\rightarrow\neg B)\rightarrow A$,$r_{mp}(1)(2)$</li>
+</ol>
+<p>$Th25$：$\vdash_{PC}B\wedge A\rightarrow A$</p>
+<ol>
+<li>$\neg B\rightarrow(A\rightarrow\neg B)$,$A1$</li>
+<li>$(\neg B\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow B)$,$Th14$</li>
+<li>$\neg(A\rightarrow\neg B)\rightarrow B$,$r_{mp}(1)(2)$</li>
+</ol>
+<p>$Th26$：$\vdash_{PC}A\rightarrow(B\rightarrow A\wedge B)$</p>
+<ol>
+<li>$A\wedge B\rightarrow A\wedge B$,$Th1$</li>
+<li>$A\rightarrow(B\rightarrow A\wedge B)$,$Th23$</li>
+</ol>
+<p>$Th27$：$\vdash_{PC}(A\rightarrow B)\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$</p>
+<ol>
+<li>$B\rightarrow(C\rightarrow B\wedge C)$,$Th26$</li>
+<li>$(B\rightarrow(C\rightarrow B\wedge C))\rightarrow(A\rightarrow(B\rightarrow(C\rightarrow B\wedge C)))$,$A1$</li>
+<li>$A\rightarrow(B\rightarrow(C\rightarrow B\wedge C))$,$r_{mp}(1)(2)$</li>
+<li>$(A\rightarrow(B\rightarrow(C\rightarrow B\wedge C)))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow(C\rightarrow B\wedge C)))$,$A2$</li>
+<li>$(A\rightarrow B)\rightarrow(A\rightarrow(C\rightarrow B\wedge C))$,$r_{mp}(3)(4)$</li>
+<li>$A\rightarrow((A\rightarrow B)\rightarrow(C\rightarrow B\wedge C))$,$Th2$</li>
+<li>$((A\rightarrow B)\rightarrow(C\rightarrow B\wedge C))\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$,$A2$</li>
+<li>$A\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$,$Th6$</li>
+</ol>
+<p>$Th28$：我们将$\vdash_{PC}P\rightarrow Q,\vdash_{PC}Q\rightarrow P$记作$\vdash_{PC}P\leftrightarrow Q$，那么有$\vdash_{PC}A\vee B\leftrightarrow B\vee A$</p>
+<ol>
+<li>$(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$Th14$</li>
+<li>$(\neg B\rightarrow A)\rightarrow(\neg A\rightarrow B)$,$Th14$</li>
+</ol>
+<p>$Th29$：$\vdash_{PC}A\wedge B\leftrightarrow B\wedge A$</p>
+<ol>
+<li>$(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$Th15$</li>
+<li>$(B\rightarrow\neg A)\rightarrow(A\rightarrow\neg B)$,$Th15$</li>
+</ol>
+<p>$Th30$：$\vdash_{PC}(A\vee B)\vee C\leftrightarrow A\vee(B\vee C)$</p>
+<ol>
+<li>$B\rightarrow(\neg B\rightarrow C)$,$Th8$</li>
+<li>$(B\rightarrow(\neg B\rightarrow C))\rightarrow((\neg A\rightarrow B)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C)))$,$A2$</li>
+<li>$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C))$,$r_{mp}(1)(2)$</li>
+<li>$\neg\neg(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow B)$,$Th10$</li>
+<li>$\neg\neg(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C))$,$Th6$</li>
+<li>$C\rightarrow(\neg B\rightarrow C)$,$A1$</li>
+<li>$(C\rightarrow(\neg B\rightarrow C))\rightarrow(\neg A\rightarrow(C\rightarrow(\neg B\rightarrow C)))$,$A1$</li>
+<li>$\neg A\rightarrow(C\rightarrow(\neg B\rightarrow C))$,$r_{mp}(6)(7)$</li>
+<li>$C\rightarrow(\neg A\rightarrow(\neg B\rightarrow C))$,$Th2$</li>
+<li>$(\neg(\neg A\rightarrow B)\rightarrow C)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C))$,$Th18$</li>
+<li>$B\rightarrow(\neg A\rightarrow B)$,$A1$</li>
+<li>$(B\rightarrow(\neg A\rightarrow B))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg B)$,$Th13$</li>
+<li>$\neg(\neg A\rightarrow B)\rightarrow\neg B$,$r_{mp}(11)(12)$</li>
+<li>$(\neg(\neg A\rightarrow B)\rightarrow\neg B)\rightarrow((\neg B\rightarrow C)\rightarrow(\neg(\neg A\rightarrow B)\rightarrow C))$,$Th5$</li>
+<li>$(\neg B\rightarrow C)\rightarrow(\neg(\neg A\rightarrow B)\rightarrow C)$,$r_{mp}(13)(14)$</li>
+<li>$\neg A\rightarrow(A\rightarrow C)$,$Th7$</li>
+<li>$A\rightarrow(\neg A\rightarrow B)$,$Th8$</li>
+<li>$(A\rightarrow(\neg A\rightarrow B))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$Th13$</li>
+<li>$\neg(\neg A\rightarrow B)\rightarrow\neg A$,$r_{mp}(17)(18)$</li>
+<li>$(\neg(\neg A\rightarrow B)\rightarrow\neg A)\rightarrow(A\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A))$,$A1$</li>
+<li>$A\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$r_{mp}(19)(20)$</li>
+<li>$\neg\neg A\rightarrow A$,$Th10$</li>
+<li>$\neg\neg A\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$Th6$</li>
+<li>$(\neg A\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow C)$,$Th18$</li>
+</ol>
+<p>$Th31$：$\vdash_{PC}(A\wedge B)\wedge C\leftrightarrow A\wedge(B\wedge C)$</p>
+<ol>
+<li>$(B\rightarrow\neg C)\rightarrow(C\rightarrow\neg B)$,$Th15$</li>
+<li>$((B\rightarrow\neg C)\rightarrow(C\rightarrow\neg B))\rightarrow((A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow(C\rightarrow\neg B)))$,$Th4$</li>
+<li>$(A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow(C\rightarrow\neg B))$,$r_{mp}(1)(2)$</li>
+<li>$(A\rightarrow(C\rightarrow\neg B))\rightarrow(C\rightarrow(A\rightarrow\neg B))$,$Th3$</li>
+<li>$(A\rightarrow(B\rightarrow\neg C))\rightarrow(C\rightarrow(A\rightarrow\neg B))$,$Th6$</li>
+<li>$\neg\neg(B\rightarrow\neg C)\rightarrow(B\rightarrow\neg C)$,$Th10$</li>
+<li>$(\neg\neg(B\rightarrow\neg C)\rightarrow(B\rightarrow\neg C))\rightarrow((A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(A\rightarrow(B\rightarrow\neg C)))$,$Th4$</li>
+<li>$(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(A\rightarrow(B\rightarrow\neg C))$,$r_{mp}(6)(7)$</li>
+<li>$(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(C\rightarrow(A\rightarrow\neg B))$,$Th6$</li>
+<li>$(C\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow\neg C)$,$Th13$</li>
+<li>$(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow\neg C)$,$Th6$</li>
+<li>$((A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow\neg C))\rightarrow(\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow\neg(A\rightarrow\neg\neg(B\rightarrow\neg C)))$,$Th13$</li>
+<li>$\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))$,$r_{mp}(11)(12)$</li>
+<li>$(C\rightarrow\neg B)\rightarrow(B\rightarrow\neg C)$,$Th15$</li>
+<li>$((C\rightarrow\neg B)\rightarrow(B\rightarrow\neg C))\rightarrow((A\rightarrow(C\rightarrow\neg B))\rightarrow(A\rightarrow(B\rightarrow\neg C)))$,$Th4$</li>
+<li>$(A\rightarrow(C\rightarrow\neg B))\rightarrow(A\rightarrow(B\rightarrow\neg C))$,$r_{mp}(14)(15)$</li>
+<li>$(C\rightarrow(A\rightarrow\neg B))\rightarrow(A\rightarrow(C\rightarrow\neg B))$,$Th3$</li>
+<li>$(C\rightarrow(A\rightarrow\neg B))\rightarrow(A\rightarrow(B\rightarrow\neg C))$,$Th6$</li>
+<li>$(B\rightarrow\neg C)\rightarrow\neg\neg(B\rightarrow\neg C)$,$Th12$</li>
+<li>$((B\rightarrow\neg C)\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow((A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C)))$,$Th4$</li>
+<li>$(A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C))$,$r_{mp}(19)(20)$</li>
+<li>$(C\rightarrow(A\rightarrow\neg B))\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C))$,$Th6$</li>
+<li>$(\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow(C\rightarrow(A\rightarrow\neg B))$,$A3$</li>
+<li>$(\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C))$,$Th6$</li>
+<li>$((\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C)))\rightarrow(\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C))$,$Th13$</li>
+<li>$\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C)$,$r_{mp}(24)(25)$</li>
+</ol>
+<p>$Th32$：$\vdash_{PC}A\wedge(A\vee B)\leftrightarrow A$</p>
+<ol>
+<li>$A\rightarrow(A\vee B\rightarrow A)$,$A1$</li>
+<li>$A\wedge(A \vee B)\rightarrow A$,$Th23$</li>
+<li>$\neg A\rightarrow\neg A$,$Th1$</li>
+<li>$A\rightarrow(\neg A\rightarrow B)$,$Th8$</li>
+<li>$(A\rightarrow(\neg A\rightarrow B))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$Th13$</li>
+<li>$\neg(\neg A\rightarrow B)\rightarrow\neg A$,$r_{mp}(4)(5)$</li>
+<li>$((\neg A\rightarrow B)\rightarrow\neg A)\rightarrow\neg A$,$Th18$</li>
+<li>$(A\rightarrow\neg(\neg A\rightarrow B))\rightarrow((\neg A\rightarrow B)\rightarrow\neg A)$,$Th15$</li>
+<li>$(A\rightarrow\neg(\neg A\rightarrow B))\rightarrow\neg A$,$Th6$</li>
+<li>$((A\rightarrow\neg(\neg A\rightarrow B))\rightarrow\neg A)\rightarrow(A\rightarrow\neg(A\rightarrow\neg(\neg A\rightarrow B)))$,$Th15$</li>
+<li>$A\rightarrow\neg(A\rightarrow\neg(\neg A\rightarrow B))$,$r_{mp}(9)(10)$</li>
+</ol>
+<p>$Th33$：$\vdash_{PC}A\vee(A\wedge B)\leftrightarrow A$</p>
+<ol>
+<li>$A\rightarrow(\neg A\rightarrow(A\wedge B))$,$Th8$</li>
+<li>$A\wedge B\rightarrow A$,$Th24$</li>
+<li>$(A\wedge B\rightarrow A)\rightarrow((\neg A\rightarrow(A\wedge B))\rightarrow(\neg A\rightarrow A))$,$Th4$</li>
+<li>$(\neg A\rightarrow(A\wedge B))\rightarrow(\neg A\rightarrow A)$,$r_{mp}(2)(3)$</li>
+<li>$(\neg A\rightarrow A)\rightarrow A$,$Th9$</li>
+<li>$(\neg A\rightarrow(A\wedge B))\rightarrow A$,$Th6$</li>
+</ol>
+<p>$Th34$：$\vdash_{PC}A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$</p>
+<ol>
+<li>$B\rightarrow(\neg B\rightarrow C)$,$Th8$</li>
+<li>$(B\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg B\rightarrow C)\rightarrow\neg B)$,$Th13$</li>
+<li>$\neg(\neg B\rightarrow C)\rightarrow\neg B$,$r_{mp}(1)(2)$</li>
+<li>$(\neg(\neg B\rightarrow C)\rightarrow\neg B)\rightarrow((A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg B))$,$Th4$</li>
+<li>$(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg B)$,$r_{mp}(3)(4)$</li>
+<li>$((A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C)))$,$Th13$</li>
+<li>$\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C))$,$r_{mp}(5)(6)$</li>
+<li>$C\rightarrow(\neg B\rightarrow C)$,$A1$</li>
+<li>$(C\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg B\rightarrow C)\rightarrow\neg C)$,$Th13$</li>
+<li>$\neg(\neg B\rightarrow C)\rightarrow\neg C$,$r_{mp}(8)(9)$</li>
+<li>$(\neg(\neg B\rightarrow C)\rightarrow\neg C)\rightarrow((A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg C))$,$Th4$</li>
+<li>$(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg C)$,$r_{mp}(10)(11)$</li>
+<li>$((A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(A\rightarrow\neg C))\rightarrow(\neg(A\rightarrow\neg C)\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C)))$,$Th13$</li>
+<li>$\neg(A\rightarrow\neg C)\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C))$,$r_{mp}(12)(13)$</li>
+<li>$((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C))$,$Th18$</li>
+<li>$(A\rightarrow\neg B)\rightarrow\neg\neg(A\rightarrow\neg B)$,$Th12$</li>
+<li>$((A\rightarrow\neg B)\rightarrow\neg\neg(A\rightarrow\neg B))\rightarrow((\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C)))$,$Th5$</li>
+<li>$(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$r_{mp}(16)(17)$</li>
+<li>$(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow\neg(A\rightarrow\neg(\neg B\rightarrow C))$,$Th6$</li>
+<li>$(A\rightarrow\neg B)\rightarrow((A\rightarrow\neg C)\rightarrow(A\rightarrow\neg(\neg B\rightarrow C)))$,$Th23$</li>
+<li>$((A\rightarrow\neg C)\rightarrow(A\rightarrow\neg(\neg B\rightarrow C)))\rightarrow(\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow\neg(A\rightarrow\neg C))$,$Th13$</li>
+<li>$(A\rightarrow\neg B)\rightarrow(\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow\neg(A\rightarrow\neg C))$,$Th6$</li>
+<li>$\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$Th2$</li>
+<li>$\neg\neg(A\rightarrow\neg B)\rightarrow(A\rightarrow\neg B)$,$Th10$</li>
+<li>$(\neg\neg(A\rightarrow\neg B)\rightarrow(A\rightarrow\neg B))\rightarrow(((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C)))$,$Th5$</li>
+<li>$((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$r_{mp}(24)(25)$</li>
+<li>$\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$Th6$</li>
+</ol>
+<p>$Th35$：$\vdash_{PC}A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$</p>
+<ol>
+<li>$B\wedge C\rightarrow B$,$Th24$</li>
+<li>$(B\wedge C\rightarrow B)\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B))$,$Th4$</li>
+<li>$(\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B)$,$r_{mp}(1)(2)$</li>
+<li>$((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B))\rightarrow(((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow C))\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B)\wedge(\neg A\rightarrow C)))$</li>
+<li>$((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow C))\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B)\wedge(\neg A\rightarrow C))$,$r_{mp}(3)(4)$</li>
+<li>$B\wedge C\rightarrow C$,$Th25$</li>
+<li>$(B\wedge C\rightarrow C)\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow C))$,$Th4$</li>
+<li>$(\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow C)$,$r_{mp}(6)(7)$</li>
+<li>$(\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B)\wedge(\neg A\rightarrow C)$,$r_{mp}(5)(8)$</li>
+<li>$(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow C)\rightarrow(\neg A\rightarrow B\wedge C))$,$Th27$</li>
+<li>$(\neg A\rightarrow B)\wedge(\neg A\rightarrow C)\rightarrow(\neg A\rightarrow B\wedge C)$,$Th23$</li>
+</ol>
+<p>上述的35个PC的定理都是十分重要和有用的，其中定理$Th16$（反证法）和$Th18$（→拆分法）可以帮助我们将定理更加系统地证明，下面我们举两个例子进行说明。</p>
+<h2 id="pc的基本定理的运用">PC的基本定理的运用
+</h2><p>运用$Th16$证明：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow A$</p>
+<p>如果我们要运用$Th16$，我们就需要假设这个定理不成立从而推出矛盾，不妨证明：</p>
+<p>$\vdash_{PC}\neg(((A\rightarrow B)\rightarrow A)\rightarrow A)\rightarrow(A\rightarrow B)$</p>
+<p>$\vdash_{PC}\neg(((A\rightarrow B)\rightarrow A)\rightarrow A)\rightarrow\neg(A\rightarrow B)$</p>
+<p>后者即证：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow((A\rightarrow B)\rightarrow A)$，结论是显然的。</p>
+<p>前者即证：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow(\neg(A\rightarrow B)\rightarrow A)$</p>
+<p>后件可以由$\neg A\rightarrow(A\rightarrow B)$变形得到，所以得证。</p>
+<p>运用$Th18$证明：$\vdash_{PC}(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>运用$Th18$证明这个定理等价于证明：</p>
+<p>$\vdash_{PC}\neg A\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>$\vdash_{PC}C\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>后者即证：$\vdash_{PC}(B\rightarrow C)\rightarrow(C\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>其后件是$A1$，故结论是显然的。</p>
+<p>现在我们只需要证明：$\vdash_{PC}\neg A\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>即证：$\vdash_{PC}(B\rightarrow C)\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>再次运用$Th18$，即证：</p>
+<p>$\vdash_{PC}\neg B\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>$\vdash_{PC}C\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>后者即证$\vdash_{PC}\neg A\rightarrow(C\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>其后件是$A1$，故结论是显然的。</p>
+<p>现在我们只需要证明：$\vdash_{PC}\neg B\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$</p>
+<p>即证：$\vdash_{PC}((A\rightarrow B)\rightarrow B)\rightarrow(\neg B\rightarrow(\neg A\rightarrow C))$</p>
+<p>再次运用$Th18$，即证：</p>
+<p>$\vdash_{PC}\neg(A\rightarrow B)\rightarrow(\neg B\rightarrow(\neg A\rightarrow C))$</p>
+<p>$\vdash_{PC}B\rightarrow(\neg B\rightarrow(\neg A\rightarrow C))$</p>
+<p>后者是$Th8$，故结论是显然的。</p>
+<p>现在我们只需要证明：$\vdash_{PC}\neg(A\rightarrow B)\rightarrow(\neg B\rightarrow(\neg A\rightarrow C))$</p>
+<p>即证：$\vdash_{PC}\neg B\rightarrow(\neg A\rightarrow(\neg C\rightarrow (A\rightarrow B)))$</p>
+<p>不妨证：$\vdash_{PC}\neg A\rightarrow(\neg C\rightarrow (A\rightarrow B))$</p>
+<p>可知有：</p>
+<p>$\vdash_{PC}\neg A\rightarrow(A\rightarrow B)$</p>
+<p>$\vdash_{PC}(A\rightarrow B)\rightarrow(\neg C\rightarrow(A\rightarrow B))$</p>
+<p>按照上述思路将对应的证明序列写出即可证明该定理。</p>
+<h2 id="演绎定理">演绎定理
+</h2><p>证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$</p>
+<ol>
+<li>$(C\rightarrow D)\rightarrow((B\rightarrow C)\rightarrow(B\rightarrow D))$,$Th4$</li>
+<li>$((B\rightarrow C)\rightarrow(B\rightarrow D))\rightarrow((A\rightarrow(B\rightarrow C))\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th4$</li>
+<li>$(C\rightarrow D)\rightarrow((A\rightarrow(B\rightarrow C))\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th6$</li>
+<li>$(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th2$</li>
+</ol>
+<p>上面这个例子表明，在PC中证明定理的这个过程中的公式序列的公式长度通常较长，为了缩短公式序列的长度，我们现在给出PC中一个重要方便的定理：<strong>演绎定理</strong>。</p>
+<p><strong>演绎定理</strong>：对PC中任意公式集合$\Gamma$和公式$A,B$，$\Gamma\cup{A}\vdash_{PC}B$（或记为$\Gamma;A\vdash_{PC}B$）当且仅当$\Gamma\vdash_{PC}A\rightarrow B$。</p>
+<hr>
+<p>证明：（充分性）</p>
+<p>已知$\Gamma\vdash_{PC}A\rightarrow B$</p>
+<p>从$\Gamma$出发在PC可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$</p>
+<p>从$\Gamma\cup{A}$出发在PC也可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$</p>
+<p>从$\Gamma\cup{A}$出发在PC中可以得到$B$的一个演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B),A,B$</p>
+<p>也就是说有$\Gamma;A\vdash_{PC}B$。</p>
+<hr>
+<p>证明：（必要性）</p>
+<p>已知$\Gamma\cup{A}\vdash_{PC}B$</p>
+<p>从$\Gamma\cup{A}$出发在PC可以得到一个$B$的演绎序列$B_1,B_2,\cdots,B_k(=B)$，我们对演绎序列的长度$k$使用数学归纳法：</p>
+<p>当$k=1$时可知$B$或是公理、或有$B\in\Gamma\cup{A}$：</p>
+<p>当$B$是公理时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。</p>
+<p>当$B\in\Gamma$时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。</p>
+<p>当$B=A$时，$A\rightarrow B$也即$A\rightarrow A$，也就是$Th1$，那么有$\Gamma\vdash_{PC}A\rightarrow B$。</p>
+<p>假设$k&lt; n$时原命题成立，那么对于$B$的演绎序列中的公式有$\Gamma\vdash_{PC}A\rightarrow B_i,i&lt; n$。</p>
+<p>那么$k=n$时$B$或为公理、或有$B\in\Gamma\cup{A}$，或由$B_i,B_j(i,j&lt; n)$通过$r_{mp}$得到。</p>
+<p>当$B$是公理时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。</p>
+<p>当$B\in\Gamma$时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。</p>
+<p>当$B=A$时，$A\rightarrow B$也即$A\rightarrow A$，也就是$Th1$，那么有$\Gamma\vdash_{PC}A\rightarrow B$。</p>
+<p>当$B$由$B_i,B_j(i,j&lt; n)$通过$r_{mp}$得到时，我们设$B_j=B_i\rightarrow B$。</p>
+<p>那么有：$\Gamma\vdash_{PC}A\rightarrow B_i,\Gamma\vdash_{PC}A\rightarrow B_j$</p>
+<p>也就是说：$\Gamma\vdash_{PC}A\rightarrow B_i,\Gamma\vdash_{PC}A\rightarrow(B_i\rightarrow B)$</p>
+<p>由$A2$知：$(A\rightarrow(B_i\rightarrow B))\rightarrow((A\rightarrow B_i)\rightarrow(A\rightarrow B))$</p>
+<p>故：$\vdash_{PC}(A\rightarrow B_i)\rightarrow(A\rightarrow B)$，则$\Gamma\vdash_{PC}A\rightarrow B$</p>
+<hr>
+<p>我们现在回到上面那个例子，现在使用演绎定理解决这个问题。</p>
+<p>证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$</p>
+<p>即证：$A\rightarrow(B\rightarrow C)\vdash_{PC}(C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D))$</p>
+<p>即证：$A\rightarrow(B\rightarrow C),C\rightarrow D\vdash_{PC}A\rightarrow(B\rightarrow D)$</p>
+<p>即证：$A\rightarrow(B\rightarrow C),C\rightarrow D,A\vdash_{PC}B\rightarrow D$</p>
+<p>即证：$A\rightarrow(B\rightarrow C),C\rightarrow D,A,B\vdash_{PC}D$</p>
+<ol>
+<li>$A$</li>
+<li>$A\rightarrow(B\rightarrow C)$</li>
+<li>$B\rightarrow C$,$r_{mp}(1)(2)$</li>
+<li>$B$</li>
+<li>$C$,$r_{mp}(3)(4)$</li>
+<li>$C\rightarrow D$</li>
+<li>$D$,$r_{mp}(5)(6)$</li>
+</ol>
+<p>不难发现，在使用了演绎定理之后，我们的证明过程中涉及的公式变得更加简单了。</p>
+<hr>
+<h2 id="pc定理证明习题选">PC定理证明习题选
+</h2><p>下面给出了六道PC定理习题供读者练习使用：</p>
+<ol>
+<li>证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow(D\rightarrow B))\rightarrow(A\rightarrow(D\rightarrow C)))$</li>
+<li>证明：$\vdash_{PC}(((A\rightarrow B)\rightarrow C)\rightarrow D)\rightarrow((B\rightarrow D)\rightarrow(A\rightarrow D))$</li>
+<li>证明：$\vdash_{PC}(A\rightarrow(\neg B\rightarrow(\neg D\rightarrow C)))\rightarrow((B\rightarrow\neg A)\rightarrow((C\rightarrow\neg A)\rightarrow(A\rightarrow D)))$</li>
+<li>证明：$\vdash_{PC}((D\rightarrow B)\rightarrow((C\rightarrow G)\rightarrow A))\rightarrow((E\rightarrow((C\rightarrow G)\rightarrow A))\rightarrow((D\rightarrow E)\rightarrow(G\rightarrow A)))$</li>
+<li>证明：$\vdash_{PC}(C\rightarrow(\neg A\rightarrow(\neg D\rightarrow A)))\rightarrow((B\rightarrow A)\rightarrow((\neg B\rightarrow C)\rightarrow(\neg A\rightarrow D)))$</li>
+<li>证明：$\vdash_{PC}((B\rightarrow C)\rightarrow(D\rightarrow E))\rightarrow(((B\rightarrow C)\rightarrow(G\rightarrow H))\rightarrow(((A\rightarrow B)\rightarrow C)\rightarrow\neg(((E\rightarrow G)\rightarrow(D\rightarrow H))\rightarrow\neg((G\rightarrow\neg H)\rightarrow\neg G))))$</li>
+</ol>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/">数理逻辑</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 0x3a0x29的博客
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
