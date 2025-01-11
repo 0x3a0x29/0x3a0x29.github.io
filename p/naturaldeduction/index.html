@@ -383,20 +383,20 @@
 $\Gamma;A\vdash A(\in)$</li>
 <li>推理规则：用于从已有的公理和已推出的结论来推理另一结论。相较于PC，在ND中多了很多推理规则，这也使得ND更加符合我们的思维模式。
 <ol>
-<li>假设引入规则$\displaystyle{\frac{\Gamma\vdash B}{\Gamma;A\vdash B}}(+)$</li>
-<li><strong>假设消除规则</strong>$\displaystyle{\frac{\Gamma;A\vdash B,\Gamma;\neg A\vdash B}{\Gamma\vdash B}}(-)$</li>
-<li>$\vee$引入规则$\displaystyle{\frac{\Gamma\vdash A}{\Gamma\vdash A\vee B},\frac{\Gamma\vdash A}{\Gamma\vdash B\vee A}}(\vee+)$</li>
-<li>$\vee$<strong>消除规则</strong>$\displaystyle{\frac{\Gamma;A\vdash C,\Gamma;B\vdash C,\Gamma\vdash A\vee B}{\Gamma\vdash C}}(\vee-)$</li>
-<li>$\wedge$引入规则$\displaystyle{\frac{\Gamma\vdash A,\Gamma\vdash B}{\Gamma\vdash A\wedge B}}(\wedge+)$</li>
-<li>$\wedge$消除规则$\displaystyle{\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A},\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}}(\wedge -)$</li>
-<li>$\rightarrow$引入规则$\displaystyle{\frac{\Gamma;A\vdash B}{\Gamma\vdash A\rightarrow B}}(\rightarrow+)$</li>
-<li>$\rightarrow$消除规则$\displaystyle{\frac{\Gamma\vdash A,\Gamma\vdash A\rightarrow B}{\Gamma\vdash B}}(\rightarrow-)$</li>
-<li>$\neg$<strong>引入规则</strong>$\displaystyle{\frac{\Gamma;A\vdash B,\Gamma;A\vdash\neg B}{\Gamma\vdash\neg A}}(\neg+)$</li>
-<li>$\neg$消除规则$\displaystyle{\frac{\Gamma\vdash A,\Gamma\vdash\neg A}{\Gamma\vdash B}}(\neg-)$</li>
-<li>$\neg\neg$引入规则$\displaystyle{\frac{\Gamma\vdash A}{\Gamma\vdash\neg\neg A}}(\neg\neg+)$</li>
-<li>$\neg\neg$消除规则$\displaystyle{\frac{\Gamma\vdash\neg\neg A}{\Gamma\vdash A}}(\neg\neg-)$</li>
-<li>$\leftrightarrow$引入规则$\displaystyle{\frac{\Gamma\vdash A\rightarrow B,\Gamma\vdash B\rightarrow A}{\Gamma\vdash A\leftrightarrow B}}(\leftrightarrow+)$</li>
-<li>$\leftrightarrow$消除规则$\displaystyle{\frac{\Gamma\vdash A\leftrightarrow B}{\Gamma\vdash A\rightarrow B},\frac{\Gamma\vdash A\leftrightarrow B}{\Gamma\vdash B\rightarrow A}}(\leftrightarrow-)$</li>
+<li>假设引入规则${\frac{\Gamma\vdash B}{\Gamma;A\vdash B}}(+)$</li>
+<li><strong>假设消除规则</strong>${\frac{\Gamma;A\vdash B,\Gamma;\neg A\vdash B}{\Gamma\vdash B}}(-)$</li>
+<li>$\vee$引入规则${\frac{\Gamma\vdash A}{\Gamma\vdash A\vee B},\frac{\Gamma\vdash A}{\Gamma\vdash B\vee A}}(\vee+)$</li>
+<li>$\vee$<strong>消除规则</strong>${\frac{\Gamma;A\vdash C,\Gamma;B\vdash C,\Gamma\vdash A\vee B}{\Gamma\vdash C}}(\vee-)$</li>
+<li>$\wedge$引入规则${\frac{\Gamma\vdash A,\Gamma\vdash B}{\Gamma\vdash A\wedge B}}(\wedge+)$</li>
+<li>$\wedge$消除规则${\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A},\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}}(\wedge -)$</li>
+<li>$\rightarrow$引入规则${\frac{\Gamma;A\vdash B}{\Gamma\vdash A\rightarrow B}}(\rightarrow+)$</li>
+<li>$\rightarrow$消除规则${\frac{\Gamma\vdash A,\Gamma\vdash A\rightarrow B}{\Gamma\vdash B}}(\rightarrow-)$</li>
+<li>$\neg$<strong>引入规则</strong>${\frac{\Gamma;A\vdash B,\Gamma;A\vdash\neg B}{\Gamma\vdash\neg A}}(\neg+)$</li>
+<li>$\neg$消除规则${\frac{\Gamma\vdash A,\Gamma\vdash\neg A}{\Gamma\vdash B}}(\neg-)$</li>
+<li>$\neg\neg$引入规则${\frac{\Gamma\vdash A}{\Gamma\vdash\neg\neg A}}(\neg\neg+)$</li>
+<li>$\neg\neg$消除规则${\frac{\Gamma\vdash\neg\neg A}{\Gamma\vdash A}}(\neg\neg-)$</li>
+<li>$\leftrightarrow$引入规则${\frac{\Gamma\vdash A\rightarrow B,\Gamma\vdash B\rightarrow A}{\Gamma\vdash A\leftrightarrow B}}(\leftrightarrow+)$</li>
+<li>$\leftrightarrow$消除规则${\frac{\Gamma\vdash A\leftrightarrow B}{\Gamma\vdash A\rightarrow B},\frac{\Gamma\vdash A\leftrightarrow B}{\Gamma\vdash B\rightarrow A}}(\leftrightarrow-)$</li>
 </ol>
 </li>
 <li>定理推导：包括所有的推理结论及其推理过程。</li>
@@ -633,6 +633,7 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>证明：$\vdash_{ND}(A\leftrightarrow\neg B)\leftrightarrow\neg(A\leftrightarrow B)$</li>
 </ol>
 <hr>
+<p>水平有限，存在的错误和不足请大家指正。</p>
 
 </section>
 
@@ -698,6 +699,30 @@ $\Gamma;A\vdash A(\in)$</li>
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/firstorderpredicatecalculus/">
+        
+        
+            <div class="article-image">
+                <img src="/p/firstorderpredicatecalculus/image.44d3608b921d0f6dc2d464872d248e27_hu499527166130466722.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post FC(一阶谓词演算系统)及其相关定理"
+                        data-key="FirstOrderPredicateCalculus" 
+                        data-hash="md5-RNNgi5IdD23C1GSHLSSOJw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">FC(一阶谓词演算系统)及其相关定理</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">

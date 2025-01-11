@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="介绍了FC及其相关定理">
+<title>FC(一阶谓词演算系统)及其相关定理</title>
+
+<link rel='canonical' href='https://0x3a0x29.github.io/p/firstorderpredicatecalculus/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="FC(一阶谓词演算系统)及其相关定理">
+<meta property='og:description' content="介绍了FC及其相关定理">
+<meta property='og:url' content='https://0x3a0x29.github.io/p/firstorderpredicatecalculus/'>
+<meta property='og:site_name' content='0x3a0x29的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='数理逻辑' /><meta property='article:published_time' content='2024-06-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-06-17T00:00:00&#43;00:00'/><meta property='og:image' content='https://0x3a0x29.github.io/p/firstorderpredicatecalculus/image.png' />
+<meta name="twitter:title" content="FC(一阶谓词演算系统)及其相关定理">
+<meta name="twitter:description" content="介绍了FC及其相关定理"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://0x3a0x29.github.io/p/firstorderpredicatecalculus/image.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/preview_hu12876420758783534955.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">📖</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0x3a0x29的博客</a></h1>
+            <h2 class="site-description">有时会分享一些感兴趣的事情</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0x3a0x29'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%96%87%E7%AB%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>文章</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%90%9C%E7%B4%A2/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://0x3a0x29.github.io/en/" >English</option>
+                                
+                                    <option value="https://0x3a0x29.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#基础知识">基础知识</a></li>
+    <li><a href="#一阶谓词形式系统的语义">一阶谓词形式系统的语义</a>
+      <ol>
+        <li><a href="#解释i的组成">解释I的组成</a></li>
+        <li><a href="#指派">指派</a></li>
+        <li><a href="#models_uas的严格定义">$\models_UA[s]$的严格定义</a></li>
+      </ol>
+    </li>
+    <li><a href="#一阶谓词演算形式系统fc的简单介绍">一阶谓词演算形式系统FC的简单介绍</a></li>
+    <li><a href="#fc中的基本定理">FC中的基本定理</a>
+      <ol>
+        <li><a href="#fc的定理">FC的定理</a></li>
+        <li><a href="#例题">例题</a></li>
+      </ol>
+    </li>
+    <li><a href="#其他形式的一阶谓词演算系统">其他形式的一阶谓词演算系统</a>
+      <ol>
+        <li><a href="#fcm形式系统">FCM形式系统</a></li>
+        <li><a href="#fnd形式系统">FND形式系统</a></li>
+        <li><a href="#例题-1">例题</a></li>
+      </ol>
+    </li>
+    <li><a href="#fc定理证明习题选">FC定理证明习题选</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/firstorderpredicatecalculus/">
+                <img src="/p/firstorderpredicatecalculus/image_hu17908872038893433835.png"
+                        srcset="/p/firstorderpredicatecalculus/image_hu17908872038893433835.png 800w, /p/firstorderpredicatecalculus/image_hu4595652406018598013.png 1600w"
+                        width="800" 
+                        height="496" 
+                        loading="lazy"
+                        alt="Featured image of post FC(一阶谓词演算系统)及其相关定理" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/math/" style="background-color: #ffffff; color: #fff;">
+                离散数学
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/firstorderpredicatecalculus/">FC(一阶谓词演算系统)及其相关定理</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            介绍了FC及其相关定理
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 17, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 19 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="fc及其相关定理">FC及其相关定理
+</h1><h2 id="前言">前言
+</h2><p>本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。</p>
+<p>在先前已经给出了命题逻辑的相关介绍，但是命题逻辑存在着不可避免的缺陷，在命题逻辑中我们将原子命题看成是不可再分的基本单位，这就体现不出命题中研究对象的特性以及研究对象之间的逻辑关系，而有些推理的正确性依赖于命题的内部结构，我们以著名的苏格拉底三段论为例：</p>
+<ol>
+<li>所有的人都是要死的。</li>
+<li>苏格拉底是人。</li>
+<li>所以苏格拉底是要死的。</li>
+</ol>
+<p>我们引入三个命题变元$P,Q,R$，我们可以写出推理的命题形式：$P\wedge Q\rightarrow R$，但是很明显这个公式并非永真式，我们不能看出原来正确的推理。
+为此，我们必须引入谓词逻辑，以帮助我们研究相关的推理形式和规律。</p>
+<hr>
+<h2 id="基础知识">基础知识
+</h2><p>部分基础概念如定理、证明、演绎等在此不作赘述。</p>
+<p><strong>个体词</strong>：用于表示研究对象的词，分为个体常元（通常用字母表靠前的小写字母表示）和个体变元（通常用字母表靠后的小写字母表示）。</p>
+<p><strong>谓词</strong>：表示研究对象的性质（一个个体变元）或研究对象（多个个体变元）之间关系的词（通常用大写字母来表示）。那么我们可以得到n元谓词的概念，为了增加可读性，我们可以写作$P^{(n)}(t_1,t_2,\cdots,t_n)$。</p>
+<p><strong>个体域（论域）</strong>：个体变元的取值范围。</p>
+<p><strong>函词</strong>：用于描述从一个论域到另一个论域的映射，不难发现函词的定义类似于函数的定义，常用小写字母或小写英文单词来表示，对于含有n个个体变元的函词常记作$f^{(n)}$，为了增加可读性，我们可以写作$f^{(n)}(t_1,t_2,\cdots,t_n)$。</p>
+<p><strong>量词</strong>：用于限制个体词的数量，分为全称量词和存在量词。</p>
+<ol>
+<li><strong>全称量词$\forall$</strong>：表任意的，从量上表示“所有的”。</li>
+<li><strong>特称量词$\exists$</strong>：表存在的，从量上表示“至少有一个”。</li>
+</ol>
+<p>在量词之间显然有着这样的对应关系：</p>
+<p>（1）$\forall xP(x)\Leftrightarrow\neg\exists x\neg P(x)$</p>
+<p>（2）$\exists xP(x)\Leftrightarrow\neg\forall x\neg P(x)$</p>
+<p>（3）$\neg\forall xP(x)\Leftrightarrow\exists x\neg P(x)$</p>
+<p>（4）$\neg\exists xP(x)\Leftrightarrow\forall x\neg P(x)$</p>
+<hr>
+<p><strong>项</strong>：类似于之前命题公式的定义，现在给出项的定义：</p>
+<p>（1）个体变元和个体常元是项。</p>
+<p>（2）若$f^{(n)}$是一个n元函词，且$t_1,t_2\cdots,t_n$是项，那么$f^{(n)}(t_1,t_2,\cdots,t_n)$是项。</p>
+<p>（3）有限次的使用（1）（2）进行复合得到的结果也是项。</p>
+<p>在此定义的项的概念在我们将介绍的FC中也是同理的。</p>
+<p><strong>约束变元</strong>：受量词约束的个体变元。</p>
+<p><strong>自由变元</strong>：不受量词约束的个体变元。</p>
+<p>例如$\forall x(P(x,y)\rightarrow Q(x,y))\rightarrow R(x,y)$中，记前件为$A$，记后件为$B$。在前件中存在指导变元$x$，故$x$为约束变元，在后件中$x$为自由变元，在前件和后件中$y$均为自由变元。</p>
+<p><strong>辖域</strong>：量词所约束的范围。</p>
+<p><strong>合式公式</strong>：合式公式也称谓词公式，或简称公式，定义如下：</p>
+<p>（1）不含联结词的单个谓词即原子谓词公式是合式公式。</p>
+<p>（2）若$A$为合式公式，那么$\neg A$也是合式公式。</p>
+<p>（3）若$A,B$为合式公式，且无变元$x$在$A,B$中的一个是约束的，而另一个是自由的，则$A\wedge B,A\vee B,A\rightarrow B,A\leftrightarrow B$都是合式公式。</p>
+<p>（4）若$A$为合式公式，而$x$在$A$中为自由变元，则$\forall xP(x),\exists xP(X)$均为合式公式。</p>
+<p>（5）由（1）~（4）有限次复合所形成的公式均为合式公式。</p>
+<p>在此定义的公式的概念在我们将介绍的FC中也是同理的。</p>
+<p><strong>子公式</strong>：如果公式$A$为形如$wBw&rsquo;$的符号串，其中$w,w&rsquo;$都是符号串，$B$是公式，那么$B$就称为公式$A$的子公式。当$w,w&rsquo;$中存在非空串时我们称$B$为真子公式。</p>
+<hr>
+<p><strong>易名规则</strong>：将量词辖域中出现的某个约束变元改为另一个在该辖域中未出现的个体变元，公式中的其余部分保持不变，改名后的公式称为原公式的改名式，例如$\forall xP(x)$的改名式可以是$\forall yP(x)^x_y$。在使用易名规则时需要注意待改名的变元在其辖域内的此变元都应该被改掉，而其余的保持不变，另外新引进的变元符不应该在该量词的辖域内出现。</p>
+<p><strong>可代入</strong>：设$v$为谓词公式$A$中的自由变元，且项$t$中不含$A$的约束变元符（若有可以使用易名规则），则称项$t$对$v$是可代入的。</p>
+<p>例如$A=\forall v_1P(v_1,v_2)$中，若$t$不含约束变元$v$的项，那么$t$对$v_2$是可代入的。若$t=f(v_1)$，其中$f$为函词，那么$t$对$v_2$是不可代入的。</p>
+<p><strong>代入</strong>：对公式$A$中的自由变元$v$的所有自由出现都换为项$t$（必须是可代入的），记为$A^v_t$。若$A$中无$v$的出现则$A^v_t=A$。值得注意的是：我们使用记号$A^{v_1,v_2,\cdots,v_n}<em>{t_1,t_2,\cdots,t_n}$表示对$A$的变元$v_1,v_2,\cdots,v_n$同时做代入，即将$v_i$代为$t_i$，而不同于$(\cdots((A^{v_1}</em>{t_1})^{v_2}<em>{t_2})^{v_3}</em>{t_3}\cdots)^{v_n}_{t_n}$。</p>
+<p><strong>全称化</strong>：设$v_1,v_2,\cdots,v_n$为公式$A$中的自由变元，则公式$\forall v_{i_1}\forall v_{i_2}\cdots\forall v_{i_r}A$称为$A$的全称化，其中$1\leq i_1,i_2,\cdots,i_r\leq n,1\leq r\leq n$。当$r=n$时即为$A$的全称封闭式。</p>
+<hr>
+<p>有了这些基础知识后，我们便可以将自然语句形式化，例如：</p>
+<p>命题“过平面上两个不同点有且仅有一条直线通过”，令：</p>
+<p>谓词$D(x)$表示：$x$为平面上的点</p>
+<p>谓词$G(x)$表示：$x$为平面上的直线</p>
+<p>谓词$L(x,y,z)$表示：$z$通过$x,y$</p>
+<p>谓词$E(x,y)$表示：$x$与$y$相等</p>
+<p>那么我们可以将语句形式化为：</p>
+<p>$\forall x\forall y(D(x)\wedge D(y)\wedge\neg E(x,y)\rightarrow \exists z(G(z)\wedge L(x,y,z)\wedge\forall u(G(u)\wedge L(x,y,u)\rightarrow E(u,z))))$</p>
+<hr>
+<h2 id="一阶谓词形式系统的语义">一阶谓词形式系统的语义
+</h2><p>个体常元、变元、项、函词、谓词等属于语法范畴的概念，它们只是一些字符串，并不具备实际意义。为了讨论谓词演算公式的真值，就需要对函词、谓词进行指称，对个体常元、变元取值的指派，即赋予它们一定的意义。</p>
+<p>在一阶谓词演算系统中，证明和推演只是公式符号组合的形式变糊，并未考虑到其语义，但是建立一个形式系统正是为了研究正确的逻辑推理形式及其规律，为此，在予以解释后，其中的公理和定理应当是逻辑规律的反映。</p>
+<p>由于相较于命题逻辑我们引入了谓词、函词、量词等符号，对谓词公式的解释会更加复杂，其语义解释通常是一个数学结构，包括论域$D$及对常元、函词、谓词进行指称的解释$I$，我们得到了一个结构$U=&lt; D,I &gt;$，全体结构的集合记为$T$（这样的结构通常称为$Tarski$语义类）。</p>
+<hr>
+<h3 id="解释i的组成">解释I的组成
+</h3><p>一个<strong>解释</strong>就是一个映射$I$，它指称常元、函词和谓词为：</p>
+<p>（1）对任一常元$a$指定为论域$D$的一个个体，记为$I(a)$，简记为$\overline{a}$。</p>
+<p>（2）对每一n元函词$f^{(n)}$指定为$D$上的一个n元函数，记为$I(f^{(n)})$，简记为$\overline{f}^{(n)}$。</p>
+<p>（3）对每一n元谓词$P^{(n)}$指定为$D$上的一个n元关系，记为$I(P^{(n)})$，简记为$\overline{P}^{(n)}$。</p>
+<hr>
+<h3 id="指派">指派
+</h3><p>一阶谓词演算中的<strong>指派</strong>是对个体变元指定为论域$D$中的个体作为其取值，即为映射$s:{v_1,v_2,\cdots}\rightarrow D$。即对任一变元$v_i,s(v_i)\in D$。</p>
+<p>指派$s$可以扩展为从项集合到个体域的映射$\overline{s}$：对于任意的项$t$，</p>
+<p>（1）$\overline{s}(t)=s(v)$，当$t$为变元$v$时。</p>
+<p>（2）$\overline{s}(t)=\overline{a}$，当$t$为常元$a$时。</p>
+<p>（3）$\overline{s}(t)=\overline{f}^{(n)}(\overline{s}(t_1),\overline{s}(t_2),\cdots,\overline{s}(t_n))$，当$t$为n元函词$f^{(n)}(t_1,t_2,\cdots,t_n)$时。</p>
+<p>不难发现指派$s$域解释$I$是相互独立的，但是指派$\overline{s}$却是依赖于解释$I$的。</p>
+<p>有了结构$U=&lt; D,I &gt;$及指派$s$，于是对公式$A$在结构$U=&lt; D,I &gt;$及指派$s$下取值为真记为$\models_UA[s]$，反之记为$\nvDash_UA[s]$。而$\models_UA$则表示在结构$U$中对一切可能的指派$s$，公式$A$皆为真；而$\models A$或者$\models_TA$表示公式$A$在一切结构$U$中均为真，即$A$永真。</p>
+<h3 id="models_uas的严格定义">$\models_UA[s]$的严格定义
+</h3><p>除了解释和指派，我们还需要对量词和联结词的意义作出规定，为此我们给出递归定义来明确$\models_UA[s]$的严格定义。</p>
+<p>（1）当$A$为原子公式$P^{(n)}(t_1,\cdots,t_n)$时$\models_UA[s]$当且仅当$&lt; \overline{s}(t_1),\cdots,\overline{s}(t_n) &gt;\in\overline{P}^{(n)}$，即此时n元谓词所描述的n元关系成立。</p>
+<p>（2）当$A$为公式$\neg B$时$\models_UA[s]$当且仅当$\nvDash_UB[s]$。</p>
+<p>（3）当$A$为公式$B\rightarrow C$时$\models_UA[s]$当且仅当$\nvDash_UB[s]$或$\models_UC[s]$。</p>
+<p>（4）当$A$为公式$\forall vB$时$\models_UA[s]$当且仅当对每一个$d\in D$都有$\models_UB[s(v|d)]$，其中指派$s(v|d)$表示除了对变元$v$用指定元素$d$赋值外，对其他变元的指派与$s$相同。</p>
+<p>当我们使用联结词$\vee,\wedge$和存在量词$\exists$时可以补充：</p>
+<p>（1）$\models_UB\vee C[s]$当且仅当$\models_UB[s]$或$\models_UC[s]$。</p>
+<p>（2）$\models_UB\wedge C[s]$当且仅当$\models_UB[s]$且$\models_UC[s]$。</p>
+<p>（3）$\models_U\exists vB[s]$当且仅当存在$d\in D$使得$\models_UB[s(v|d)]$。</p>
+<hr>
+<h2 id="一阶谓词演算形式系统fc的简单介绍">一阶谓词演算形式系统FC的简单介绍
+</h2><p>一阶谓词演算形式系统FC（First order predicate Calculus）是一种形式系统，我们先简单介绍一下FC的组成部分：</p>
+<ol>
+<li>
+<p>字母表$\Sigma=L_v\cup L_a\cup L_f\cup L_p\cup L_l$，其中$L_v$即个体变元，$L_a$即个体常元，$L_f$即各种函词，$L_p$即各种谓词，$L_l$包括了真值联结词$\rightarrow,\neg$，量词$\forall$和括号$(,)$。</p>
+<p>（1）在这里其他的联结词和存在量词$\exists$都被视作是缩写符号。</p>
+<p>（2）这里的介绍中未引入等词$=$。</p>
+<p>（3）$L_f=\varnothing$时称之为纯谓词演算系统。</p>
+<p>（4）如果我们引入0元谓词符号，那么实际上我们就得到了PC，故可以将PC视作FC的子系统，在PC中成立的定理可以迁移到FC中。</p>
+</li>
+<li>
+<p>形式规则：上文提到的合式公式的定义</p>
+</li>
+<li>
+<p>公理：设$A,B,C$为代表FC中任意公式的语法变元，$v$为任意变元，$t$为任意项，那么FC中有六个公理模式
+$A1:A\rightarrow (B\rightarrow A)$
+$A2:(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$
+$A3:(\neg A\rightarrow\neg B)\rightarrow (B\rightarrow A)$
+$A4:\forall vA\rightarrow A^v_t$，若$t$对$A$中的变元$v$可代入
+$A5:\forall v(A\rightarrow B)\rightarrow(\forall vA\rightarrow\forall vB)$
+$A6:A\rightarrow\forall vA$，若$v$在$A$中无自由出现
+FC的公理包含上述六个公理模式和他们对应的全称化，同时后面的3个公理也是永真式，在此不作证明。</p>
+</li>
+<li>
+<p>推理规则：同PC中的规则$r_{mp}$：即若有$A$和$A\rightarrow B$成立，那么$B$也成立，形式化的推理序列为：$A,A\rightarrow B,B$。
+可以记作$\displaystyle{\frac{A,A\rightarrow B}{B}}$</p>
+</li>
+</ol>
+<p>FC是完备的，也就是说所有永真式均为FC的定理，$G\ddot{o}del$首先发现并证明了这一事实，即$G\ddot{o}del$完备性定理。</p>
+<hr>
+<h2 id="fc中的基本定理">FC中的基本定理
+</h2><h3 id="fc的定理">FC的定理
+</h3><p>下列总结了FC中12个基本定理，并给出了部分证明：</p>
+<p>$Th1$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}\forall vA\rightarrow A$</p>
+<ol>
+<li>$\forall vA\rightarrow A^v_v$,$A4$，后者即$A$</li>
+</ol>
+<p>$Th2$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}A\rightarrow\neg\forall v\neg A$，即$\vdash_{FC}A\rightarrow\exists vA$</p>
+<ol>
+<li>$\forall v\neg A\rightarrow\neg A$,$A4$</li>
+<li>$(\forall v\neg A\rightarrow\neg A)\rightarrow(A\rightarrow\neg\forall v\neg A)$,$PC$中的定理</li>
+<li>$A\rightarrow\neg\forall v\neg A$,$r_{mp}(1)(2)$</li>
+</ol>
+<p>$Th3$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}\forall vA\rightarrow\exists vA$</p>
+<ol>
+<li>$\forall vA\rightarrow A$,$Th1$</li>
+<li>$A\rightarrow\exists vA$,$Th2$</li>
+<li>$\forall vA\rightarrow\exists vA$,三段论</li>
+</ol>
+<p>$Th4$：（<strong>普化定理</strong>/全称推广定理）对于FC中的任何公式$A$和变元$v$，如果$\vdash_{FC}A$，那么$\vdash_{FC}\forall vA$
+需要注意的是$\vdash_{FC}A\rightarrow\forall vA$并不一定成立，故在$A6$中我们作出了额外的要求：$v$在$A$中无自由出现。</p>
+<p>证明：设$A_1,A_2,\cdots,A_n(=A)$是FC中公式$A$的证明序列，对证明的长度n使用归纳法。
+（1）当n=1时，$A$只能是公理。若$v$在$A$中自由出现，那么$\forall vA$也是公理；若$v$不在$A$中自由出现，则$A\rightarrow\forall vA$为公理，由$r_{mp}$知$\forall vA$为公理。
+（2）当n&gt;1时，若$A$为公理，仿照（1）的证明可知$\forall vA$为定理。若$A_n$为$A_j(i&lt; n)$，则由归纳假设可知$\forall vA_j=\forall vA$为定理。若$A_n$是由$A_i,A_j$通过$r_{mp}$推得，不妨设$A_j=A_i\rightarrow A$，则由归纳假设$\forall vA_i,\forall v(A_i\rightarrow A)$都是定理。再由公理$\forall v(A_i\rightarrow A)\rightarrow(\forall vA_i\rightarrow\forall vA)$知$\forall vA_i\rightarrow\forall vA$为定理，使用$r_{mp}$则知$\forall vA$为定理。</p>
+<p>$Th5$：对于FC中的任何公式集合$\Gamma$，公式$A$和不在$\Gamma$的任意公式中自由出现的变元$v$，对$Th4$进行推广，得到：如果$\Gamma\vdash_{FC}A$，那么$\Gamma\vdash_{FC}\forall vA$。</p>
+<p>证明：设$A_1,A_2,\cdots,A_n(=A)$是FC中公式$A$的演绎序列，对证明的长度n使用归纳法。
+（1）当n=1时，若$A$是公理。若$v$在$A$中自由出现，那么$\forall vA$也是公理；若$v$不在$A$中自由出现，则$A\rightarrow\forall vA$为公理，由$r_{mp}$知$\forall vA$为公理。于是当$A$为公理时，都有$\Gamma\vdash\forall vA$。若$A\in\Gamma$，则$v$不在$A$中自由出现，从而$A\rightarrow\forall vA$为公理，从而由$r_{mp}$知$\Gamma\vdash\forall vA$。
+（2）当n&gt;1时，若$A$为公理或者$A\in\Gamma$，仿照（1）的证明可知$\forall vA$为定理。若$A_n$为$A_j(i&lt; n)$，则由归纳假设可知$\forall vA_j=\forall vA$为定理。若$A_n$是由$A_i,A_j$通过$r_{mp}$推得，不妨设$A_j=A_i\rightarrow A$，则由归纳假设$\forall vA_i,\forall v(A_i\rightarrow A)$都是定理。再由公理$\forall v(A_i\rightarrow A)\rightarrow(\forall vA_i\rightarrow\forall vA)$知$\forall vA_i\rightarrow\forall vA$为定理，使用$r_{mp}$则知$\forall vA$为定理。</p>
+<p>$Th6$：（<strong>演绎定理</strong>）在FC中演绎定理也成立，对于FC中任何公式集合$\Gamma$和FC中的任意两个公式$A,B$，那么$\Gamma;A\vdash_{FC}B$当且仅当$\Gamma\vdash_{FC}A\rightarrow B$。</p>
+<p>证明：类似于在PC中演绎定理的证明，在此不作说明。</p>
+<p>$Th7$：设$\Gamma$为FC中的任一公式集合，$A,B$为FC中任意两个公式，$\Gamma;A\vdash_{FC}\neg B$当且仅当$\Gamma;B\vdash_{FC}\neg A$。</p>
+<ol>
+<li>$\Gamma;A\vdash\neg B$</li>
+<li>$\Gamma\vdash A\rightarrow\neg B$,$Th6$</li>
+<li>$\Gamma\vdash(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$PC$中的定理</li>
+<li>$\Gamma\vdash B\rightarrow\neg A$,$r_{mp}(2)(3)$</li>
+<li>$\Gamma;B\vdash\neg A$,$Th6$</li>
+</ol>
+<p>$Th8$：（反证法）如果FC中的公式集合$\Gamma\cup{A}$是不一致的，则$\Gamma\vdash_{FC}\neg A$。</p>
+<p>证明：由于$\Gamma\cup{A}$不一致，则存在公式$B$使得$\Gamma;A\vdash B$和$\Gamma;A\vdash\neg B$。由于$\neg B\rightarrow(B\rightarrow\neg A)$为定理，所以$\Gamma;A\vdash\neg A$，由演绎定理得$\Gamma\vdash A\rightarrow\neg A$，又因为$(A\rightarrow\neg A)\rightarrow\neg A$为定理，从而$\Gamma\vdash\neg A$。</p>
+<p>$Th9$：设$\Gamma$为FC中的任一公式集合，$A,B$为FC中的任意两个公式，并且变元$v$不在$\Gamma$的任何公式里面自由出现，那么$\Gamma;A\vdash_{FC}B$蕴含$\Gamma;\forall vA\vdash_{FC}B$和$\Gamma;\forall vA\vdash_{FC}\forall vB$。</p>
+<ol>
+<li>$\Gamma;A\vdash B$</li>
+<li>$\Gamma\vdash A\rightarrow B$,$Th6$</li>
+<li>$\Gamma\vdash\forall v(A\rightarrow B)$,$Th4$</li>
+<li>$\Gamma\vdash\forall v(A\rightarrow B)\rightarrow(\forall vA\rightarrow\forall vB)$,$A5$</li>
+<li>$\Gamma\vdash\forall vA\rightarrow\forall vB$,$r_{mp}(3)(4)$</li>
+<li>$\Gamma;\forall vA\vdash\forall vB$,$Th6$</li>
+<li>$\Gamma;\forall vA\vdash B$,$Th1$</li>
+</ol>
+<p>$Th10$：（<strong>存在消除</strong>）设$\Gamma$为FC中的任一公式集合，$A,B$为FC中的任意两个公式，并且变元$v$不在$\Gamma$的任何公式以及公式$B$里面自由出现，那么由$\Gamma\vdash_{FC}\exists vA$以及$\Gamma;A\vdash_{FC}B$可以推出$\Gamma\vdash_{FC}B$。</p>
+<ol>
+<li>$\Gamma;A\vdash B$</li>
+<li>$\Gamma\vdash A\rightarrow B$</li>
+<li>$\Gamma\vdash(A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$PC$中的定理</li>
+<li>$\Gamma\vdash\neg B\rightarrow\neg A$,$r_{mp}(2)(3)$</li>
+<li>$\Gamma\vdash;\neg B\vdash\neg A$</li>
+<li>$\Gamma;\neg B\vdash\forall v\neg A$,$Th2$</li>
+<li>$\Gamma\vdash\neg B\rightarrow\forall v\neg A$</li>
+<li>$\Gamma\vdash(\neg B\rightarrow\forall v\neg A)\rightarrow(\neg\forall v\neg A\rightarrow B)$,$PC$中的定理</li>
+<li>$\Gamma\vdash\neg\forall v\neg A\rightarrow B$,$r_{mp}(7)(8)$</li>
+<li>$\Gamma\vdash\exists vA\rightarrow B$</li>
+<li>$\Gamma\vdash\exists vA$</li>
+<li>$\Gamma\vdash B$,$r_{mp}(10)(11)$</li>
+</ol>
+<p>$Th11$：（替换原理）设$A,B$为FC的公式，且满足$A\vdash\dashv_{FC}B$，$A$是$C$的子公式，$D$是将$C$中$A$的若干出现换为公式$B$得到的公式，则$C\vdash\dashv_{FC}D$。</p>
+<p>证明：略</p>
+<p>$Th12$：（改名定理）在FC中若$A&rsquo;$是$A$的改名式，且$A&rsquo;$改用的变元不在$A$中出现，则$A\vdash\dashv_{FC}A&rsquo;$。</p>
+<p>证明：略</p>
+<hr>
+<h3 id="例题">例题
+</h3><p>证明：$\vdash A\rightarrow B$且变元$v$在$B$中无自由出现，则$\vdash\exists vA\rightarrow B$。</p>
+<ol>
+<li>$\vdash A\rightarrow B$</li>
+<li>$\vdash\neg B\rightarrow\neg A$,$PC$中的定理</li>
+<li>$\vdash\forall v(\neg B\rightarrow\neg A)$,$Th1$</li>
+<li>$\vdash\forall v(\neg B\rightarrow\neg A)\rightarrow(\forall v\neg B\rightarrow\forall v\neg A)$,$A5$</li>
+<li>$\vdash\forall v\neg B\rightarrow\forall v\neg A$,$r_{mp}(3)(4)$</li>
+<li>$\vdash\neg B\rightarrow\forall v\neg B$,$A6$</li>
+<li>$\vdash\neg B\rightarrow\forall v\neg A$,三段论</li>
+<li>$\vdash(\neg B\rightarrow\forall v\neg A)\rightarrow(\neg\forall v\neg A\rightarrow B)$,$PC$中的定理</li>
+<li>$\vdash\neg\forall v\neg A\rightarrow B$,$r_{mp}(7)(8)$</li>
+</ol>
+<p>证明：$\vdash(A\rightarrow\exists vB)\rightarrow\exists v(A\rightarrow B)$，其中$v$在$A$中无自由出现。</p>
+<ol>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\forall v\neg(A\rightarrow B)$</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\neg(A\rightarrow B)$,$Th1$</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\neg(A\rightarrow B)\rightarrow\neg B$,$PC$中的定理</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\neg B$,$r_{mp}(2)(3)$</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\forall v\neg B$,$Th1$</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\neg(A\rightarrow B)\rightarrow A$,$PC$中的定理</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash A$,$r_{mp}(2)(6)$</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash A\rightarrow\exists vB$</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\exists vB$,$r_{mp}(7)(8)$</li>
+<li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\neg\forall v\neg B$</li>
+<li>$A\rightarrow\exists vB\vdash\neg\forall v\neg(A\rightarrow B)$,对(5)和(10)使用反证法</li>
+<li>$A\rightarrow\exists vB\vdash\exists v(A\rightarrow B)$</li>
+<li>$\vdash(A\rightarrow\exists vB)\rightarrow\exists v(A\rightarrow B)$</li>
+</ol>
+<hr>
+<h2 id="其他形式的一阶谓词演算系统">其他形式的一阶谓词演算系统
+</h2><p>FC的形式是简洁的，但是正如PC所具有的问题那样，在实际应用中FC并不方便，因为它所使用的联结词、量词和公理数量太少了。故类似于先前在介绍完PC后引入了ND，本文将引入FCM和FND两个形式系统，以便让我们的推理更加直观。</p>
+<h3 id="fcm形式系统">FCM形式系统
+</h3><p>FCM形式系统是由莫绍揆教授提出的使用五个逻辑联结词（$\neg,\rightarrow,\vee,\wedge,\leftrightarrow$）和两个量词（$\forall,\exists$）的一阶谓词演算形式系统：</p>
+<ol>
+<li>
+<p>公理：设$A,B,C$为代表FC中任意公式的语法变元，$v$为任意变元，$t$为任意项，那么FCM的公理包含下列七组公理模式及其对应的全称化</p>
+<p>$A1.1:A\rightarrow A$</p>
+<p>$A1.2:(A\rightarrow(B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$</p>
+<p>$A1.3:(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$</p>
+<p>$A1.4:(A\rightarrow(A\rightarrow B))\rightarrow(A\rightarrow B)$</p>
+<p>$A2.1:(A\leftrightarrow B)\rightarrow(A\rightarrow B)$</p>
+<p>$A2.2:(A\leftrightarrow B)\rightarrow(B\rightarrow A)$</p>
+<p>$A2.3:(A\rightarrow B)\rightarrow((B\rightarrow A)\rightarrow(A\leftrightarrow B))$</p>
+<p>$A3.1:A\rightarrow(A\vee B)$</p>
+<p>$A3.2:B\rightarrow(A\vee B)$</p>
+<p>$A3.3:(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow(A\vee B\rightarrow C))$</p>
+<p>$A4.1:A\wedge B\rightarrow A$</p>
+<p>$A4.2:A\wedge B\rightarrow B$</p>
+<p>$A4.3:A\rightarrow(B\rightarrow A\wedge B)$</p>
+<p>$A5.1:(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$</p>
+<p>$A5.2:\neg\neg A\rightarrow A$</p>
+<p>$A6.1:\forall vA\rightarrow A^v_t$，若$t$对$A$中的变元$v$可代入</p>
+<p>$A6.2:\forall v(A\rightarrow B)\rightarrow(\forall vA\rightarrow\forall vB)$</p>
+<p>$A6.3:A\rightarrow\forall vA$，若$v$在$A$中无自由出现</p>
+<p>$A7.1:\exists vA\rightarrow\neg\forall v\neg A$</p>
+<p>$A7.2:\neg\forall v\neg A\rightarrow\exists vA$</p>
+<p>这七组公理模式是显然的，很多在之前已经进行了证明。</p>
+</li>
+<li>
+<p>推理规则：$r_{mp}$</p>
+</li>
+</ol>
+<h3 id="fnd形式系统">FND形式系统
+</h3><p>在ND的基础上，很容易扩展出一个谓词演算的自然推理系统，我们称作FND，FND在ND的基础上新增添了一些规则，主要是增加了有关量词的推理规则，其余规则保持不变。</p>
+<ol>
+<li>$\forall$引入规则${\frac{\Gamma\vdash A}{\Gamma\vdash\forall vA}}(\forall+)$</li>
+<li>$\forall$消除规则${\frac{\Gamma\vdash\forall vA}{\Gamma\vdash A^v_t}}(\forall-)$，若$t$对$A$中的变元$v$可代入</li>
+<li>$\exists$引入规则${\frac{\Gamma\vdash A^t_t}{\Gamma\vdash\exists vA}}(\exists+)$，若$t$对$A$中的变元$v$可代入</li>
+<li>$\exists$消除规则${\frac{\Gamma\vdash\exists vA,\Gamma;A^v_t\vdash B}{\Gamma\vdash B}}(\exists-)$，其中常元$c$在$\Gamma$及公式$A,B$中均无自由出现</li>
+</ol>
+<p>我们现在对这里的推理规则的意义进行解释：</p>
+<ol>
+<li>$(\forall+)$规则：考虑FC中的全称引入定理。</li>
+<li>$(\forall-)$规则：考虑FC的公理$\forall vA\rightarrow A^v_t$，若$t$对$A$中的变元$v$可代入。</li>
+<li>$(\exists+)$规则：考虑FC的定理$A^v_t\rightarrow\exists vA$，若$t$对$A$中的变元$v$可代入。</li>
+<li>$(\exists-)$规则：考虑FC的存在消除定理。</li>
+</ol>
+<hr>
+<h3 id="例题-1">例题
+</h3><p>证明：$\exists x(A\vee B)\vdash\dashv\exists xA\vee\exists xB$</p>
+<ol>
+<li>$\exists x(A\vee B),A\vee B,A\vdash A$,$(\in)$</li>
+<li>$\exists x(A\vee B),A\vee B,A\vdash\exists xA$,$(\exists+)(1)$</li>
+<li>$\exists x(A\vee B),A\vee B,A\vdash\exists xA\vee\exists xB$,$(\vee+)(2)$</li>
+<li>$\exists x(A\vee B),A\vee B,B\vdash B$,$(\in)$</li>
+<li>$\exists x(A\vee B),A\vee B,B\vdash\exists xB$,$(\exists+)(4)$</li>
+<li>$\exists x(A\vee B),A\vee B,B\vdash\exists xA\vee\exists xB$,$(\vee+)(5)$</li>
+<li>$\exists x(A\vee B),A\vee B\vdash A\vee B$,$(\in)$</li>
+<li>$\exists x(A\vee B),A\vee B\vdash\exists xA\vee\exists xB$,$(\vee-)(3)(6)(7)$</li>
+<li>$\exists x(A\vee B)\vdash\exists x(A\vee B)$,$(\in)$</li>
+<li>$\exists x(A\vee B)\vdash\exists xA\vee\exists xB$,$(\exists-)(8)(9)$</li>
+<li>$\exists xA\vee\exists xB,\exists xA,A\vdash A$,$(\in)$</li>
+<li>$\exists xA\vee\exists xB,\exists xA,A\vdash A\vee B$,$(\vee+)(11)$</li>
+<li>$\exists xA\vee\exists xB,\exists xA,A\vdash\exists x(A\vee B)$,$(\exists+)(12)$</li>
+<li>$\exists xA\vee\exists xB,\exists xA\vdash\exists xA$,$(\in)$</li>
+<li>$\exists xA\vee\exists xB,\exists xA\vdash\exists x(A\vee B)$,$(\exists-)(13)(14)$</li>
+<li>$\exists xA\vee\exists xB,\exists xB,B\vdash B$,$(\in)$</li>
+<li>$\exists xA\vee\exists xB,\exists xB,B\vdash A\vee B$,$(\vee+)(16)$</li>
+<li>$\exists xA\vee\exists xB,\exists xB,B\vdash\exists x(A\vee B)$,$(\exists+)(17)$</li>
+<li>$\exists xA\vee\exists xB,\exists xB\vdash\exists xB$,$(\in)$</li>
+<li>$\exists xA\vee\exists xB,\exists xB\vdash\exists x(A\vee B)$,$(\exists-)(18)(19)$</li>
+<li>$\exists xA\vee\exists xB\vdash\exists xA\vee\exists xB$,$(\in)$</li>
+<li>$\exists xA\vee\exists xB\vdash\exists x(A\vee B)$,$(\vee-)(15)(20)(21)$</li>
+<li>$\exists x(A\vee B)\vdash\dashv\exists xA\vee\exists xB$</li>
+</ol>
+<hr>
+<h2 id="fc定理证明习题选">FC定理证明习题选
+</h2><p>下面给出了八道FC定理习题供读者练习使用：</p>
+<ol>
+<li>证明：$\forall x(A\rightarrow B)\vdash A\rightarrow\forall xB$，其中$x$在$A$中无自由出现。</li>
+<li>证明: $\vdash\exists v(A\rightarrow B)\rightarrow(A\rightarrow\exists vB)$，其中$v$在$A$中无自由出现。</li>
+<li>证明：存在一种方法能击败所有敌人，那么所有敌人都存在一种方法让其被击败。</li>
+<li>证明：$\exists x(A\wedge B)\vdash\exists xA\wedge\exists xB$</li>
+<li>证明：$\Gamma={\exists x(P(x)\wedge\forall y(D(y)\rightarrow L(x,y))),\forall x\forall y(P(x)\wedge Q(y)\rightarrow\neg L(x,y))}$，则有$\Gamma\vdash\forall y(D(y)\rightarrow\neg Q(y))$。</li>
+<li>证明：$\Gamma={P(Sam),G(Clyde)\wedge L(Clyde,Oscar),(P(Oscar)\oplus G(Oscar))\wedge L(Oscar,Sam)}$，则有$\Gamma\vdash\exists x\exists y(G(x)\wedge P(y)\wedge L(x,y))$，注：$\oplus$表示联结词中的“异或”。</li>
+<li>证明：$\Gamma={\forall x(N(x)\rightarrow E(x)\oplus O(x)),\forall x(N(x)\rightarrow(E(x)\leftrightarrow G(x))),\neg\forall x(N(x)\rightarrow G(x))}$，则有$\Gamma\vdash\exists x(N(x)\wedge O(x))$。</li>
+<li>证明：有二元关系$R$，若$R$是传递且反自反的，那么它是非对称的。</li>
+</ol>
+<hr>
+<p>水平有限，存在的错误和不足请大家指正。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/">数理逻辑</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/naturaldeduction/">
+        
+        
+            <div class="article-image">
+                <img src="/p/naturaldeduction/image.281d95def9cd9b739c9d0d2773b76206_hu2568763475494634575.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post ND(自然演绎推理系统)及其相关定理"
+                        data-key="NaturalDeduction" 
+                        data-hash="md5-KB2V3vnNm3OcnQ0nc7diBg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ND(自然演绎推理系统)及其相关定理</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/propositionalcalculus/">
+        
+        
+            <div class="article-image">
+                <img src="/p/propositionalcalculus/23.e7d84d25f93c268909231e357d194d7e_hu6035539504102454594.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PC(命题逻辑演算形式系统)及其相关定理"
+                        data-key="PropositionalCalculus" 
+                        data-hash="md5-59hNJfk8JokJIx41fRlNfg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PC(命题逻辑演算形式系统)及其相关定理</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 0x3a0x29的博客
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
