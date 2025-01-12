@@ -373,13 +373,16 @@
     
     <h1 id="fc及其相关定理">FC及其相关定理
 </h1><h2 id="前言">前言
-</h2><p>本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。</p>
+</h2><p>水平有限，存在的错误和不足请大家指正。</p>
+<p>本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。</p>
 <p>在先前已经给出了命题逻辑的相关介绍，但是命题逻辑存在着不可避免的缺陷，在命题逻辑中我们将原子命题看成是不可再分的基本单位，这就体现不出命题中研究对象的特性以及研究对象之间的逻辑关系，而有些推理的正确性依赖于命题的内部结构，我们以著名的苏格拉底三段论为例：</p>
+<blockquote>
 <ol>
 <li>所有的人都是要死的。</li>
 <li>苏格拉底是人。</li>
 <li>所以苏格拉底是要死的。</li>
 </ol>
+</blockquote>
 <p>我们引入三个命题变元$P,Q,R$，我们可以写出推理的命题形式：$P\wedge Q\rightarrow R$，但是很明显这个公式并非永真式，我们不能看出原来正确的推理。
 为此，我们必须引入谓词逻辑，以帮助我们研究相关的推理形式和规律。</p>
 <hr>
@@ -445,7 +448,7 @@
 <p>（3）对每一n元谓词$P^{(n)}$指定为$D$上的一个n元关系，记为$I(P^{(n)})$，简记为$\overline{P}^{(n)}$。</p>
 <hr>
 <h3 id="指派">指派
-</h3><p>一阶谓词演算中的<strong>指派</strong>是对个体变元指定为论域$D$中的个体作为其取值，即为映射$s:{v_1,v_2,\cdots}\rightarrow D$。即对任一变元$v_i,s(v_i)\in D$。</p>
+</h3><p>一阶谓词演算中的<strong>指派</strong>是对个体变元指定为论域$D$中的个体作为其取值，即为映射$s:${$v_1,v_2,\cdots$}$\rightarrow D$。即对任一变元$v_i,s(v_i)\in D$。</p>
 <p>指派$s$可以扩展为从项集合到个体域的映射$\overline{s}$：对于任意的项$t$，</p>
 <p>（1）$\overline{s}(t)=s(v)$，当$t$为变元$v$时。</p>
 <p>（2）$\overline{s}(t)=\overline{a}$，当$t$为常元$a$时。</p>
@@ -497,33 +500,46 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 </h2><h3 id="fc的定理">FC的定理
 </h3><p>下列总结了FC中12个基本定理，并给出了部分证明：</p>
 <p>$Th1$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}\forall vA\rightarrow A$</p>
+<blockquote>
 <ol>
 <li>$\forall vA\rightarrow A^v_v$,$A4$，后者即$A$</li>
 </ol>
+</blockquote>
 <p>$Th2$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}A\rightarrow\neg\forall v\neg A$，即$\vdash_{FC}A\rightarrow\exists vA$</p>
+<blockquote>
 <ol>
 <li>$\forall v\neg A\rightarrow\neg A$,$A4$</li>
 <li>$(\forall v\neg A\rightarrow\neg A)\rightarrow(A\rightarrow\neg\forall v\neg A)$,$PC$中的定理</li>
 <li>$A\rightarrow\neg\forall v\neg A$,$r_{mp}(1)(2)$</li>
 </ol>
+</blockquote>
 <p>$Th3$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}\forall vA\rightarrow\exists vA$</p>
+<blockquote>
 <ol>
 <li>$\forall vA\rightarrow A$,$Th1$</li>
 <li>$A\rightarrow\exists vA$,$Th2$</li>
 <li>$\forall vA\rightarrow\exists vA$,三段论</li>
 </ol>
+</blockquote>
 <p>$Th4$：（<strong>普化定理</strong>/全称推广定理）对于FC中的任何公式$A$和变元$v$，如果$\vdash_{FC}A$，那么$\vdash_{FC}\forall vA$
 需要注意的是$\vdash_{FC}A\rightarrow\forall vA$并不一定成立，故在$A6$中我们作出了额外的要求：$v$在$A$中无自由出现。</p>
+<blockquote>
 <p>证明：设$A_1,A_2,\cdots,A_n(=A)$是FC中公式$A$的证明序列，对证明的长度n使用归纳法。
 （1）当n=1时，$A$只能是公理。若$v$在$A$中自由出现，那么$\forall vA$也是公理；若$v$不在$A$中自由出现，则$A\rightarrow\forall vA$为公理，由$r_{mp}$知$\forall vA$为公理。
 （2）当n&gt;1时，若$A$为公理，仿照（1）的证明可知$\forall vA$为定理。若$A_n$为$A_j(i&lt; n)$，则由归纳假设可知$\forall vA_j=\forall vA$为定理。若$A_n$是由$A_i,A_j$通过$r_{mp}$推得，不妨设$A_j=A_i\rightarrow A$，则由归纳假设$\forall vA_i,\forall v(A_i\rightarrow A)$都是定理。再由公理$\forall v(A_i\rightarrow A)\rightarrow(\forall vA_i\rightarrow\forall vA)$知$\forall vA_i\rightarrow\forall vA$为定理，使用$r_{mp}$则知$\forall vA$为定理。</p>
+</blockquote>
 <p>$Th5$：对于FC中的任何公式集合$\Gamma$，公式$A$和不在$\Gamma$的任意公式中自由出现的变元$v$，对$Th4$进行推广，得到：如果$\Gamma\vdash_{FC}A$，那么$\Gamma\vdash_{FC}\forall vA$。</p>
+<blockquote>
 <p>证明：设$A_1,A_2,\cdots,A_n(=A)$是FC中公式$A$的演绎序列，对证明的长度n使用归纳法。
 （1）当n=1时，若$A$是公理。若$v$在$A$中自由出现，那么$\forall vA$也是公理；若$v$不在$A$中自由出现，则$A\rightarrow\forall vA$为公理，由$r_{mp}$知$\forall vA$为公理。于是当$A$为公理时，都有$\Gamma\vdash\forall vA$。若$A\in\Gamma$，则$v$不在$A$中自由出现，从而$A\rightarrow\forall vA$为公理，从而由$r_{mp}$知$\Gamma\vdash\forall vA$。
 （2）当n&gt;1时，若$A$为公理或者$A\in\Gamma$，仿照（1）的证明可知$\forall vA$为定理。若$A_n$为$A_j(i&lt; n)$，则由归纳假设可知$\forall vA_j=\forall vA$为定理。若$A_n$是由$A_i,A_j$通过$r_{mp}$推得，不妨设$A_j=A_i\rightarrow A$，则由归纳假设$\forall vA_i,\forall v(A_i\rightarrow A)$都是定理。再由公理$\forall v(A_i\rightarrow A)\rightarrow(\forall vA_i\rightarrow\forall vA)$知$\forall vA_i\rightarrow\forall vA$为定理，使用$r_{mp}$则知$\forall vA$为定理。</p>
+</blockquote>
 <p>$Th6$：（<strong>演绎定理</strong>）在FC中演绎定理也成立，对于FC中任何公式集合$\Gamma$和FC中的任意两个公式$A,B$，那么$\Gamma;A\vdash_{FC}B$当且仅当$\Gamma\vdash_{FC}A\rightarrow B$。</p>
+<blockquote>
 <p>证明：类似于在PC中演绎定理的证明，在此不作说明。</p>
+</blockquote>
 <p>$Th7$：设$\Gamma$为FC中的任一公式集合，$A,B$为FC中任意两个公式，$\Gamma;A\vdash_{FC}\neg B$当且仅当$\Gamma;B\vdash_{FC}\neg A$。</p>
+<blockquote>
 <ol>
 <li>$\Gamma;A\vdash\neg B$</li>
 <li>$\Gamma\vdash A\rightarrow\neg B$,$Th6$</li>
@@ -531,9 +547,13 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 <li>$\Gamma\vdash B\rightarrow\neg A$,$r_{mp}(2)(3)$</li>
 <li>$\Gamma;B\vdash\neg A$,$Th6$</li>
 </ol>
-<p>$Th8$：（反证法）如果FC中的公式集合$\Gamma\cup{A}$是不一致的，则$\Gamma\vdash_{FC}\neg A$。</p>
-<p>证明：由于$\Gamma\cup{A}$不一致，则存在公式$B$使得$\Gamma;A\vdash B$和$\Gamma;A\vdash\neg B$。由于$\neg B\rightarrow(B\rightarrow\neg A)$为定理，所以$\Gamma;A\vdash\neg A$，由演绎定理得$\Gamma\vdash A\rightarrow\neg A$，又因为$(A\rightarrow\neg A)\rightarrow\neg A$为定理，从而$\Gamma\vdash\neg A$。</p>
+</blockquote>
+<p>$Th8$：（反证法）如果FC中的公式集合$\Gamma\cup${$A$}是不一致的，则$\Gamma\vdash_{FC}\neg A$。</p>
+<blockquote>
+<p>证明：由于$\Gamma\cup${$A$}不一致，则存在公式$B$使得$\Gamma;A\vdash B$和$\Gamma;A\vdash\neg B$。由于$\neg B\rightarrow(B\rightarrow\neg A)$为定理，所以$\Gamma;A\vdash\neg A$，由演绎定理得$\Gamma\vdash A\rightarrow\neg A$，又因为$(A\rightarrow\neg A)\rightarrow\neg A$为定理，从而$\Gamma\vdash\neg A$。</p>
+</blockquote>
 <p>$Th9$：设$\Gamma$为FC中的任一公式集合，$A,B$为FC中的任意两个公式，并且变元$v$不在$\Gamma$的任何公式里面自由出现，那么$\Gamma;A\vdash_{FC}B$蕴含$\Gamma;\forall vA\vdash_{FC}B$和$\Gamma;\forall vA\vdash_{FC}\forall vB$。</p>
+<blockquote>
 <ol>
 <li>$\Gamma;A\vdash B$</li>
 <li>$\Gamma\vdash A\rightarrow B$,$Th6$</li>
@@ -543,7 +563,9 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 <li>$\Gamma;\forall vA\vdash\forall vB$,$Th6$</li>
 <li>$\Gamma;\forall vA\vdash B$,$Th1$</li>
 </ol>
+</blockquote>
 <p>$Th10$：（<strong>存在消除</strong>）设$\Gamma$为FC中的任一公式集合，$A,B$为FC中的任意两个公式，并且变元$v$不在$\Gamma$的任何公式以及公式$B$里面自由出现，那么由$\Gamma\vdash_{FC}\exists vA$以及$\Gamma;A\vdash_{FC}B$可以推出$\Gamma\vdash_{FC}B$。</p>
+<blockquote>
 <ol>
 <li>$\Gamma;A\vdash B$</li>
 <li>$\Gamma\vdash A\rightarrow B$</li>
@@ -558,13 +580,19 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 <li>$\Gamma\vdash\exists vA$</li>
 <li>$\Gamma\vdash B$,$r_{mp}(10)(11)$</li>
 </ol>
+</blockquote>
 <p>$Th11$：（替换原理）设$A,B$为FC的公式，且满足$A\vdash\dashv_{FC}B$，$A$是$C$的子公式，$D$是将$C$中$A$的若干出现换为公式$B$得到的公式，则$C\vdash\dashv_{FC}D$。</p>
+<blockquote>
 <p>证明：略</p>
+</blockquote>
 <p>$Th12$：（改名定理）在FC中若$A&rsquo;$是$A$的改名式，且$A&rsquo;$改用的变元不在$A$中出现，则$A\vdash\dashv_{FC}A&rsquo;$。</p>
+<blockquote>
 <p>证明：略</p>
+</blockquote>
 <hr>
 <h3 id="例题">例题
 </h3><p>证明：$\vdash A\rightarrow B$且变元$v$在$B$中无自由出现，则$\vdash\exists vA\rightarrow B$。</p>
+<blockquote>
 <ol>
 <li>$\vdash A\rightarrow B$</li>
 <li>$\vdash\neg B\rightarrow\neg A$,$PC$中的定理</li>
@@ -576,7 +604,9 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 <li>$\vdash(\neg B\rightarrow\forall v\neg A)\rightarrow(\neg\forall v\neg A\rightarrow B)$,$PC$中的定理</li>
 <li>$\vdash\neg\forall v\neg A\rightarrow B$,$r_{mp}(7)(8)$</li>
 </ol>
+</blockquote>
 <p>证明：$\vdash(A\rightarrow\exists vB)\rightarrow\exists v(A\rightarrow B)$，其中$v$在$A$中无自由出现。</p>
+<blockquote>
 <ol>
 <li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\forall v\neg(A\rightarrow B)$</li>
 <li>$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\neg(A\rightarrow B)$,$Th1$</li>
@@ -592,6 +622,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 <li>$A\rightarrow\exists vB\vdash\exists v(A\rightarrow B)$</li>
 <li>$\vdash(A\rightarrow\exists vB)\rightarrow\exists v(A\rightarrow B)$</li>
 </ol>
+</blockquote>
 <hr>
 <h2 id="其他形式的一阶谓词演算系统">其他形式的一阶谓词演算系统
 </h2><p>FC的形式是简洁的，但是正如PC所具有的问题那样，在实际应用中FC并不方便，因为它所使用的联结词、量词和公理数量太少了。故类似于先前在介绍完PC后引入了ND，本文将引入FCM和FND两个形式系统，以便让我们的推理更加直观。</p>
@@ -644,6 +675,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 <hr>
 <h3 id="例题-1">例题
 </h3><p>证明：$\exists x(A\vee B)\vdash\dashv\exists xA\vee\exists xB$</p>
+<blockquote>
 <ol>
 <li>$\exists x(A\vee B),A\vee B,A\vdash A$,$(\in)$</li>
 <li>$\exists x(A\vee B),A\vee B,A\vdash\exists xA$,$(\exists+)(1)$</li>
@@ -669,6 +701,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 <li>$\exists xA\vee\exists xB\vdash\exists x(A\vee B)$,$(\vee-)(15)(20)(21)$</li>
 <li>$\exists x(A\vee B)\vdash\dashv\exists xA\vee\exists xB$</li>
 </ol>
+</blockquote>
 <hr>
 <h2 id="fc定理证明习题选">FC定理证明习题选
 </h2><p>下面给出了八道FC定理习题供读者练习使用：</p>
@@ -677,13 +710,12 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 <li>证明: $\vdash\exists v(A\rightarrow B)\rightarrow(A\rightarrow\exists vB)$，其中$v$在$A$中无自由出现。</li>
 <li>证明：存在一种方法能击败所有敌人，那么所有敌人都存在一种方法让其被击败。</li>
 <li>证明：$\exists x(A\wedge B)\vdash\exists xA\wedge\exists xB$</li>
-<li>证明：$\Gamma={\exists x(P(x)\wedge\forall y(D(y)\rightarrow L(x,y))),\forall x\forall y(P(x)\wedge Q(y)\rightarrow\neg L(x,y))}$，则有$\Gamma\vdash\forall y(D(y)\rightarrow\neg Q(y))$。</li>
-<li>证明：$\Gamma={P(Sam),G(Clyde)\wedge L(Clyde,Oscar),(P(Oscar)\oplus G(Oscar))\wedge L(Oscar,Sam)}$，则有$\Gamma\vdash\exists x\exists y(G(x)\wedge P(y)\wedge L(x,y))$，注：$\oplus$表示联结词中的“异或”。</li>
-<li>证明：$\Gamma={\forall x(N(x)\rightarrow E(x)\oplus O(x)),\forall x(N(x)\rightarrow(E(x)\leftrightarrow G(x))),\neg\forall x(N(x)\rightarrow G(x))}$，则有$\Gamma\vdash\exists x(N(x)\wedge O(x))$。</li>
+<li>证明：$\Gamma=${$\exists x(P(x)\wedge\forall y(D(y)\rightarrow L(x,y))),\forall x\forall y(P(x)\wedge Q(y)\rightarrow\neg L(x,y))$}，则有$\Gamma\vdash\forall y(D(y)\rightarrow\neg Q(y))$。</li>
+<li>证明：$\Gamma=${$P(Sam),G(Clyde)\wedge L(Clyde,Oscar),(P(Oscar)\oplus G(Oscar))\wedge L(Oscar,Sam)$}，则有$\Gamma\vdash\exists x\exists y(G(x)\wedge P(y)\wedge L(x,y))$，注：$\oplus$表示联结词中的“异或”。</li>
+<li>证明：$\Gamma=${$\forall x(N(x)\rightarrow E(x)\oplus O(x)),\forall x(N(x)\rightarrow(E(x)\leftrightarrow G(x))),\neg\forall x(N(x)\rightarrow G(x))$}，则有$\Gamma\vdash\exists x(N(x)\wedge O(x))$。</li>
 <li>证明：有二元关系$R$，若$R$是传递且反自反的，那么它是非对称的。</li>
 </ol>
 <hr>
-<p>水平有限，存在的错误和不足请大家指正。</p>
 
 </section>
 
@@ -793,6 +825,30 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 
         <div class="article-details">
             <h2 class="article-title">PC(命题逻辑演算形式系统)及其相关定理</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/regular/">
+        
+        
+            <div class="article-image">
+                <img src="/p/regular/image.66b39998fde1d29b4322d816732e4fcc_hu10189641357372666466.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 有穷自动机FA及正则语言RL"
+                        data-key="Regular" 
+                        data-hash="md5-ZrOZmP3h0ptDItgWcy5PzA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">有穷自动机FA及正则语言RL</h2>
         </div>
     </a>
 </article>

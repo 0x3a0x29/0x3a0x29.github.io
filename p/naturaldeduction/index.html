@@ -355,7 +355,8 @@
     
     <h1 id="nd及其相关定理">ND及其相关定理
 </h1><h2 id="前言">前言
-</h2><p>本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。</p>
+</h2><p>水平有限，存在的错误和不足请大家指正。</p>
+<p>本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。</p>
 <hr>
 <h2 id="基础知识">基础知识
 </h2><p>命题：能唯一确定真假值的陈述句。</p>
@@ -379,7 +380,7 @@
 <h2 id="自然演绎推理系统nd的简单介绍">自然演绎推理系统ND的简单介绍
 </h2><p>与之前介绍的PC一样，自然演绎推理系统ND（natural deduction）也是一种形式系统，相较于PC而言，ND是一个更加实用、比较符合人的思维模式的推理演算系统，ND的规则和直观含义都比较明显，我们先简单介绍一下ND的组成部分：</p>
 <ol>
-<li>字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集${\neg,\wedge,\vee,\rightarrow,\leftrightarrow}$、辅助符号$(,)$</li>
+<li>字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集{$\neg,\wedge,\vee,\rightarrow,\leftrightarrow$}、辅助符号$(,)$</li>
 <li>形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义</li>
 <li>公理：设$A$为可以表达任意命题公式的语法变元，$\Gamma$是一个公式集，在ND中只有一个公理（也有人把这个公理变形为推理规则，这样的ND的公理集就是$\varnothing$）：
 $\Gamma;A\vdash A(\in)$</li>
@@ -424,14 +425,17 @@ $\Gamma;A\vdash A(\in)$</li>
 <h2 id="逻辑推理相关的基本定义">逻辑推理相关的基本定义
 </h2><p><strong>演绎</strong>：在ND中，若有$\Gamma\vdash_{ND}A$，即存在序列：$\Gamma_1\vdash A_1,\Gamma_2\vdash A_2,\cdots,\Gamma_m\vdash A_m$使得$\Gamma_i\vdash A_i$或为ND的公理，或为$\Gamma_i\vdash A_i(j&lt; i)$，或为$\Gamma_{j_1}\vdash A_{j_1},\cdots,\Gamma_{j_k}\vdash A_{j_k}(j_1,\cdots,j_k&lt; i)$使用推理规则导出的。当$\Gamma=\varnothing$时我们记作$\vdash_{ND}A$，称$A$为ND的<strong>定理</strong>。</p>
 <p>例：证明$A\vdash_{ND}B\rightarrow A$（这个定理说明了我们对一个定理增添前件后任旧是一个定理）。也就是说我们已经知道$A$成立了，现在要推出$B\rightarrow A$也成立，这个过程都要在ND中进行，故我们要在ND中构造一个演绎序列使得最后一个是$\vdash A\rightarrow(B\rightarrow A)$，一个可行的序列如下：</p>
+<blockquote>
 <ol>
 <li>$A,B\vdash A$,$(\in)$                                    （这是公理$(\in)$）</li>
 <li>$A\vdash B\rightarrow A$,$(\rightarrow+)(1)$             （对$(1)$使用$\rightarrow+$规则）</li>
 <li>$\vdash A\rightarrow(B\rightarrow A)$,$(\rightarrow)(2)$ （对$(2)$使用$\rightarrow+$规则）</li>
 </ol>
+</blockquote>
 <h2 id="nd中的基本定理">ND中的基本定理
 </h2><p>在ND中直接使用公理和推理规则得出ND中的定理会非常繁琐，其中有不少步骤遵循相同的模式，下列总结了ND中10个基本定理，用于帮助寻找ND的定理：</p>
 <p>$Th1$：$\vdash_{ND}A\vee\neg A$</p>
+<blockquote>
 <ol>
 <li>$A\vdash A$,$(\in)$</li>
 <li>$A\vdash A\wedge\neg A$,$(\vee+)(1)$</li>
@@ -439,7 +443,9 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$\neg A\vdash A\vee\neg A$,$(\vee+)(3)$</li>
 <li>$\vdash A\vee\neg A$,$(-)(2)(4)$</li>
 </ol>
+</blockquote>
 <p>$Th2$：$\vdash_{ND}\neg(A\vee B)\leftrightarrow(\neg A\wedge\neg B)$</p>
+<blockquote>
 <ol>
 <li>$\neg(A\vee B),A\vdash A$,$(\in)$</li>
 <li>$\neg(A\vee B),A\vdash A\vee B$,$(\vee+)(1)$</li>
@@ -467,7 +473,9 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$\vdash(\neg A\wedge\neg B)\rightarrow\neg(A\vee B)$,$(\rightarrow+)(23)$</li>
 <li>$\vdash\neg(A\vee B)\leftrightarrow(\neg A\wedge\neg B)$,$(\leftrightarrow+)(10)(24)$</li>
 </ol>
+</blockquote>
 <p>$Th3$：$\vdash_{ND}\neg(A\wedge B)\leftrightarrow(\neg A\vee\neg B)$</p>
+<blockquote>
 <ol>
 <li>$\neg(A\wedge B),A,B\vdash A$,$(\in)$</li>
 <li>$\neg(A\wedge B),A,B\vdash B$,$(\in)$</li>
@@ -492,7 +500,9 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$\vdash(\neg A\vee\neg B)\rightarrow\neg(A\wedge B)$,$(\rightarrow+)(20)$</li>
 <li>$\vdash(\neg A\vee\neg b)\leftrightarrow\neg(A\wedge B)$,$(\leftrightarrow+)(10)(21)$</li>
 </ol>
+</blockquote>
 <p>$Th4$：$\neg A\rightarrow B\vdash\dashv_{ND} A\vee B$，这里的$P\vdash\dashv_{ND}Q$当且仅当$P\vdash_{ND}Q$且$Q\vdash_{ND}P$</p>
+<blockquote>
 <ol>
 <li>$\neg A\rightarrow B,\neg A\vdash\neg A$,$(\in)$</li>
 <li>$\neg A\rightarrow B,\neg A\vdash\neg A\rightarrow B$,$(\in)$</li>
@@ -509,7 +519,9 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$A\vee B,\neg A\vdash B$,$(\vee-)(8)(11)(12)$</li>
 <li>$A\vee B\vdash \neg A\rightarrow B$,$(\rightarrow+)(13)$</li>
 </ol>
+</blockquote>
 <p>$Th5$：$A\rightarrow B\vdash\dashv_{ND}\neg A\vee B$</p>
+<blockquote>
 <ol>
 <li>$A\rightarrow B,A\vdash A$,$(\in)$</li>
 <li>$A\rightarrow B,A\vdash A\rightarrow B$,$(\in)$</li>
@@ -526,7 +538,9 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$\neg A\vee B,A\vdash B$,$(\vee-)(8)(11)(12)$</li>
 <li>$\neg A\vee B\vdash A\rightarrow B$,$(\rightarrow+)(13)$</li>
 </ol>
+</blockquote>
 <p>$Th6$：$\vdash_{ND}A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$</p>
+<blockquote>
 <ol>
 <li>$A\wedge(B\vee C),B\vdash A\wedge(B\vee C)$,$(\in)$</li>
 <li>$A\wedge(B\vee C),B\vdash A$,$(\wedge-)(1)$</li>
@@ -557,7 +571,9 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$\vdash(A\wedge B)\vee(A\wedge C)\rightarrow A\wedge(B\vee C)$,$(\rightarrow+)(26)$</li>
 <li>$\vdash A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$,$(\leftrightarrow+)(14)(27)$</li>
 </ol>
+</blockquote>
 <p>$Th7$：$\vdash_{HD}A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$</p>
+<blockquote>
 <ol>
 <li>$A\vee(B\wedge C),B\wedge C\vdash B\wedge C$,$(\in)$</li>
 <li>$A\vee(B\wedge C),B\wedge C\vdash B$,$(\wedge-)(1)$</li>
@@ -592,14 +608,18 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$\vdash(A\vee B)\wedge(A\vee C)\rightarrow A\vee(B\wedge C)$,$(\rightarrow+)(30)$</li>
 <li>$\vdash A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$,$(\leftrightarrow+)(13)(31)$</li>
 </ol>
+</blockquote>
 <p>从上面的7个定理的证明中我们可以发现，和PC相比，ND的证明思路更加符合我们的思维模式，事实上能通过PC证明的定理在ND中也可以证明出来，为了证明这个事实，我们不妨在ND中尝试证明PC中使用到的3个公理。</p>
 <p>$Th8$：$\vdash_{ND}A\rightarrow(B\rightarrow A)$</p>
+<blockquote>
 <ol>
 <li>$A,B\vdash A$,$(\in)$</li>
 <li>$A\vdash B\rightarrow A$,$(\rightarrow+)(1)$</li>
 <li>$\vdash A\rightarrow(B\rightarrow A)$,$(\rightarrow+)(2)$</li>
 </ol>
+</blockquote>
 <p>$Th9$：$\vdash_{ND}(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$</p>
+<blockquote>
 <ol>
 <li>$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A$,$(\in)$</li>
 <li>$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A\rightarrow B$,$(\in)$</li>
@@ -611,7 +631,9 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$A\rightarrow(B\rightarrow C),\vdash(A\rightarrow B)\rightarrow(A\rightarrow C)$,$(\rightarrow+)(7)$</li>
 <li>$\vdash(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$(\rightarrow+)(8)$</li>
 </ol>
+</blockquote>
 <p>$Th10$：$\vdash_{ND}(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$</p>
+<blockquote>
 <ol>
 <li>$\neg A\rightarrow\neg B,\neg A,B\vdash\neg A$,$(\in)$</li>
 <li>$\neg A\rightarrow\neg B,\neg A,B\vdash\neg A\rightarrow\neg B$,$(\in)$</li>
@@ -623,6 +645,7 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>$\neg A\rightarrow\neg B\vdash B\rightarrow A$,$(\rightarrow+)(7)$</li>
 <li>$\vdash(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$,$(\rightarrow+)(8)$</li>
 </ol>
+</blockquote>
 <hr>
 <h2 id="nd定理证明习题选">ND定理证明习题选
 </h2><p>下面给出了六道ND定理习题供读者练习使用：</p>
@@ -635,7 +658,6 @@ $\Gamma;A\vdash A(\in)$</li>
 <li>证明：$\vdash_{ND}(A\leftrightarrow\neg B)\leftrightarrow\neg(A\leftrightarrow B)$</li>
 </ol>
 <hr>
-<p>水平有限，存在的错误和不足请大家指正。</p>
 
 </section>
 
@@ -745,6 +767,30 @@ $\Gamma;A\vdash A(\in)$</li>
 
         <div class="article-details">
             <h2 class="article-title">PC(命题逻辑演算形式系统)及其相关定理</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/regular/">
+        
+        
+            <div class="article-image">
+                <img src="/p/regular/image.66b39998fde1d29b4322d816732e4fcc_hu10189641357372666466.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 有穷自动机FA及正则语言RL"
+                        data-key="Regular" 
+                        data-hash="md5-ZrOZmP3h0ptDItgWcy5PzA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">有穷自动机FA及正则语言RL</h2>
         </div>
     </a>
 </article>

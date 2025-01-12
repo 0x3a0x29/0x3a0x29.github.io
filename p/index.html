@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="title: 有穷自动机FA及正则语言RL slug: Regular date: 2024-06-17 description: 介绍了有穷自动机和正则语言 image: &lsquo;image.png&rsquo; categories: - math tags : - 形式语言与自动机 有穷自动机FA及正则语言RL 前言 阅读本文需要集合论和图论的相关知识，在此不作有关集合论和图论相关知识的赘述。 笔者水平有限，存在的错误和不足请大家指正。\n">
+<title></title>
+
+<link rel='canonical' href='http://localhost:1313/p/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="">
+<meta property='og:description' content="title: 有穷自动机FA及正则语言RL slug: Regular date: 2024-06-17 description: 介绍了有穷自动机和正则语言 image: &lsquo;image.png&rsquo; categories: - math tags : - 形式语言与自动机 有穷自动机FA及正则语言RL 前言 阅读本文需要集合论和图论的相关知识，在此不作有关集合论和图论相关知识的赘述。 笔者水平有限，存在的错误和不足请大家指正。\n">
+<meta property='og:url' content='http://localhost:1313/p/'>
+<meta property='og:site_name' content='0x3a0x29的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' />
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="title: 有穷自动机FA及正则语言RL slug: Regular date: 2024-06-17 description: 介绍了有穷自动机和正则语言 image: &lsquo;image.png&rsquo; categories: - math tags : - 形式语言与自动机 有穷自动机FA及正则语言RL 前言 阅读本文需要集合论和图论的相关知识，在此不作有关集合论和图论相关知识的赘述。 笔者水平有限，存在的错误和不足请大家指正。\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/preview_hu12876420758783534955.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">📖</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0x3a0x29的博客</a></h1>
+            <h2 class="site-description">有时会分享一些感兴趣的事情</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0x3a0x29'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E%E6%88%91/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%96%87%E7%AB%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>文章</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%90%9C%E7%B4%A2/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/en/" >English</option>
+                                
+                                    <option value="http://localhost:1313/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#--形式语言与自动机">title: 有穷自动机FA及正则语言RL
+slug:  Regular
+date:  2024-06-17
+description: 介绍了有穷自动机和正则语言
+image: &lsquo;image.png&rsquo;
+categories:
+- math
+tags :
+- 形式语言与自动机</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#字符串和语言">字符串和语言</a></li>
+    <li><a href="#有穷自动机">有穷自动机</a>
+      <ol>
+        <li><a href="#有穷自动机的引入">有穷自动机的引入</a></li>
+        <li><a href="#有穷自动机的形式化定义">有穷自动机的形式化定义</a></li>
+        <li><a href="#正则运算">正则运算</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/"></a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 10 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="--形式语言与自动机">title: 有穷自动机FA及正则语言RL
+slug:  Regular
+date:  2024-06-17
+description: 介绍了有穷自动机和正则语言
+image: &lsquo;image.png&rsquo;
+categories:
+- math
+tags :
+- 形式语言与自动机
+</h2><h1 id="有穷自动机fa及正则语言rl">有穷自动机FA及正则语言RL
+</h1><h2 id="前言">前言
+</h2><p>阅读本文需要集合论和图论的相关知识，在此不作有关集合论和图论相关知识的赘述。
+笔者水平有限，存在的错误和不足请大家指正。</p>
+<hr>
+<h2 id="字符串和语言">字符串和语言
+</h2><p><strong>字母表（alphabet）</strong>：一个非空有穷集合，其成员被称为该字母表的<strong>符号（symbol）</strong>，通常用大写希腊字母$\Sigma,\Gamma$来表示字母表和字母表中符号的打印字体。</p>
+<p><strong>字符串（string）</strong>：字母表中符号的有穷序列，通常写为一个符号挨着一个符号，不用逗号分隔，如果一个字符串$w$由字符$w_1,\cdots,w_n$一个挨着一个表示，称$w=w_1\cdots w_n$。一个字符串$w$所包含的符号数目称为它的<strong>长度（length）</strong>，记作$|w|$。长度为零的字符串称为<strong>空串（empty string）</strong>，记作$\epsilon$。若$\alpha$为$\alpha_1\cdots\alpha_m$、$\beta$为$\beta_1\cdots\beta_n$，它们都是某个字母表$\Sigma$的字符串，若$m=n$且对于每个$j,1\leq j\leq n$都有$\alpha_j$与$\beta_j$相同，称$\alpha=\beta$。</p>
+<p><strong>反转（reverse）</strong>：按照相反的顺序写$w$所得到的字符串，记作$w^R$，例如$w=w_1w_2\cdots w_n$，那么有$w^R=w_nw_{n-1}\cdots w_1$。</p>
+<p><strong>连接（concatenation）</strong>：若有字符串$x=x_1\cdots x_m,y=y_1\cdots y_n$，那么连接运算记作$xy=x_1\cdots x_my_1\cdots y_n$，也即把$y$附加在$x$得到的字符串。</p>
+<p>不难发现全体字符串集$W$对连接运算构成了一个以字母表$\Sigma$为基的自由含幺半群/自由独异点，也即：</p>
+<ol>
+<li>对于字符串$x,y,z\in W$，结合律$(xy)z=x(yz)$成立。</li>
+<li>对于字符串$x\in W$，$\epsilon x=x\epsilon=x$，即$\epsilon$为单位元。</li>
+<li>对于字符串$x\in W$，可以唯一地表示为$x=x_1\cdots x_n$，此处的$x_1,\cdots,x_n\in\Sigma$。</li>
+<li>对于字符串$x,y,z\in W$，若有$xy=xz$，则$y=z$；若有$xz=yz$，则$x=y$。即满足左、右消去律。</li>
+</ol>
+<p>因为结合律成立，可以定义一个字符串自身连接多次为$x^k=x\cdots x$，共有$k$个$x$连接。</p>
+<p><strong>子串（substring）</strong>：若有$\beta=\gamma\alpha\theta$，其中$\alpha,\beta,\gamma,\theta$都是某个字母表上的字符串，那么称$\alpha$为$\beta$的子串。</p>
+<p><strong>字典序（lexicographic order）</strong>：类似于大家熟悉的字典顺序，而一般采用<strong>字符串顺序（string order）</strong>，它在字典序的基础上将短的字符串排在长的字符串的前面，例如字母表$\Sigma={0,1}$上的字符串顺序为$(\epsilon,0,1,00,01,10,11,000,\cdots)$。</p>
+<p><strong>前缀（prefix）</strong>：如果有字符串$x,y,z$满足$xz=y$，则称$x$是$y$的前缀，并且若$x\neq y$，则称$x$是$y$的<strong>真前缀（proper prefix）</strong>。</p>
+<p><strong>语言（language）</strong>：字符串的集合，称不含字符串的语言为空语言，记作$\varnothing$。如果语言中任何一个成员都不是其他成员的真前缀，那么该语言是<strong>无前缀的（prefix-free）</strong>。</p>
+<hr>
+<h2 id="有穷自动机">有穷自动机
+</h2><h3 id="有穷自动机的引入">有穷自动机的引入
+</h3><p>**有穷自动机（finite automaton,FA）**是描述能力和资源极其有限的计算机的模型，但是它也可以做到很多的事情。以一个生活中的例子为例：</p>
+<p>想象一个电视机，在处在开启状态时接收到关闭指令时它的状态会变为关闭，在处在关闭状态时接收到关闭指令时它的状态会变为开启，电视机有两个状态：开启状态和关闭状态，而指令是外部输入，这是一种有穷自动机。</p>
+<p><img src="/image/test1/1718859193499.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1718859193499"
+	
+	
+></p>
+<p>为了更好地描述FA，可以设想一种物理模型————FA的物理模型，现在对其进行描述。首先它带有一个输入带，在输入带上有一系列方格，每个方格里都储存了一个字符，约定输入串从输入带的左端点开始存放，而输入带的右端是无穷的。其次系统有一个<strong>有穷状态控制器（finite state control，FSC）</strong>，带有有穷个状态，FSC控制了一个读头，每读入一个字符就将读头指向输入带的后一个字符。系统的运行按照3个节拍进行：读入读头指向的字符，FSC根据当前的状态和读入的字符改变状态，读头向右移动一格。</p>
+<p><img src="/image/test1/1718774973794.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1718774973794"
+	
+	
+></p>
+<p>而在很多地方FA都有它的应用，如在时序电路设计当中有摩尔机（Moore Machine）：时序电路的输出是现态的函数。米利机（Mealy Machine）：输出是现态和输入的函数。它们两个也都是FA,下面使用Verilog语言编写的三段式代码描述了一个时序电路中的Moore机，它包含在物理模型当中提到的读入输入，改变状态，等待下一个输入的过程。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//状态寄存器
+</span></span><span class="line"><span class="cl">always @ (posedge clk or negedge rst_n) begin
+</span></span><span class="line"><span class="cl">    if(!rst_n)
+</span></span><span class="line"><span class="cl">        state &lt;= IDLE;
+</span></span><span class="line"><span class="cl">    else
+</span></span><span class="line"><span class="cl">        state &lt;= next_state;
+</span></span><span class="line"><span class="cl">end
+</span></span><span class="line"><span class="cl">//次态的组合逻辑
+</span></span><span class="line"><span class="cl">always @ (*) begin
+</span></span><span class="line"><span class="cl">    case(state)
+</span></span><span class="line"><span class="cl">        IDLE：begin
+</span></span><span class="line"><span class="cl">                if(w_i) next_state = S0;
+</span></span><span class="line"><span class="cl">                else   next_state = IDLE;
+</span></span><span class="line"><span class="cl">              end
+</span></span><span class="line"><span class="cl">        S0:  begin
+</span></span><span class="line"><span class="cl">                if(w_i) next_state = S1;
+</span></span><span class="line"><span class="cl">                else    next_state = IDLE;
+</span></span><span class="line"><span class="cl">             end
+</span></span><span class="line"><span class="cl">        S1:  begin
+</span></span><span class="line"><span class="cl">                if(w_i) next_state = S1;
+</span></span><span class="line"><span class="cl">                else    next_state = IDLE;
+</span></span><span class="line"><span class="cl">             end
+</span></span><span class="line"><span class="cl">        default : next_state = 2&#39;bxx;
+</span></span><span class="line"><span class="cl">   endcase
+</span></span><span class="line"><span class="cl">end
+</span></span><span class="line"><span class="cl">//输出逻辑
+</span></span><span class="line"><span class="cl">always @ (*) beign
+</span></span><span class="line"><span class="cl">    case(current)
+</span></span><span class="line"><span class="cl">        IDLE:  z = 1&#39;b0;
+</span></span><span class="line"><span class="cl">        S0:    z = 1&#39;b0;
+</span></span><span class="line"><span class="cl">        S1:    z = 1&#39;b1;
+</span></span><span class="line"><span class="cl">        default:  z = 1&#39;b0;
+</span></span><span class="line"><span class="cl">    endcase
+</span></span><span class="line"><span class="cl">end
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的这种FA也被称为<strong>有穷状态转换器（Finite-state transducer，FST）</strong>，读者可以尝试自己给出它的形式化定义，在此不作相关说明。</p>
+<p>为了更好地描述FA的工作，先不给出FA的形式化定义，首先给出一个有穷自动机$M_1$：</p>
+<p><img src="/image/test1/1718762658450.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1718762658450"
+	
+	
+></p>
+<p>上面这个图被称为$M_1$的<strong>状态图（state diagram）</strong>，它总共有三个状态$q_0,q_1,q_2$，<strong>起始状态（start state）</strong>$q_0$用一个单独的箭头表明出来，<strong>接受状态（accept state）</strong>$q_1$带有一个双圈，从一个状态指向另一个状态的箭头称为<strong>转移（transition）</strong>。当这个自动机接收到字符串后它会处理这个字符串并给出一个输出，或是<strong>接受</strong>或是<strong>拒绝</strong>。常用<strong>状态转移表</strong>来描述可能的转移过程：</p>
+<p><img src="/image/test1/1718763381901.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1718763381901"
+	
+	
+></p>
+<p>现在来看两个字符串输入的例子：</p>
+<p>输入字符串011：</p>
+<ol>
+<li>开始时处在状态$q_0$。</li>
+<li>读到0，沿着转移从$q_0$到$q_0$。</li>
+<li>读到1，沿着转移从$q_0$到$q_1$。</li>
+<li>读到1，沿着转移从$q_1$到$q_1$。</li>
+<li>输出接受，因为在输入字符串的末端$M$正处在一个接受状态$q_1$。</li>
+</ol>
+<p>输入字符串1100：</p>
+<ol>
+<li>开始时处在状态$q_0$。</li>
+<li>读到1，沿着转移从$q_0$到$q_1$。</li>
+<li>读到1，沿着转移从$q_1$到$q_1$。</li>
+<li>读到0，沿着转移从$q_1$到$q_2$。</li>
+<li>读到0，沿着转移从$q_2$到$q_2$。</li>
+<li>输出拒绝，因为在输入字符串的末端$M$不处在一个接受状态。</li>
+</ol>
+<h3 id="有穷自动机的形式化定义">有穷自动机的形式化定义
+</h3><p>上面的例子说明，一台FA可以描述成一张含5个部分的表：状态集、输入字母表、动作规则、起始状态集和接受状态集。而用**转移函数（transition function）**来定义动作规则，常记作$\delta$。</p>
+<p>FA是一个5元组$M=(Q,\Sigma,\delta,q_0,F)$，其中：</p>
+<ol>
+<li>$Q$是一个有穷集合，称为<strong>状态集</strong>。</li>
+<li>$\Sigma$是一个有穷集合，称为<strong>字母表</strong>。</li>
+<li>$\delta:Q\times\Sigma\rightarrow Q$，称为<strong>转移函数</strong>。</li>
+<li>$q_0\in Q$是<strong>起始状态</strong>。</li>
+<li>$F\subseteq Q$是<strong>接受状态集</strong>。</li>
+</ol>
+<p>这样就可以给出上面的例子$M_1$的形式化描述：</p>
+<ol>
+<li>$Q={q_0,q_1,q_2}$。</li>
+<li>$\Sigma={0,1}$。</li>
+<li>$\delta(q_0,0)=q_0,\delta(q_0,1)=q_1,\delta(q_1,0)=q_2,\delta(q_1,1)=q_1,\delta(q_2,0)=q_2,\delta(q_2,1)=q_1$。</li>
+<li>$q_0$是起始状态。</li>
+<li>$F={q_1}$。</li>
+</ol>
+<p>若$A$是机器$M$所接受的全部字符串集，则称$A$是机器$M$的<strong>语言</strong>，记作$L(M)=A$，又称$M$识别$A$或$M$接受$A$。</p>
+<p>转移函数处理的是一个字符，为了在理论分析时更加便于处理字符串，定义扩展转移函数$\hat{\delta}$：当$w=\epsilon$时$\hat{\delta}(q,w)=q$，当$w=xa$时$\hat{\delta}(q,w)=\delta(\hat{\delta}(q,x),a)$，其中$w,x$是字符串，$a$是字符。可知机器$M$接受$w$当且仅当$\hat{\delta}(q_0,w)\in F$。</p>
+<h3 id="正则运算">正则运算
+</h3><p><strong>正则语言（regular language，RL）</strong>：如果一个语言被一台FA识别，则称它为正则语言。</p>
+<p>为了更好的研究RL，引入**正则运算（regular operation）**以便研究它的性质，设$A,B$为两个语言，那么有：</p>
+<ol>
+<li><strong>并（union）</strong>：$A\cup B={x|x\in A或x\in B}$，也有写作$A+B$的。</li>
+<li><strong>连接（concatenation）</strong>：$A\circ B={xy|x\in A且y\in B}$，在不产生混淆的情况下可以写为$AB$。</li>
+<li><strong>幂（power）</strong>：$A^0={\epsilon},A^1=A,A^n=A^{n-1}\circ A$。</li>
+<li><strong>克林闭包（Kleene star）</strong>：$A^*=\cup^\infty_{i=0}A^i$，也有一种定义称$A^+=\cup^\infty_{i=1}A^i$为正闭包。</li>
+</ol>
+<p>除了正则运算外，也有一些常用的运算，在此也作出介绍：</p>
+<ol>
+<li>对于两个语言$A,B$，那么有<strong>交</strong>运算：$A\cap B={x|x\in A且x\in B}$。</li>
+<li>对于两个语言$A,B$，那么有<strong>差</strong>运算：$A-B={x|x\in A且x\notin B}$。</li>
+<li>对于字母表$\Sigma$上的一个语言$L$，称这个语言的<strong>补</strong>运算为：$\overline{L}=\Sigma^*-L$，显然有$L-M=L\cap\overline{M}$。</li>
+<li>对于字母表$\Sigma$上的语言$L$，称它的<strong>反转</strong>为$L^R={w^R\in\Sigma^*|w\in L}$。</li>
+<li>对于字母表$\Sigma$上的语言$L_1,L_2$，称**商（quotient）**为：$L_1/L_2={x|\exists y\in L_2使得xy\in L_1}$，这里是$L_2$除以$L_1$的商。</li>
+</ol>
+<p>为了更好地研究语言和运算之间的性质，引入封闭性的概念：</p>
+<p>如果任意的属于某一语言类的语言在某一特定运算下所得的结果任然是该类语言，则称该语言类对此运算是封闭的，并称该语言类对此运算有<strong>封闭性（closure property）</strong>。</p>
+<p>给定一个语言类的若干语言的描述。如果存在一个算法，它可以构造出这些语言在给定运算下所获得的运算结果的相应形式的语言描述，则称此语言类对相应的运算是有效封闭的，并称此语言类对相应的运算具有<strong>有效封闭性（valid closure property）</strong>。</p>
+<p>可以证明RL在并运算下是封闭的：</p>
+<p>设有RL：$A_1,A_2$，识别它们的有穷状态机分别为$M_1=(Q_1,\Sigma,\delta_1,q_1,F_1),M_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$（两者的字母表不同时也可以构造相应的证明过程），那么可以构造这样一台FA$M=(Q_1\times Q_2,\Sigma,\delta,(q_1,q_2),(F_1\times Q_2)\cup(Q_1\times F_2))$，其中对于每一对$(r_1,r_2)\in Q,a\in\Sigma$，$\delta((r_1,r_2),a)=(\delta_1(r_1,a),\delta_2(r_2,a))$，这台自动机可以识别$A_1\cup A_2$。</p>
+<p>RL在连接运算下也是封闭的，但是如果想要证明这个事实，就会面临一个问题，该如何让需要构造的自动机$M$知道哪里才能将输入的字符串$w=w_1w_2$分为$w_1$和$w_2$，从而让两者分别被两台自动机接受呢？为了解决这个问题要引入非确定性。</p>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 0x3a0x29的博客
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.2656bfc10e5ca43ff0599a4321e870496180bcb14850ea241bdd016a36f7705c.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

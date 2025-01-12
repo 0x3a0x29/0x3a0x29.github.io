@@ -16,6 +16,658 @@
         <description></description>
         </item>
         <item>
+        <title>有穷自动机FA及正则语言RL</title>
+        <link>https://0x3a0x29.github.io/p/regular/</link>
+        <pubDate>Thu, 20 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://0x3a0x29.github.io/p/regular/</guid>
+        <description>&lt;img src="https://0x3a0x29.github.io/p/regular/image.png" alt="Featured image of post 有穷自动机FA及正则语言RL" /&gt;&lt;h1 id=&#34;有穷自动机fa及正则语言rl&#34;&gt;有穷自动机FA及正则语言RL
+&lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;p&gt;阅读本文需要集合论和图论的相关知识，在此不作有关集合论和图论相关知识的赘述。
+笔者水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;字符串和语言&#34;&gt;字符串和语言
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;字母表（alphabet）&lt;/strong&gt;：一个非空有穷集合，其成员被称为该字母表的&lt;strong&gt;符号（symbol）&lt;/strong&gt;，通常用大写希腊字母$\Sigma,\Gamma$来表示字母表和字母表中符号的打印字体。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;字符串（string）&lt;/strong&gt;：字母表中符号的有穷序列，通常写为一个符号挨着一个符号，不用逗号分隔，如果一个字符串$w$由字符$w_1,\cdots,w_n$一个挨着一个表示，称$w=w_1\cdots w_n$。一个字符串$w$所包含的符号数目称为它的&lt;strong&gt;长度（length）&lt;/strong&gt;，记作$|w|$。长度为零的字符串称为&lt;strong&gt;空串（empty string）&lt;/strong&gt;，记作$\epsilon$。若$\alpha$为$\alpha_1\cdots\alpha_m$、$\beta$为$\beta_1\cdots\beta_n$，它们都是某个字母表$\Sigma$的字符串，若$m=n$且对于每个$j,1\leq j\leq n$都有$\alpha_j$与$\beta_j$相同，称$\alpha=\beta$。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;反转（reverse）&lt;/strong&gt;：按照相反的顺序写$w$所得到的字符串，记作$w^R$，例如$w=w_1w_2\cdots w_n$，那么有$w^R=w_nw_{n-1}\cdots w_1$。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;连接（concatenation）&lt;/strong&gt;：若有字符串$x=x_1\cdots x_m,y=y_1\cdots y_n$，那么连接运算记作$xy=x_1\cdots x_my_1\cdots y_n$，也即把$y$附加在$x$得到的字符串。&lt;/p&gt;
+&lt;p&gt;不难发现全体字符串集$W$对连接运算构成了一个以字母表$\Sigma$为基的自由含幺半群/自由独异点，也即：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对于字符串$x,y,z\in W$，结合律$(xy)z=x(yz)$成立。&lt;/li&gt;
+&lt;li&gt;对于字符串$x\in W$，$\epsilon x=x\epsilon=x$，即$\epsilon$为单位元。&lt;/li&gt;
+&lt;li&gt;对于字符串$x\in W$，可以唯一地表示为$x=x_1\cdots x_n$，此处的$x_1,\cdots,x_n\in\Sigma$。&lt;/li&gt;
+&lt;li&gt;对于字符串$x,y,z\in W$，若有$xy=xz$，则$y=z$；若有$xz=yz$，则$x=y$。即满足左、右消去律。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;因为结合律成立，可以定义一个字符串自身连接多次为$x^k=x\cdots x$，共有$k$个$x$连接。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;子串（substring）&lt;/strong&gt;：若有$\beta=\gamma\alpha\theta$，其中$\alpha,\beta,\gamma,\theta$都是某个字母表上的字符串，那么称$\alpha$为$\beta$的子串。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;字典序（lexicographic order）&lt;/strong&gt;：类似于大家熟悉的字典顺序，而一般采用&lt;strong&gt;字符串顺序（string order）&lt;/strong&gt;，它在字典序的基础上将短的字符串排在长的字符串的前面，例如字母表$\Sigma=${$0,1$}上的字符串顺序为$(\epsilon,0,1,00,01,10,11,000,\cdots)$。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;前缀（prefix）&lt;/strong&gt;：如果有字符串$x,y,z$满足$xz=y$，则称$x$是$y$的前缀，并且若$x\neq y$，则称$x$是$y$的&lt;strong&gt;真前缀（proper prefix）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;语言（language）&lt;/strong&gt;：字符串的集合，称不含字符串的语言为空语言，记作$\varnothing$。如果语言中任何一个成员都不是其他成员的真前缀，那么该语言是&lt;strong&gt;无前缀的（prefix-free）&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;有穷自动机&#34;&gt;有穷自动机
+&lt;/h2&gt;&lt;h3 id=&#34;有穷自动机的引入&#34;&gt;有穷自动机的引入
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;有穷自动机（finite automaton,FA）&lt;/strong&gt; 是描述能力和资源极其有限的计算机的模型，但是它也可以做到很多的事情。以一个生活中的例子为例：&lt;/p&gt;
+&lt;p&gt;想象一个电视机，在处在开启状态时接收到关闭指令时它的状态会变为关闭，在处在关闭状态时接收到关闭指令时它的状态会变为开启，电视机有两个状态：开启状态和关闭状态，而指令是外部输入，这是一种有穷自动机。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/1.png&#34;
+	width=&#34;1260&#34;
+	height=&#34;426&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/1_hu18221439412241038001.png 480w, https://0x3a0x29.github.io/p/regular/1_hu12088125681086466226.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;295&#34;
+		data-flex-basis=&#34;709px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;为了更好地描述FA，可以设想一种物理模型————FA的物理模型，现在对其进行描述。首先它带有一个输入带，在输入带上有一系列方格，每个方格里都储存了一个字符，约定输入串从输入带的左端点开始存放，而输入带的右端是无穷的。其次系统有一个&lt;strong&gt;有穷状态控制器（finite state control，FSC）&lt;/strong&gt;，带有有穷个状态，FSC控制了一个读头，每读入一个字符就将读头指向输入带的后一个字符。系统的运行按照3个节拍进行：读入读头指向的字符，FSC根据当前的状态和读入的字符改变状态，读头向右移动一格。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/2.png&#34;
+	width=&#34;658&#34;
+	height=&#34;248&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/2_hu15937446866882204574.png 480w, https://0x3a0x29.github.io/p/regular/2_hu15828587064437324954.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;265&#34;
+		data-flex-basis=&#34;636px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;而在很多地方FA都有它的应用，如在时序电路设计当中有摩尔机（Moore Machine）：时序电路的输出是现态的函数。米利机（Mealy Machine）：输出是现态和输入的函数。它们两个也都是FA,下面使用Verilog语言编写的三段式代码描述了一个时序电路中的Moore机，它包含在物理模型当中提到的读入输入，改变状态，等待下一个输入的过程。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//状态寄存器
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;always @ (posedge clk or negedge rst_n) begin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    if(!rst_n)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;lt;= IDLE;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    else
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;lt;= next_state;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//次态的组合逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;always @ (*) begin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    case(state)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        IDLE：begin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                if(w_i) next_state = S0;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                else   next_state = IDLE;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S0:  begin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                if(w_i) next_state = S1;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                else    next_state = IDLE;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;             end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S1:  begin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                if(w_i) next_state = S1;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                else    next_state = IDLE;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;             end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        default : next_state = 2&amp;#39;bxx;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   endcase
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//输出逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;always @ (*) beign
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    case(current)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        IDLE:  z = 1&amp;#39;b0;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S0:    z = 1&amp;#39;b0;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S1:    z = 1&amp;#39;b1;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        default:  z = 1&amp;#39;b0;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    endcase
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面的这种FA也被称为&lt;strong&gt;有穷状态转换器（Finite-state transducer，FST）&lt;/strong&gt;，读者可以尝试自己给出它的形式化定义，在此不作相关说明。&lt;/p&gt;
+&lt;p&gt;为了更好地描述FA的工作，先不给出FA的形式化定义，首先给出一个有穷自动机$M_1$：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/3.png&#34;
+	width=&#34;636&#34;
+	height=&#34;154&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/3_hu12928029905551494049.png 480w, https://0x3a0x29.github.io/p/regular/3_hu604089665199698384.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;3&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;412&#34;
+		data-flex-basis=&#34;991px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;上面这个图被称为$M_1$的&lt;strong&gt;状态图（state diagram）&lt;/strong&gt;，它总共有三个状态$q_0,q_1,q_2$，&lt;strong&gt;起始状态（start state）&lt;/strong&gt;$q_0$用一个单独的箭头表明出来，&lt;strong&gt;接受状态（accept state）&lt;/strong&gt;$q_1$带有一个双圈，从一个状态指向另一个状态的箭头称为&lt;strong&gt;转移（transition）&lt;/strong&gt;。当这个自动机接收到字符串后它会处理这个字符串并给出一个输出，或是&lt;strong&gt;接受&lt;/strong&gt;或是&lt;strong&gt;拒绝&lt;/strong&gt;。常用&lt;strong&gt;状态转移表&lt;/strong&gt;来描述可能的转移过程：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;0&lt;/th&gt;
+          &lt;th&gt;1&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$q_0$&lt;/td&gt;
+          &lt;td&gt;$q_0$&lt;/td&gt;
+          &lt;td&gt;$q_1$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$q_1$&lt;/td&gt;
+          &lt;td&gt;$q_2$&lt;/td&gt;
+          &lt;td&gt;$q_1$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$q_2$&lt;/td&gt;
+          &lt;td&gt;$q_2$&lt;/td&gt;
+          &lt;td&gt;$q_2$&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;现在来看两个字符串输入的例子：&lt;/p&gt;
+&lt;p&gt;输入字符串011：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;开始时处在状态$q_0$。&lt;/li&gt;
+&lt;li&gt;读到0，沿着转移从$q_0$到$q_0$。&lt;/li&gt;
+&lt;li&gt;读到1，沿着转移从$q_0$到$q_1$。&lt;/li&gt;
+&lt;li&gt;读到1，沿着转移从$q_1$到$q_1$。&lt;/li&gt;
+&lt;li&gt;输出接受，因为在输入字符串的末端$M$正处在一个接受状态$q_1$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;输入字符串1100：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;开始时处在状态$q_0$。&lt;/li&gt;
+&lt;li&gt;读到1，沿着转移从$q_0$到$q_1$。&lt;/li&gt;
+&lt;li&gt;读到1，沿着转移从$q_1$到$q_1$。&lt;/li&gt;
+&lt;li&gt;读到0，沿着转移从$q_1$到$q_2$。&lt;/li&gt;
+&lt;li&gt;读到0，沿着转移从$q_2$到$q_2$。&lt;/li&gt;
+&lt;li&gt;输出拒绝，因为在输入字符串的末端$M$不处在一个接受状态。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;有穷自动机的形式化定义&#34;&gt;有穷自动机的形式化定义
+&lt;/h3&gt;&lt;p&gt;上面的例子说明，一台FA可以描述成一张含5个部分的表：状态集、输入字母表、动作规则、起始状态集和接受状态集。而用 &lt;strong&gt;转移函数（transition function）&lt;/strong&gt; 来定义动作规则，常记作$\delta$。&lt;/p&gt;
+&lt;p&gt;FA是一个5元组$M=(Q,\Sigma,\delta,q_0,F)$，其中：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$Q$是一个有穷集合，称为&lt;strong&gt;状态集&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;$\Sigma$是一个有穷集合，称为&lt;strong&gt;字母表&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;$\delta:Q\times\Sigma\rightarrow Q$，称为&lt;strong&gt;转移函数&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;$q_0\in Q$是&lt;strong&gt;起始状态&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;$F\subseteq Q$是&lt;strong&gt;接受状态集&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样就可以给出上面的例子$M_1$的形式化描述：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;$Q=${$q_0,q_1,q_2$}。&lt;/li&gt;
+&lt;li&gt;$\Sigma=${$0,1$}。&lt;/li&gt;
+&lt;li&gt;$\delta(q_0,0)=q_0,\delta(q_0,1)=q_1,\delta(q_1,0)=q_2,\delta(q_1,1)=q_1,\delta(q_2,0)=q_2,\delta(q_2,1)=q_1$。&lt;/li&gt;
+&lt;li&gt;$q_0$是起始状态。&lt;/li&gt;
+&lt;li&gt;$F=${$q_1$}。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;若$A$是机器$M$所接受的全部字符串集，则称$A$是机器$M$的&lt;strong&gt;语言&lt;/strong&gt;，记作$L(M)=A$，又称$M$识别$A$或$M$接受$A$。&lt;/p&gt;
+&lt;p&gt;转移函数处理的是一个字符，为了在理论分析时更加便于处理字符串，定义扩展转移函数$\hat{\delta}$：当$w=\epsilon$时$\hat{\delta}(q,w)=q$，当$w=xa$时$\hat{\delta}(q,w)=\delta(\hat{\delta}(q,x),a)$，其中$w,x$是字符串，$a$是字符。可知机器$M$接受$w$当且仅当$\hat{\delta}(q_0,w)\in F$。&lt;/p&gt;
+&lt;h3 id=&#34;正则运算&#34;&gt;正则运算
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;正则语言（regular language，RL）&lt;/strong&gt;：如果一个语言被一台FA识别，则称它为正则语言。&lt;/p&gt;
+&lt;p&gt;为了更好的研究RL，引入 &lt;strong&gt;正则运算（regular operation）&lt;/strong&gt; 以便研究它的性质，设$A,B$为两个语言，那么有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;并（union）&lt;/strong&gt;：$A\cup B=${$x|x\in A或x\in B$}，也有写作$A+B$的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;连接（concatenation）&lt;/strong&gt;：$A\circ B=${$xy|x\in A且y\in B$}，在不产生混淆的情况下可以写为$AB$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;幂（power）&lt;/strong&gt;：$A^0=${$\epsilon$}$,A^1=A,A^n=A^{n-1}\circ A$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;克林闭包（Kleene star）&lt;/strong&gt;：$A^{ * }=\cup^\infty_{i=0}A^i$，也有一种定义称$A^+=\cup^\infty_{i=1}A^i$为正闭包。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;除了正则运算外，也有一些常用的运算，在此也作出介绍：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对于两个语言$A,B$，那么有&lt;strong&gt;交&lt;/strong&gt;运算：$A\cap B=${$x|x\in A且x\in B$}。&lt;/li&gt;
+&lt;li&gt;对于两个语言$A,B$，那么有&lt;strong&gt;差&lt;/strong&gt;运算：$A-B=${$x|x\in A且x\notin B$}。&lt;/li&gt;
+&lt;li&gt;对于字母表$\Sigma$上的一个语言$L$，称这个语言的&lt;strong&gt;补&lt;/strong&gt;运算为：$\overline{L}=\Sigma^{ * }-L$，显然有$L-M=L\cap\overline{M}$。&lt;/li&gt;
+&lt;li&gt;对于字母表$\Sigma$上的语言$L$，称它的&lt;strong&gt;反转&lt;/strong&gt;为$L^R=${$w^R\in\Sigma^{ * }|w\in L$}。&lt;/li&gt;
+&lt;li&gt;对于字母表$\Sigma$上的语言$L_1,L_2$，称**商（quotient）**为：$L_1/L_2=${$x|\exists y\in L_2使得xy\in L_1$}，这里是$L_2$除以$L_1$的商。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为了更好地研究语言和运算之间的性质，引入封闭性的概念：&lt;/p&gt;
+&lt;p&gt;如果任意的属于某一语言类的语言在某一特定运算下所得的结果任然是该类语言，则称该语言类对此运算是封闭的，并称该语言类对此运算有&lt;strong&gt;封闭性（closure property）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;给定一个语言类的若干语言的描述。如果存在一个算法，它可以构造出这些语言在给定运算下所获得的运算结果的相应形式的语言描述，则称此语言类对相应的运算是有效封闭的，并称此语言类对相应的运算具有&lt;strong&gt;有效封闭性（valid closure property）&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以证明RL在并运算下是封闭的：&lt;/p&gt;
+&lt;p&gt;设有RL：$A_1,A_2$，识别它们的有穷状态机分别为$M_1=(Q_1,\Sigma,\delta_1,q_1,F_1),M_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$（两者的字母表不同时也可以构造相应的证明过程），那么可以构造这样一台FA$M=(Q_1\times Q_2,\Sigma,\delta,(q_1,q_2),(F_1\times Q_2)\cup(Q_1\times F_2))$，其中对于每一对$(r_1,r_2)\in Q,a\in\Sigma$，$\delta((r_1,r_2),a)=(\delta_1(r_1,a),\delta_2(r_2,a))$，这台自动机可以识别$A_1\cup A_2$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;RL在连接运算下也是封闭的，但是如果想要证明这个事实，就会面临一个问题，该如何让需要构造的自动机$M$知道哪里才能将输入的字符串$w=w_1w_2$分为$w_1$和$w_2$，从而让两者分别被两台自动机接受呢？为了解决这个问题要引入非确定性。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;非确定性&#34;&gt;非确定性
+&lt;/h2&gt;&lt;h3 id=&#34;非确定性的引入&#34;&gt;非确定性的引入
+&lt;/h3&gt;&lt;p&gt;在刚刚定义的FA可以被称为&lt;strong&gt;确定的有穷自动机（deterministic finite automaton,DFA）&lt;/strong&gt;，它进行的是&lt;strong&gt;确定性计算（deterministic computation）&lt;/strong&gt;，现在要介绍的是&lt;strong&gt;带空移动的不确定的有穷自动机（non-deterministic finite automaton with $\epsilon$,$\epsilon$-NFA）&lt;/strong&gt;，这种机器是前者的推广，而在任何一点，其下一个状态可能存在若干个选择。&lt;/p&gt;
+&lt;p&gt;首先给出一个$\epsilon$-NFA的例子，记其为$N_1$：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/5.png&#34;
+	width=&#34;1120&#34;
+	height=&#34;244&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/5_hu13492785266724341849.png 480w, https://0x3a0x29.github.io/p/regular/5_hu10198609769495381885.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;5&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;459&#34;
+		data-flex-basis=&#34;1101px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;与DFA相比，这里某些状态对字母表中的某些符号产生了多个转移箭头，也有些符号没有对应的转移箭头，而这里出现了不取自于字母表的符号$\epsilon$。一般而言，$\epsilon$-NFA的箭头可以标记为字母表中的元素或$\epsilon$，从一个状态可能射出0个、1个或若干个标有$\epsilon$的箭头。&lt;/p&gt;
+&lt;p&gt;$\epsilon$-NFA进行运算的过程像是多线程工作，当读入一个字符对应多个转移箭头时，$\epsilon$-NFA便会“复制”自己以进行多个方向的工作，当没有可以转移的箭头时这个$\epsilon$-NFA的“备份”便结束工作，而遇到带有$\epsilon$的箭头时$\epsilon$-NFA直接“复制”一份自身进行工作，也可以借助树的结构来观察这个过程。&lt;/p&gt;
+&lt;p&gt;以$N_1$为例，输入字符串010110：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;开始时处在状态$q_1$。&lt;/li&gt;
+&lt;li&gt;读到0，沿着转移从$q_1$到$q_1$。&lt;/li&gt;
+&lt;li&gt;读到1，沿着转移从$q_1$到$q_1,q_2,q_3$。&lt;/li&gt;
+&lt;li&gt;读到0，沿着转移从$q_1$到$q_1$，从$q_2$到$q_3$，$q_3$无法进行转移。&lt;/li&gt;
+&lt;li&gt;读到1，沿着转移从$q_1$到$q_1,q_2,q_3$，从$q_3$到$q_4$。&lt;/li&gt;
+&lt;li&gt;读到1，沿着转移从$q_1$到$q_1,q_2,q_3$，从$q_3$到$q_4$，从$q_3$到$q_4$，$q_2$无法进行转移。&lt;/li&gt;
+&lt;li&gt;读到0，沿着转移从$q_1$到$q_1$，从$q_2$到$q_3$，从$q_4$到$q_4$，$q_3$无法进行转移。&lt;/li&gt;
+&lt;li&gt;输出接受，因为存在一个NFA的“备份”能够到达接受状态$q_4$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;利用树的结构来观察这个过程如下：
+&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/6.png&#34;
+	width=&#34;1150&#34;
+	height=&#34;1074&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/6_hu14836835862620595787.png 480w, https://0x3a0x29.github.io/p/regular/6_hu6195013174086624256.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;6&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;107&#34;
+		data-flex-basis=&#34;256px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;非确定性的形式化定义&#34;&gt;非确定性的形式化定义
+&lt;/h3&gt;&lt;p&gt;现在给出$\epsilon$-NFA的形式化定义，$\epsilon$-NFA是一个五元组$(Q,\Sigma,\delta,q_0,F)$：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$Q$是一个有穷集合，称为&lt;strong&gt;状态集&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;$\Sigma$是一个有穷集合，称为&lt;strong&gt;字母表&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;$\delta:Q\times\Sigma_\epsilon\rightarrow 2^Q$，称为&lt;strong&gt;转移函数&lt;/strong&gt;，其中$2^Q$表示$Q$的幂集，即$Q$的全体子集的集合，$\Sigma_\epsilon=\Sigma\cup${$\epsilon$}。&lt;/li&gt;
+&lt;li&gt;$q_0\in Q$是&lt;strong&gt;起始状态&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;$F\subseteq Q$是&lt;strong&gt;接受状态集&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当$\epsilon$-NFA中不含有有$\epsilon$的转移箭头时得到了 &lt;strong&gt;不确定的有穷自动机（non-deterministic finite automaton,NFA）&lt;/strong&gt; 的定义，在此不作赘述。&lt;/p&gt;
+&lt;p&gt;为了方便研究，引入$\epsilon$-闭包（$\epsilon$-Closure）的概念，记为$ECLOSE(q)$，表示经过0个或多于0个空转移到达的全部状态的集合，其递归定义如下：&lt;/p&gt;
+&lt;p&gt;$q\in ECLOSE(q)$（包含当前状态本身）&lt;/p&gt;
+&lt;p&gt;$\forall p\in ECLOSE(q),$如果有$r\in\theta(p,\epsilon)$，那么$r\in ECLOSE(q)$。&lt;/p&gt;
+&lt;p&gt;在$N_1$中可以发现$ECLOSE(q_0)=${$q_0$}$,ECLOSE(q_1)=${$q_1,q_2$}。&lt;/p&gt;
+&lt;p&gt;对$\epsilon$-闭包进行推广，状态集$S$的$\epsilon$-闭包为：$ECLOSE(S)=\cup_{q\in S}ECLOSE(q)$，即一个状态集$S$的$\epsilon$-闭包为$S$中每一个状态的$\epsilon$-闭包的并集。&lt;/p&gt;
+&lt;p&gt;类似于先前做的那样，也给出扩展转移函数$\hat{\delta}$：&lt;/p&gt;
+&lt;p&gt;$\hat{\delta}$：当$w=\epsilon$时$\hat{\delta}(q,w)=ECLOSE(q)$，当$w=xa$时$\hat{\delta}(q,w)=ECLOSE(\cup_{p\in\hat{\delta}(q,x)}\delta(p,a))$，其中$w,x$是字符串，$a$是字符。可知机器$N$接受$w$当且仅当$\hat{\delta}(q_0,w)\cap F\neq\varnothing$。&lt;/p&gt;
+&lt;h3 id=&#34;dfa和ε-nfa的等价性&#34;&gt;DFA和ε-NFA的等价性
+&lt;/h3&gt;&lt;p&gt;当两台机器识别同样的语言，则称它们是&lt;strong&gt;等价&lt;/strong&gt;的，乍一看上去仿佛$\epsilon$-NFA有着比DFA更加强大的能力，因为DFA本身便符合$\epsilon$-NFA的定义，但是两者实际上是等价的，为此，需要找到用DFA表示$\epsilon$-NFA的方法，这样的构造如下：&lt;/p&gt;
+&lt;p&gt;设有$\epsilon$-NFA：$N=(Q,\Sigma,\delta,q_0,F)$，其识别了语言$A$，那么可以构造一台DFA识别语言$A$：$D=(2^Q,\Sigma,\delta_D,ECLOSE(q_0),F_D)$，其中$\forall S\subseteq Q,\forall a\in\Sigma,\delta_D(S,a)=ECLOSE(\cup_{p\in S}\delta(p,a))$，$F_D=${$S|S\subseteq Q,S\cap F\neq\varnothing$}。&lt;/p&gt;
+&lt;p&gt;NFA是$\epsilon$-NFA的特殊情形，同时DFA一定是NFA，故这三种FA都是等价的。&lt;/p&gt;
+&lt;p&gt;知道了两者的等价性后，可以得到推论：一个语言是正则的当且仅当有一台$\epsilon$-NFA可以识别它。&lt;/p&gt;
+&lt;h3 id=&#34;在正则运算下的封闭性&#34;&gt;在正则运算下的封闭性
+&lt;/h3&gt;&lt;p&gt;有了关于$\epsilon$-NFA的知识后，可以回过头来看看之前所未解决的问题，也即证明RL在正则运算下的封闭性，在此通过构造三个$\epsilon$-NFA将这个问题解决：&lt;/p&gt;
+&lt;p&gt;（1）正则语言在并运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设有RL：$A_1,A_2$被它们对应的两个$\epsilon$-NFA识别：$N_1=(Q_1,\Sigma,\delta_1,q_1,F_1),N_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$，那么可以识别$A_1\cup A_2$的$\epsilon$-NFA构造为：$N=(${$q_0$}$\cup Q_1\cup Q_2,\Sigma,\delta,q_0,F_1\cup F_2)$，其中$\forall q\in Q,a\in \Sigma_\epsilon$&lt;/p&gt;
+&lt;p&gt;当$q\in Q_1$时$\delta(q,a)=\delta_1(q,a)$&lt;/p&gt;
+&lt;p&gt;当$q\in Q_2$时$\delta(q,a)=\delta_2(q,a)$&lt;/p&gt;
+&lt;p&gt;当$q=q_0$且$a=\epsilon$时$\delta(q,a)=${$q_1,q_2$}&lt;/p&gt;
+&lt;p&gt;当$q=q_0$且$a\neq\epsilon$时$\delta(q,a)=\varnothing$&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/7.png&#34;
+	width=&#34;922&#34;
+	height=&#34;850&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/7_hu526286099206366473.png 480w, https://0x3a0x29.github.io/p/regular/7_hu1731852976432196056.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;7&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;108&#34;
+		data-flex-basis=&#34;260px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;（2）正则语言在连接运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设有RL：$A_1,A_2$被它们对应的两个$\epsilon$-NFA识别：$N_1=(Q_1,\Sigma,\delta_1,q_1,F_1),N_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$，那么可以识别$A_1\circ A_2$的$\epsilon$-NFA构造为：$N=(Q_1\cup Q_2,\Sigma,\delta,q_1,F_2)$，其中$\forall q\in Q,a\in \Sigma_\epsilon$&lt;/p&gt;
+&lt;p&gt;当$q\in Q_1$且$q\notin F_1$时$\delta(q,a)=\delta_1(q,a)$&lt;/p&gt;
+&lt;p&gt;当$q\in F_1$且$a\neq\epsilon$时$\delta(q,a)=\delta_1(q,a)$&lt;/p&gt;
+&lt;p&gt;当$q\in F_1$且$a=\epsilon$时$\delta(q,a)=\delta_1(q,a)\cup${$q_2$}&lt;/p&gt;
+&lt;p&gt;当$q\in Q_2$时$\delta(q,a)=\delta_2(q,a)$
+&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/8.png&#34;
+	width=&#34;1116&#34;
+	height=&#34;680&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/8_hu7210683092556059390.png 480w, https://0x3a0x29.github.io/p/regular/8_hu5577002273944923359.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;8&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;164&#34;
+		data-flex-basis=&#34;393px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（3）正则语言在克林闭包运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设有RL：$A_1$被对应的$\epsilon$-NFA识别：$N_1=(Q_1,\Sigma,\delta_1,q_1,F_1)$，那么可以识别$A_1^{ * }$的$\epsilon$-NFA构造为：$N=(${$q_0$}$\cup Q_1,\Sigma,\delta,q_0,${$q_0$}$\cup F_1)$，其中$\forall q\in Q,a\in \Sigma_\epsilon$&lt;/p&gt;
+&lt;p&gt;当$q\in Q_1$且$q\notin F_1$时$\delta(q,a)=\delta_1(q,a)$&lt;/p&gt;
+&lt;p&gt;当$q\in F_1$且$a\neq\epsilon$时$\delta(q,a)=\delta_1(q,a)$&lt;/p&gt;
+&lt;p&gt;当$q\in F_1$且$a=\epsilon$时$\delta(q,a)=\delta_1(q,a)\cup${$q_1$}&lt;/p&gt;
+&lt;p&gt;当$q=q_0$且$a=\epsilon$时$\delta(q,a)=${$q_1$}&lt;/p&gt;
+&lt;p&gt;当$q=q_0$且$a\neq\epsilon$时$\delta(q,a)=\varnothing$
+&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/9.png&#34;
+	width=&#34;1128&#34;
+	height=&#34;408&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/9_hu4457836059238505445.png 480w, https://0x3a0x29.github.io/p/regular/9_hu8729684916741227664.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;9&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;276&#34;
+		data-flex-basis=&#34;663px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;在其他运算下的封闭性&#34;&gt;在其他运算下的封闭性
+&lt;/h3&gt;&lt;p&gt;RL除了在这些正则运算下保持封闭，在其他运算下也有保持封闭的性质，在此选取了常用的性质进行说明：&lt;/p&gt;
+&lt;p&gt;（1）RL在补运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设有RL：$A$被对应的DFA识别：$D=(Q,\Sigma,\delta,q_0,F)$，那么可以识别$\overline{L}=\Sigma^{ * }-L$的DFA构造为$D&amp;rsquo;=(Q,\Sigma,\delta,q_0,Q-F)$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（2）RL在交运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果$L,M$是RL，考虑事实$L\cap M=\overline{\overline{L}\cup\overline{M}}$。&lt;/p&gt;
+&lt;p&gt;也可以通过构造自动机证明这一事实，设有RL：$A_1,A_2$被对应的两个DFA识别：$M_1=(Q_1,\Sigma,\delta_1,q_1,F_1),M_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$，那么可以构造识别$A_1\cap A_2$的DFA：$M=(Q_1\times Q_2,\Sigma,\delta,(q_1,q_2),F_1\times F_2)$。其中$\forall (p,q)\in Q_1\times Q_2,\forall a\in\Sigma,\delta((p,q),a)=(\delta_1(p,a),\delta_2(q,a))$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（3）RL在差运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果$L,M$是RL，考虑事实$L-M=L\cap\overline{M}$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（4）RL在反转运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设有RL：$A$被相应的DFA：$D=(Q,\Sigma,\delta,q_0,F)$识别，可以构造识别$A^R$的$\epsilon$-NFA：$N=(Q,\Sigma,\delta&amp;rsquo;,q_R,${$q_0$}$)$，如果有$\delta(q,a)=p$，那么作$\delta&amp;rsquo;(p,a)=q$，同时要求$\delta&amp;rsquo;(q_R,\epsilon)=F$，恰好满足这两个条件即可。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（5）正则代换：&lt;/p&gt;
+&lt;p&gt;可以引入&lt;strong&gt;代换（substitution）&lt;/strong&gt; 的概念，设有两个字母表$\Sigma,\Delta$，那么映射$f:\Sigma\rightarrow 2^{\Delta^{ * }}$称为从$\Sigma$到$\Delta$的一个代换，如果对于$\forall a\in\Sigma,f(a)$是$\Delta$上的RL，则称$f$为&lt;strong&gt;正则代换（regular substitution）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;可以进一步扩展$f$的定义域，首先将其定义域拓展到$\Sigma^{ * } $上，也就是说定义字符串的代换，$f:\Sigma^{ * }\rightarrow 2^{\Delta^{ * }}$：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$f(\epsilon)=${$\epsilon$}。&lt;/li&gt;
+&lt;li&gt;$f(xa)=f(x)f(a)$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;再将定义域拓展到$2^{\Sigma^{ * } }$上，也就是定义语言的代换，$f:2^{\Sigma^{ * }}\rightarrow 2^{\Delta^{ * } }$：
+对于$\forall L\subseteq\Sigma^{ * } $，有$f(L)=\cup_{x\in L}f(x)$。
+为了方便研究，也给出正则表达式上的正则代换：
+设$\Sigma,\Delta$是两个字母表，映射$f:\Sigma\rightarrow 2^{\Delta^{ * }}$为正则代换，那么有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$f(\varnothing)=\varnothing$。&lt;/li&gt;
+&lt;li&gt;$f(\epsilon)=\epsilon$。&lt;/li&gt;
+&lt;li&gt;对于$\forall a\in\Sigma,f(a)$是$\Delta$上的正则表达式&lt;/li&gt;
+&lt;li&gt;如果$r,s$是$\Sigma$上的正则表达式，那么有:$f(r\cup s)=f(r)\cup f(s),f(r\circ s)=f(r)\circ f(s),f(r^{ * })=f(r)^{ * }$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用数学归纳法很容易证明：设$L$是$\Sigma$上的一个RL，有正则代换$f:\Sigma\rightarrow 2^{\Delta^{ * }}$，则$f(L)$也是RL。&lt;/p&gt;
+&lt;p&gt;可以引入 &lt;strong&gt;同态（homomorphism）&lt;/strong&gt; 的概念，设有两个字母表$\Sigma,\Delta$，有映射$f:\Sigma\rightarrow\Delta^{ * } $。如果对于$\forall x,y\in\Sigma^{ * } $有$f(xy)=f(x)f(y)$，则称$f$为从$\Sigma$到$\Delta^{ * } $的同态映射。&lt;/p&gt;
+&lt;p&gt;对于$\forall L\subseteq\Sigma^{ * }$，$L$的同态像$f(L)=\cup_{x\in L}${$f(x)$}。&lt;/p&gt;
+&lt;p&gt;对于$\forall w\subseteq\Delta^{ * } $，$w$的同态原像$f^{-1}(w)=${$x|f(x)=w且x\in\Sigma^{ * }$}。&lt;/p&gt;
+&lt;p&gt;对于$\forall L\subseteq\Delta^{ * } $，$L$的同态原像$f^{-1}(L)=${$x|f(x)\in L$}。&lt;/p&gt;
+&lt;p&gt;（6）RL在同态像运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不难发现同态映射是正则代换的特例。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（7）RL在同态原像运算下封闭：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设有$L$是RL，有同态映射$h:\Sigma\rightarrow\Delta^{ * } $，识别它的DFA：$D=(Q,\Gamma,\delta,q_0,F)$，那么可以构造识别$h^{-1}(A)$的DFA：$D&amp;rsquo;=(Q,\Sigma,\delta&amp;rsquo;,q_0,F)$，其中对$\forall (q,a)\in Q\times\Sigma$，都有$\delta&amp;rsquo;(q,a)=\delta(q,h(a))$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（8）RL在商运算下封闭:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设$L_1,L_2\in\Sigma^{ * } $，如果$L_1$是RL，则$L_1/L_2$也是RL。
+设有识别$L_1$的DFA：$M_1=(Q,\Sigma,\delta,q_0,F_1)$，那么可以构造识别$L_1/L_2$的DFA：$M_2=(Q,\Sigma,\delta,q_0,${$q|\exists y\in L_2,\delta(q,y)\in F$}$)$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;必须要指出的是，这里的$L_2$可以是各种语言，故这种封闭性不是&lt;strong&gt;有效封闭性&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;正则表达式&#34;&gt;正则表达式
+&lt;/h2&gt;&lt;h3 id=&#34;正则表达式的形式化定义&#34;&gt;正则表达式的形式化定义
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;正则表达式（regular expression，RE）&lt;/strong&gt;：类似于算术中的运算存在着对应的表达式，如$5+4$，也可以使用正则运算描述语言的表达式，称为正则表达式，例如$(0\cup 1)0^{ * }$，现在给出它的形式化定义：&lt;/p&gt;
+&lt;p&gt;称$R$是一个正则表达式，如果$R$是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$a$，要求$a\in\Sigma$，$\Sigma$是字母表，表示语言{$a$}。&lt;/li&gt;
+&lt;li&gt;$\epsilon$，表示语言{$\epsilon$}。&lt;/li&gt;
+&lt;li&gt;$\varnothing$，表示空语言。&lt;/li&gt;
+&lt;li&gt;$(R_1\cup R_2)$，其中$R_1,R_2$都是正则表达式，表示这两个语言作并运算得到的语言，也有写成$(R_1+R_2)$的。&lt;/li&gt;
+&lt;li&gt;$(R_1\circ R_2)$，其中$R_1,R_2$都是正则表达式，表示这两个语言作连接运算得到的语言，在不产生混淆的情况下可以写为$(R_1R_2)$。&lt;/li&gt;
+&lt;li&gt;$(R_1)^{ * }$，其中$R_1$是正则表达式，表示这个语言作克林闭包运算得到的语言。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;上述的定义是有效的、可以避免循环的，被称为归纳定义（inductive defination）。&lt;/p&gt;
+&lt;p&gt;表达式中的括号可以被略去，如果略去括号，可以按照下述优先顺序进行运算：克林闭包，连接，并。&lt;/p&gt;
+&lt;p&gt;正则表达式$R$所描述的语言记作$L(R)$。&lt;/p&gt;
+&lt;p&gt;正则表达式和这里使用到的三种运算形成了Kleene代数（例如对并运算和连接运算形成了一个半环），在此指出有关正则表达式的一些代数定律：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;并运算满足交换律和结合律。&lt;/li&gt;
+&lt;li&gt;连接运算满足结合律，但不满足交换律。&lt;/li&gt;
+&lt;li&gt;$\varnothing$是并运算的单位元，是连接运算的零元，也就是说对于正则表达式$L$始终有$\varnothing\cup L=L\cup\varnothing=L,\varnothing\circ L=L\circ\varnothing=\varnothing$。&lt;/li&gt;
+&lt;li&gt;$\epsilon$是连接运算的单位元，也就是说对于正则表达式$L$始终有$\epsilon L=L\epsilon =L$。&lt;/li&gt;
+&lt;li&gt;连接运算对并运算满足左右分配律。&lt;/li&gt;
+&lt;li&gt;并运算满足幂等律。&lt;/li&gt;
+&lt;li&gt;对任意语言$L$都有$(L^{ * })^{ * }=L^{ * }$。&lt;/li&gt;
+&lt;li&gt;$\varnothing^{ * }=\epsilon$。&lt;/li&gt;
+&lt;li&gt;$\epsilon^{ * }=\epsilon$。&lt;/li&gt;
+&lt;li&gt;对任意语言$L$都有$L^{ * }L^{ * }=L^{ * }$。&lt;/li&gt;
+&lt;li&gt;对任意语言$L,M$都有$(L\cup M)^{ * }=(L^{ * }M^{ * })^{ * }$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;与有穷自动机的等价性&#34;&gt;与有穷自动机的等价性
+&lt;/h3&gt;&lt;p&gt;现在要说明一个正则语言一定可以用正则表达式描述，反之亦然，也就是说要证明两个命题，下面给出这两个命题的证明。&lt;/p&gt;
+&lt;p&gt;（1）如果一个语言可以用正则表达式描述，那么它是正则的。&lt;/p&gt;
+&lt;p&gt;可以使用归纳法证明这个结论，归纳基础如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/10.png&#34;
+	width=&#34;1212&#34;
+	height=&#34;924&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/10_hu4781724733839857856.png 480w, https://0x3a0x29.github.io/p/regular/10_hu6331908880685565072.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;10&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;131&#34;
+		data-flex-basis=&#34;314px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;归纳递推如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/11.png&#34;
+	width=&#34;908&#34;
+	height=&#34;628&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/11_hu3998622659975730273.png 480w, https://0x3a0x29.github.io/p/regular/11_hu2775156862375133142.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;11&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;347px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这样的三种构造恰好可以与三种正则运算相对应&lt;/p&gt;
+&lt;p&gt;那么找到了将正则表达式转化为对应的$\epsilon$-NFA的方法，证明完毕。&lt;/p&gt;
+&lt;p&gt;（2）如果一个语言是正则的，那么可以用正则表达式描述它。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;首先，给出一种方法证明这个问题，设有DFA：$M=(\cup_{i=1}^n${$q_i$}$,\Sigma,\delta,q_1,F)$&lt;/p&gt;
+&lt;p&gt;令$R^k_{ij}=${$x|\hat{\delta}(q_i,x)=q_j,而且对于x的任意前缀y(y\neq x,y\neq\epsilon),如果\hat{\delta}(q_i,y)=q_j,则l\leq k$}&lt;/p&gt;
+&lt;p&gt;也就是说$R^k_{ij}$是所有那些将DFA从给定状态$q_i$引导到状态$q_j$并且中途不经过下标大于$k$的状态的那些字符串，可以发现有递归关系：&lt;/p&gt;
+&lt;p&gt;如果$i\neq j$那么有$R^0_{ij}=${$a|\hat{\delta}(q_i,a)=q_j$}，如果$i=j$那么有$R^0_{ij}=${$a|\hat{\delta}(q_i,a)=q_j$}$\cup${$\epsilon$}。&lt;/p&gt;
+&lt;p&gt;$R^k_{ij}=R^{k-1}&lt;em&gt;{ik}(R^{k-1}&lt;/em&gt;{kk})^{ * } R^{k-1}&lt;em&gt;{kj}\cup R^{k-1}&lt;/em&gt;{ij}$&lt;/p&gt;
+&lt;p&gt;显然有$L(M)=\cup_{q_j\in F}R^n_{1f}$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;上述这种做法不太直观，为此可以通过引入一个新的自动机：&lt;strong&gt;广义非确定型有穷自动机（generalized nondeterministic finite automaton，GNFA）&lt;/strong&gt; 来解决这个问题，下面给出一个例子对这种自动机进行说明：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/12.png&#34;
+	width=&#34;1196&#34;
+	height=&#34;826&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/12_hu3432974970291811667.png 480w, https://0x3a0x29.github.io/p/regular/12_hu11285598807232773148.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;12&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;347px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以发现GNFA的转移箭头可以用任何正则表达式作标号，而不是只能用字母表的成员或者$\epsilon$作为标号。相较于NFA一次最多只能读入一个符号，GNFA可以一次读入一段输入符号，沿着连接两个状态的箭头移动，而这段输入符号正好是那个转移箭头上的正则表达式所描述的一个字符串。&lt;/p&gt;
+&lt;p&gt;为了方便，对GNFA作出一些特殊形式的条件要求：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;起始状态有射到其他每一个状态的箭头，但是没有从任何其他状态射入的箭头。&lt;/li&gt;
+&lt;li&gt;有唯一的接受状态，并且它有从其他每一个状态射入的箭头，但是没有射到任何其他状态的箭头。此外，这个接受状态和起始状态不同。&lt;/li&gt;
+&lt;li&gt;除了起始状态和接受状态之外，每一个状态到自身和其他每一个状态都有一个箭头。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;把DFA转换成GNFA是容易的，只需要新添加初始状态和接受状态，新初始状态到原初始状态有一个$\epsilon$箭头，每一个原接受状态到新接受状态有一个$\epsilon$箭头，把有多个标记的箭头换成并运算的正则表达式形式，最后将需要补上箭头的原先无箭头的地方补上$\varnothing$的箭头即可，因为这个箭头始终无法被使用。&lt;/p&gt;
+&lt;p&gt;现在给出GNFA的形式化定义：&lt;/p&gt;
+&lt;p&gt;广义非确定型有穷自动机是一个5元组$(Q,\Sigma,\delta,q_{start},q_{accept})$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$Q$是一个有穷的状态集。&lt;/li&gt;
+&lt;li&gt;$\Sigma$是一个有穷的字母表。&lt;/li&gt;
+&lt;li&gt;$\delta:(Q-${$q_{accept}$}$)\times(Q-${$q_{start}$}$)\rightarrow \mathcal{R} $，即转移函数。&lt;/li&gt;
+&lt;li&gt;$q_{start}\in Q$是起始状态。&lt;/li&gt;
+&lt;li&gt;$q_{accept}$是接受状态。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果字符串$w=w_1w_2\cdots w_k$，其中的每一个$w_i\in\Sigma^{ * }$，并且存在状态序列$q_0,q_1,\cdots,q_k$使得&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$q_0=q_{start}$是起始状态。&lt;/li&gt;
+&lt;li&gt;$q_k=q_{accept}$是接受状态。&lt;/li&gt;
+&lt;li&gt;对于每一个$i,w_i\in L(R_i)$，其中$R_i=\delta(q_{i-1},q_i)$，即$R_i$是从$q_{i-1}$到$q_i$的箭头上的正则表达式。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;那么称这个GNFA接受字符串$w$。&lt;/p&gt;
+&lt;p&gt;而对于GNFA，存在一种算法可以不断减少它所拥有的状态数目，最后将会剩下它的初始状态和接受状态，同时也只有一个从初始状态到接受状态的箭头，这个箭头的标记就说等价的正则表达式，现在给出这样一个算法CONVERT(G)，它通过每轮减少一个状态的方式实现了状态的缩减：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设$k$为$G$的状态数，如果$k=2$则$G$一定是一个起始状态、一个接受状态和连接两者的箭头组成，返回箭头上标记的正则表达式$R$。&lt;/p&gt;
+&lt;p&gt;如果$k&amp;gt;2$，则任取一个状态$q_{rip}\in Q-${$q_{start},q_{accept}$}，并且令一个新的GNFA：$G&amp;rsquo;=(Q&amp;rsquo;,\Sigma,\delta&amp;rsquo;,q_{start},q_{accept})$，其中$Q&amp;rsquo;=Q-${$q_{rip}$}，而对于每一个$q_i\in Q&amp;rsquo;-${$q_{accept}$}$,q_j\in Q&amp;rsquo;-${$q_{start}$}，令$\delta&amp;rsquo;(q_i,q_j)=(R_1)(R_2)^{ * }(R_3)\cup(R_4)$，其中$R_1=\delta(q_i,q_{rip}),R_2=\delta(q_{rip},q_{rip}),R_3=\delta(q_{rip},q_j),R_4=\delta(q_i,q_j)$，计算CONVERT(G)并返回这个值。&lt;/p&gt;
+&lt;p&gt;实际上当$k&amp;gt;2$时CONVERT(G)所做的事情是将某个状态去掉，用能够经过这个状态的路径对应的正则表达式取代了它，从而不影响整个状态机的运行。&lt;/p&gt;
+&lt;p&gt;可以证明对于任意的GNFA G，都有CONVERT(G)等价于G，也就是说所有GNFA都有与其等价的一个含有两个状态的GNFA。证明了任何RL都可以用正则表达式来描述它。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;myhill-nerode定理和dfa的极小化&#34;&gt;Myhill-Nerode定理和DFA的极小化
+&lt;/h2&gt;&lt;h3 id=&#34;myhill-nerode定理&#34;&gt;Myhill-Nerode定理
+&lt;/h3&gt;&lt;p&gt;知道任何GNFA都可以被化简为只有两个状态的形式，但是这不意味着DFA和$\epsilon$-NFA可以被化简为只有两个状态的形式，实际上总能找到这样的语言$L_n$使得能够接受它的DFA和$\epsilon$-NFA拥有至少$n$个状态（考虑只含有一个字符串的形如{$0^k$}的语言）。&lt;/p&gt;
+&lt;p&gt;但是可以对这些自动机进行化简，在此给出减少DFA的状态以化简它的方法。&lt;/p&gt;
+&lt;p&gt;设DFA：$M=(Q,\Sigma,\delta,q_0,F)$，由$M$确定的$\Sigma^{ * } $上的关系$R_M$定义为：对于$\forall x,y\in\Sigma^{ * } $都有$xR_My\Leftrightarrow\hat{\delta}(q_0,x)=\hat{\delta}(q_0,y)$。&lt;/p&gt;
+&lt;p&gt;设$L\subseteq\Sigma^{ * } $，$L$确定的$\Sigma^{ * } $上的关系$R_L$定义为：对于$\forall x,y\in\Sigma^{ * } $，$xR_Ly\Leftrightarrow(对\forall z\in\Sigma^{ * } ,xz\in L\Leftrightarrow yz\in L)$。可以证明$xR_My\Rightarrow xR_{L(M)}y$，但是反之不成立。&lt;/p&gt;
+&lt;p&gt;设$R$是$\Sigma^{ * } $上的等价关系，对于$\forall x,y\in\Sigma^{ * } $，如果$xRy$则$\forall z\in\Sigma^{ * } $都有$xzRyz$，那么称$R$是&lt;strong&gt;右不变的（right invariant）&lt;/strong&gt; 等价关系。可以证明上面定义的两个关系都是右不变的等价关系。&lt;/p&gt;
+&lt;p&gt;设$R$是$\Sigma^{ * } $上的等价关系，则称$|\Sigma^{ * } /R|$是$R$关于$\Sigma^{ * } $的&lt;strong&gt;指数（index）&lt;/strong&gt;（也就是一个集合的等价类的个数），简称为$R$的指数。$\Sigma^{ * } $关于$R$的一个等价类，也就是$\Sigma^{ * } /R$的任意一个元素，简称为$R$的一个等价类。&lt;/p&gt;
+&lt;p&gt;由于$xR_My\Rightarrow xR_{L(M)}y$，可以证明对于任意DFA：$M=(Q,\Sigma,\delta,q_0,F)$都有$|\Sigma^{ * } /R_{L(M)}|\leq|\Sigma^{ * } /R_M|\leq|Q|$。同时可以看出$R_M$对$\Sigma^{ * } $的划分比$R_{L(M)}$更加“细”，$R_M$可以将$R_{L(M)}$所划分的等价类进一步划分，称$R_M$是$R_{L(M)}$的&lt;strong&gt;加细（refinement）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Myhill-Nerode定理&lt;/strong&gt;：有三个等价的命题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$L\subseteq\Sigma^{ * } $是RL。&lt;/li&gt;
+&lt;li&gt;$L$是$\Sigma^{ * } $上的某个具有有穷指数的右不变等价关系$R$的某些等价类的并。&lt;/li&gt;
+&lt;li&gt;$R_L$具有有穷指数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;证明：不妨证明从（1）到（2）、从（2）到（3）、从（3）到（1）都是成立的。&lt;/p&gt;
+&lt;p&gt;从（1）到（2）：&lt;/p&gt;
+&lt;p&gt;由于$L$是RL，存在识别它的DFA：$M=(Q,\Sigma,\delta,q_0,F)$，由于$R_M$是$\Sigma^{ * } $上的右不变的等价关系，同时$|\Sigma^{ * } |\leq|Q|$，故$R_M$有有穷指数，$R_M$即为满足要求的一个右不变等价关系。&lt;/p&gt;
+&lt;p&gt;从（2）到（3）：&lt;/p&gt;
+&lt;p&gt;设$L$是$\Sigma^{ * } $上具有有穷指数的右不变等价关系$R$的某些等价类的并，不妨证明$R$是$R_L$的加细，也就是证明$\forall x,y\in\Sigma^{ * } ,xRy\Rightarrow xR_Ly$。由于$R$的右不变性，可知对于$\forall z\in\Sigma^{ * } $都有$xzRyz$，而$L$又是$R$的某些等价类的并，所以$xz\in L\Leftrightarrow yz\in L$，也就是说$xR_Ly$。&lt;/p&gt;
+&lt;p&gt;从（3）到（1）：&lt;/p&gt;
+&lt;p&gt;设$R_L$有有穷指数，构造DFA：$M&amp;rsquo;=(\Sigma^{ * } /R_L,\Sigma,\delta&amp;rsquo;,[\epsilon],${$[x]|x\in L$}$)$，其中$[\epsilon]$表示$\epsilon$所在的等价类所对应的状态，$[x]$表示$x$所在的等价类所对应的状态。对于任意$([x],a)\in(\Sigma^{ * } /R_L)\times\Sigma$都有$\delta&amp;rsquo;([x],a)=[xa]$，那么有$L(M&amp;rsquo;)=L$，这里构造的$M&amp;rsquo;$称为最小DFA。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;由Myhill-Nerode定理可以得到两个推论，在此不对两个推论作出证明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;$L$是RL，识别它的DFA：$M=(Q,\Sigma,\delta,q_0,F)$，则$|\Sigma^{ * } /R_L|\leq|Q|$。&lt;/p&gt;
+&lt;p&gt;$L$是RL，在同构意义下，接受$L$的最小DFA是唯一的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;定理得到证明，这个定理可以用于证明一个语言是RL，也可以证明一个语言不是RL。
+例如语言{$0^n1^n|n\geq 0$}，可以发现它的等价关系$R_L$的指数是无穷的，因此$L$不是RL。&lt;/p&gt;
+&lt;h3 id=&#34;dfa的极小化&#34;&gt;DFA的极小化
+&lt;/h3&gt;&lt;p&gt;设DFA：$M=(Q,\Sigma,\delta,q_0,F)$，如果$\exists x\in\Sigma^{ * } $使得$Q$中的两个状态$q$和$p$，在$\delta(q,x)\in F$和$\delta(p,x)\in F$中有且仅有一个成立，则称$q$和$p$是&lt;strong&gt;可以区分的（distinguishable）&lt;/strong&gt;；否则称$q$和$p$等价，记作$q\equiv p$。&lt;/p&gt;
+&lt;p&gt;为了让DFA极小化，实际上只需要找到一个DFA中全部的可区分状态对，再将不可区分的状态对合并为一个状态，同时保留被合并的状态到其他的状态的转移箭头，同时去掉DFA中的不可达状态，就得到了最小DFA。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://0x3a0x29.github.io/p/regular/13.png&#34;
+	width=&#34;1426&#34;
+	height=&#34;350&#34;
+	srcset=&#34;https://0x3a0x29.github.io/p/regular/13_hu7994359962299853571.png 480w, https://0x3a0x29.github.io/p/regular/13_hu1983745396128431918.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;13&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;407&#34;
+		data-flex-basis=&#34;977px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;正则语言的泵引理&#34;&gt;正则语言的泵引理
+&lt;/h2&gt;&lt;p&gt;正则语言的泵引理是如此的重要和有影响力，以至于人们一直将其称为引理而未改称其为定理。正则语言的泵引理是它的一种特殊性质：语言中的所有字符串只要它的长度不小于某个特定值————泵长度（pumping length），就可以被“抽取”，也就是说字符串中有一段字串，无论字串重复多少次，得到的字符串依旧在这个语言里。下面给出其形式化表述和相应证明：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;泵引理（pumping lemma）&lt;/strong&gt;：若$L$是一个RL，则存在一个正整数$N$，对$w\in L$，只要$|w|&amp;gt;N$，就可以将$w$分为三部分$w=xyz$使得：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$y\neq\epsilon$&lt;/li&gt;
+&lt;li&gt;$|xy|\leq N$&lt;/li&gt;
+&lt;li&gt;$\forall k\geq 0,xy^kz\in L$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;证明：设$M=(Q,\Sigma,\delta,q_0,F)$识别语言$L$，其中$|Q|=N$，在读入长度为$m$的串时（$m\geq N$），它所经过的状态有$q_0,q_1,\cdots,q_m$，根据鸽巢原理，必然有两个状态是相同的，不妨设$q_i=q_j,0\leq i&amp;lt; j\leq N$，那么可以划分$w$为$x=a_1a_2 \cdots a_i,y=a_{i+1}\cdots a_j,z=a_{i+1} \cdots a_M$，找到了这样一种划分符合泵引理的要求，证毕。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;有了泵引理后，可以发现并不是所有语言都是RL，例如{$0^n1^n|n\geq 0$}这样一个语言便不是一个RL，它不满足泵引理的条件。&lt;/p&gt;
+&lt;p&gt;但是值得注意的是泵引理是某个语言是RL的必要条件而不是充分条件，例如{$0^i1^j2^k|i,j,k\geq 0,并且若i=1,则j=k$}，记这个语言为$F$，考虑语言$L=L(01^{ * }2^{ * })$，那么$L\cap F=${$01^n2^n|n\geq 0$}，很明显后者不是RL，由于RL在交运算下封闭，所以$F$不是RL，但它满足泵引理。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;八正则语言的判定性质&#34;&gt;八、正则语言的判定性质
+&lt;/h2&gt;&lt;p&gt;任何语言都有3个经典的判定问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;以某种形式化模型描述的语言是否为空？是否无穷？&lt;/li&gt;
+&lt;li&gt;某个特定的串$w$是否属于所描述的语言？&lt;/li&gt;
+&lt;li&gt;以两种方式描述的语言，是否是相同的？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;下面给出了这三个问题的相关回答：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设DFA：$M=(Q,\Sigma,\delta,q_0,F)$&lt;/p&gt;
+&lt;p&gt;那么$L=L(M)$非空的充分必要条件是：存在$x\in\Sigma^{ * } ,|x|&amp;lt;|Q|,\hat{\delta}(q_0,x)\in F$。&lt;/p&gt;
+&lt;p&gt;$L=L(M)$无穷的充分必要条件是：存在$x\in\Sigma^{ * } ,|Q|\leq|x|&amp;lt;2|Q|,\hat{\delta}(q_0,x)\in F$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;设DFA：$M_1=(Q_1,\Sigma,\delta_1,q_1,F_1),M_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$，则存在判断$L(M_1),L(M_2)$是否相同的算法。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;记$L_1=L(M_1),L_2=L(M_2)$，那么$(L_1\cap\overline{L_2})\cup(\overline{L_1}\cap L_2)$是正则的，可以被某个有穷自动机$M_3$接受，而$M_3$接受某个串当且仅当$L_1\neq L_2$，已经证明了存在算法判断$L(M_3)$是否为空，得证。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;设$L$是字母表$\Sigma$上的RL，对于任意的$w\in\Sigma^{ * } $，存在判定$w$是否为$L$的句子的算法。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于$L$是RL，故存在DFA使得它接受这个语言。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>FC(一阶谓词演算系统)及其相关定理</title>
         <link>https://0x3a0x29.github.io/p/firstorderpredicatecalculus/</link>
         <pubDate>Mon, 17 Jun 2024 00:00:00 +0000</pubDate>
@@ -23,13 +675,16 @@
         <guid>https://0x3a0x29.github.io/p/firstorderpredicatecalculus/</guid>
         <description>&lt;img src="https://0x3a0x29.github.io/p/firstorderpredicatecalculus/image.png" alt="Featured image of post FC(一阶谓词演算系统)及其相关定理" /&gt;&lt;h1 id=&#34;fc及其相关定理&#34;&gt;FC及其相关定理
 &lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
-&lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
+&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
 &lt;p&gt;在先前已经给出了命题逻辑的相关介绍，但是命题逻辑存在着不可避免的缺陷，在命题逻辑中我们将原子命题看成是不可再分的基本单位，这就体现不出命题中研究对象的特性以及研究对象之间的逻辑关系，而有些推理的正确性依赖于命题的内部结构，我们以著名的苏格拉底三段论为例：&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;所有的人都是要死的。&lt;/li&gt;
 &lt;li&gt;苏格拉底是人。&lt;/li&gt;
 &lt;li&gt;所以苏格拉底是要死的。&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我们引入三个命题变元$P,Q,R$，我们可以写出推理的命题形式：$P\wedge Q\rightarrow R$，但是很明显这个公式并非永真式，我们不能看出原来正确的推理。
 为此，我们必须引入谓词逻辑，以帮助我们研究相关的推理形式和规律。&lt;/p&gt;
 &lt;hr&gt;
@@ -95,7 +750,7 @@
 &lt;p&gt;（3）对每一n元谓词$P^{(n)}$指定为$D$上的一个n元关系，记为$I(P^{(n)})$，简记为$\overline{P}^{(n)}$。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;指派&#34;&gt;指派
-&lt;/h3&gt;&lt;p&gt;一阶谓词演算中的&lt;strong&gt;指派&lt;/strong&gt;是对个体变元指定为论域$D$中的个体作为其取值，即为映射$s:{v_1,v_2,\cdots}\rightarrow D$。即对任一变元$v_i,s(v_i)\in D$。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;一阶谓词演算中的&lt;strong&gt;指派&lt;/strong&gt;是对个体变元指定为论域$D$中的个体作为其取值，即为映射$s:${$v_1,v_2,\cdots$}$\rightarrow D$。即对任一变元$v_i,s(v_i)\in D$。&lt;/p&gt;
 &lt;p&gt;指派$s$可以扩展为从项集合到个体域的映射$\overline{s}$：对于任意的项$t$，&lt;/p&gt;
 &lt;p&gt;（1）$\overline{s}(t)=s(v)$，当$t$为变元$v$时。&lt;/p&gt;
 &lt;p&gt;（2）$\overline{s}(t)=\overline{a}$，当$t$为常元$a$时。&lt;/p&gt;
@@ -147,33 +802,46 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;/h2&gt;&lt;h3 id=&#34;fc的定理&#34;&gt;FC的定理
 &lt;/h3&gt;&lt;p&gt;下列总结了FC中12个基本定理，并给出了部分证明：&lt;/p&gt;
 &lt;p&gt;$Th1$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}\forall vA\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\forall vA\rightarrow A^v_v$,$A4$，后者即$A$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th2$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}A\rightarrow\neg\forall v\neg A$，即$\vdash_{FC}A\rightarrow\exists vA$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\forall v\neg A\rightarrow\neg A$,$A4$&lt;/li&gt;
 &lt;li&gt;$(\forall v\neg A\rightarrow\neg A)\rightarrow(A\rightarrow\neg\forall v\neg A)$,$PC$中的定理&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\neg\forall v\neg A$,$r_{mp}(1)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th3$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}\forall vA\rightarrow\exists vA$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\forall vA\rightarrow A$,$Th1$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\exists vA$,$Th2$&lt;/li&gt;
 &lt;li&gt;$\forall vA\rightarrow\exists vA$,三段论&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th4$：（&lt;strong&gt;普化定理&lt;/strong&gt;/全称推广定理）对于FC中的任何公式$A$和变元$v$，如果$\vdash_{FC}A$，那么$\vdash_{FC}\forall vA$
 需要注意的是$\vdash_{FC}A\rightarrow\forall vA$并不一定成立，故在$A6$中我们作出了额外的要求：$v$在$A$中无自由出现。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：设$A_1,A_2,\cdots,A_n(=A)$是FC中公式$A$的证明序列，对证明的长度n使用归纳法。
 （1）当n=1时，$A$只能是公理。若$v$在$A$中自由出现，那么$\forall vA$也是公理；若$v$不在$A$中自由出现，则$A\rightarrow\forall vA$为公理，由$r_{mp}$知$\forall vA$为公理。
 （2）当n&amp;gt;1时，若$A$为公理，仿照（1）的证明可知$\forall vA$为定理。若$A_n$为$A_j(i&amp;lt; n)$，则由归纳假设可知$\forall vA_j=\forall vA$为定理。若$A_n$是由$A_i,A_j$通过$r_{mp}$推得，不妨设$A_j=A_i\rightarrow A$，则由归纳假设$\forall vA_i,\forall v(A_i\rightarrow A)$都是定理。再由公理$\forall v(A_i\rightarrow A)\rightarrow(\forall vA_i\rightarrow\forall vA)$知$\forall vA_i\rightarrow\forall vA$为定理，使用$r_{mp}$则知$\forall vA$为定理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th5$：对于FC中的任何公式集合$\Gamma$，公式$A$和不在$\Gamma$的任意公式中自由出现的变元$v$，对$Th4$进行推广，得到：如果$\Gamma\vdash_{FC}A$，那么$\Gamma\vdash_{FC}\forall vA$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：设$A_1,A_2,\cdots,A_n(=A)$是FC中公式$A$的演绎序列，对证明的长度n使用归纳法。
 （1）当n=1时，若$A$是公理。若$v$在$A$中自由出现，那么$\forall vA$也是公理；若$v$不在$A$中自由出现，则$A\rightarrow\forall vA$为公理，由$r_{mp}$知$\forall vA$为公理。于是当$A$为公理时，都有$\Gamma\vdash\forall vA$。若$A\in\Gamma$，则$v$不在$A$中自由出现，从而$A\rightarrow\forall vA$为公理，从而由$r_{mp}$知$\Gamma\vdash\forall vA$。
 （2）当n&amp;gt;1时，若$A$为公理或者$A\in\Gamma$，仿照（1）的证明可知$\forall vA$为定理。若$A_n$为$A_j(i&amp;lt; n)$，则由归纳假设可知$\forall vA_j=\forall vA$为定理。若$A_n$是由$A_i,A_j$通过$r_{mp}$推得，不妨设$A_j=A_i\rightarrow A$，则由归纳假设$\forall vA_i,\forall v(A_i\rightarrow A)$都是定理。再由公理$\forall v(A_i\rightarrow A)\rightarrow(\forall vA_i\rightarrow\forall vA)$知$\forall vA_i\rightarrow\forall vA$为定理，使用$r_{mp}$则知$\forall vA$为定理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th6$：（&lt;strong&gt;演绎定理&lt;/strong&gt;）在FC中演绎定理也成立，对于FC中任何公式集合$\Gamma$和FC中的任意两个公式$A,B$，那么$\Gamma;A\vdash_{FC}B$当且仅当$\Gamma\vdash_{FC}A\rightarrow B$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：类似于在PC中演绎定理的证明，在此不作说明。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th7$：设$\Gamma$为FC中的任一公式集合，$A,B$为FC中任意两个公式，$\Gamma;A\vdash_{FC}\neg B$当且仅当$\Gamma;B\vdash_{FC}\neg A$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\Gamma;A\vdash\neg B$&lt;/li&gt;
 &lt;li&gt;$\Gamma\vdash A\rightarrow\neg B$,$Th6$&lt;/li&gt;
@@ -181,9 +849,13 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\Gamma\vdash B\rightarrow\neg A$,$r_{mp}(2)(3)$&lt;/li&gt;
 &lt;li&gt;$\Gamma;B\vdash\neg A$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;$Th8$：（反证法）如果FC中的公式集合$\Gamma\cup{A}$是不一致的，则$\Gamma\vdash_{FC}\neg A$。&lt;/p&gt;
-&lt;p&gt;证明：由于$\Gamma\cup{A}$不一致，则存在公式$B$使得$\Gamma;A\vdash B$和$\Gamma;A\vdash\neg B$。由于$\neg B\rightarrow(B\rightarrow\neg A)$为定理，所以$\Gamma;A\vdash\neg A$，由演绎定理得$\Gamma\vdash A\rightarrow\neg A$，又因为$(A\rightarrow\neg A)\rightarrow\neg A$为定理，从而$\Gamma\vdash\neg A$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;$Th8$：（反证法）如果FC中的公式集合$\Gamma\cup${$A$}是不一致的，则$\Gamma\vdash_{FC}\neg A$。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;证明：由于$\Gamma\cup${$A$}不一致，则存在公式$B$使得$\Gamma;A\vdash B$和$\Gamma;A\vdash\neg B$。由于$\neg B\rightarrow(B\rightarrow\neg A)$为定理，所以$\Gamma;A\vdash\neg A$，由演绎定理得$\Gamma\vdash A\rightarrow\neg A$，又因为$(A\rightarrow\neg A)\rightarrow\neg A$为定理，从而$\Gamma\vdash\neg A$。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th9$：设$\Gamma$为FC中的任一公式集合，$A,B$为FC中的任意两个公式，并且变元$v$不在$\Gamma$的任何公式里面自由出现，那么$\Gamma;A\vdash_{FC}B$蕴含$\Gamma;\forall vA\vdash_{FC}B$和$\Gamma;\forall vA\vdash_{FC}\forall vB$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\Gamma;A\vdash B$&lt;/li&gt;
 &lt;li&gt;$\Gamma\vdash A\rightarrow B$,$Th6$&lt;/li&gt;
@@ -193,7 +865,9 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\Gamma;\forall vA\vdash\forall vB$,$Th6$&lt;/li&gt;
 &lt;li&gt;$\Gamma;\forall vA\vdash B$,$Th1$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th10$：（&lt;strong&gt;存在消除&lt;/strong&gt;）设$\Gamma$为FC中的任一公式集合，$A,B$为FC中的任意两个公式，并且变元$v$不在$\Gamma$的任何公式以及公式$B$里面自由出现，那么由$\Gamma\vdash_{FC}\exists vA$以及$\Gamma;A\vdash_{FC}B$可以推出$\Gamma\vdash_{FC}B$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\Gamma;A\vdash B$&lt;/li&gt;
 &lt;li&gt;$\Gamma\vdash A\rightarrow B$&lt;/li&gt;
@@ -208,13 +882,19 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\Gamma\vdash\exists vA$&lt;/li&gt;
 &lt;li&gt;$\Gamma\vdash B$,$r_{mp}(10)(11)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th11$：（替换原理）设$A,B$为FC的公式，且满足$A\vdash\dashv_{FC}B$，$A$是$C$的子公式，$D$是将$C$中$A$的若干出现换为公式$B$得到的公式，则$C\vdash\dashv_{FC}D$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：略&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th12$：（改名定理）在FC中若$A&amp;rsquo;$是$A$的改名式，且$A&amp;rsquo;$改用的变元不在$A$中出现，则$A\vdash\dashv_{FC}A&amp;rsquo;$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：略&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;例题&#34;&gt;例题
 &lt;/h3&gt;&lt;p&gt;证明：$\vdash A\rightarrow B$且变元$v$在$B$中无自由出现，则$\vdash\exists vA\rightarrow B$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\vdash A\rightarrow B$&lt;/li&gt;
 &lt;li&gt;$\vdash\neg B\rightarrow\neg A$,$PC$中的定理&lt;/li&gt;
@@ -226,7 +906,9 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\vdash(\neg B\rightarrow\forall v\neg A)\rightarrow(\neg\forall v\neg A\rightarrow B)$,$PC$中的定理&lt;/li&gt;
 &lt;li&gt;$\vdash\neg\forall v\neg A\rightarrow B$,$r_{mp}(7)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;证明：$\vdash(A\rightarrow\exists vB)\rightarrow\exists v(A\rightarrow B)$，其中$v$在$A$中无自由出现。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\forall v\neg(A\rightarrow B)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\neg(A\rightarrow B)$,$Th1$&lt;/li&gt;
@@ -242,6 +924,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$A\rightarrow\exists vB\vdash\exists v(A\rightarrow B)$&lt;/li&gt;
 &lt;li&gt;$\vdash(A\rightarrow\exists vB)\rightarrow\exists v(A\rightarrow B)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;其他形式的一阶谓词演算系统&#34;&gt;其他形式的一阶谓词演算系统
 &lt;/h2&gt;&lt;p&gt;FC的形式是简洁的，但是正如PC所具有的问题那样，在实际应用中FC并不方便，因为它所使用的联结词、量词和公理数量太少了。故类似于先前在介绍完PC后引入了ND，本文将引入FCM和FND两个形式系统，以便让我们的推理更加直观。&lt;/p&gt;
@@ -294,6 +977,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;hr&gt;
 &lt;h3 id=&#34;例题-1&#34;&gt;例题
 &lt;/h3&gt;&lt;p&gt;证明：$\exists x(A\vee B)\vdash\dashv\exists xA\vee\exists xB$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\exists x(A\vee B),A\vee B,A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\exists x(A\vee B),A\vee B,A\vdash\exists xA$,$(\exists+)(1)$&lt;/li&gt;
@@ -319,6 +1003,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\exists xA\vee\exists xB\vdash\exists x(A\vee B)$,$(\vee-)(15)(20)(21)$&lt;/li&gt;
 &lt;li&gt;$\exists x(A\vee B)\vdash\dashv\exists xA\vee\exists xB$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;fc定理证明习题选&#34;&gt;FC定理证明习题选
 &lt;/h2&gt;&lt;p&gt;下面给出了八道FC定理习题供读者练习使用：&lt;/p&gt;
@@ -327,13 +1012,12 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;证明: $\vdash\exists v(A\rightarrow B)\rightarrow(A\rightarrow\exists vB)$，其中$v$在$A$中无自由出现。&lt;/li&gt;
 &lt;li&gt;证明：存在一种方法能击败所有敌人，那么所有敌人都存在一种方法让其被击败。&lt;/li&gt;
 &lt;li&gt;证明：$\exists x(A\wedge B)\vdash\exists xA\wedge\exists xB$&lt;/li&gt;
-&lt;li&gt;证明：$\Gamma={\exists x(P(x)\wedge\forall y(D(y)\rightarrow L(x,y))),\forall x\forall y(P(x)\wedge Q(y)\rightarrow\neg L(x,y))}$，则有$\Gamma\vdash\forall y(D(y)\rightarrow\neg Q(y))$。&lt;/li&gt;
-&lt;li&gt;证明：$\Gamma={P(Sam),G(Clyde)\wedge L(Clyde,Oscar),(P(Oscar)\oplus G(Oscar))\wedge L(Oscar,Sam)}$，则有$\Gamma\vdash\exists x\exists y(G(x)\wedge P(y)\wedge L(x,y))$，注：$\oplus$表示联结词中的“异或”。&lt;/li&gt;
-&lt;li&gt;证明：$\Gamma={\forall x(N(x)\rightarrow E(x)\oplus O(x)),\forall x(N(x)\rightarrow(E(x)\leftrightarrow G(x))),\neg\forall x(N(x)\rightarrow G(x))}$，则有$\Gamma\vdash\exists x(N(x)\wedge O(x))$。&lt;/li&gt;
+&lt;li&gt;证明：$\Gamma=${$\exists x(P(x)\wedge\forall y(D(y)\rightarrow L(x,y))),\forall x\forall y(P(x)\wedge Q(y)\rightarrow\neg L(x,y))$}，则有$\Gamma\vdash\forall y(D(y)\rightarrow\neg Q(y))$。&lt;/li&gt;
+&lt;li&gt;证明：$\Gamma=${$P(Sam),G(Clyde)\wedge L(Clyde,Oscar),(P(Oscar)\oplus G(Oscar))\wedge L(Oscar,Sam)$}，则有$\Gamma\vdash\exists x\exists y(G(x)\wedge P(y)\wedge L(x,y))$，注：$\oplus$表示联结词中的“异或”。&lt;/li&gt;
+&lt;li&gt;证明：$\Gamma=${$\forall x(N(x)\rightarrow E(x)\oplus O(x)),\forall x(N(x)\rightarrow(E(x)\leftrightarrow G(x))),\neg\forall x(N(x)\rightarrow G(x))$}，则有$\Gamma\vdash\exists x(N(x)\wedge O(x))$。&lt;/li&gt;
 &lt;li&gt;证明：有二元关系$R$，若$R$是传递且反自反的，那么它是非对称的。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -344,7 +1028,8 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
         <guid>https://0x3a0x29.github.io/p/naturaldeduction/</guid>
         <description>&lt;img src="https://0x3a0x29.github.io/p/naturaldeduction/image.png" alt="Featured image of post ND(自然演绎推理系统)及其相关定理" /&gt;&lt;h1 id=&#34;nd及其相关定理&#34;&gt;ND及其相关定理
 &lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
-&lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
+&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;基础知识&#34;&gt;基础知识
 &lt;/h2&gt;&lt;p&gt;命题：能唯一确定真假值的陈述句。&lt;/p&gt;
@@ -368,7 +1053,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;h2 id=&#34;自然演绎推理系统nd的简单介绍&#34;&gt;自然演绎推理系统ND的简单介绍
 &lt;/h2&gt;&lt;p&gt;与之前介绍的PC一样，自然演绎推理系统ND（natural deduction）也是一种形式系统，相较于PC而言，ND是一个更加实用、比较符合人的思维模式的推理演算系统，ND的规则和直观含义都比较明显，我们先简单介绍一下ND的组成部分：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集${\neg,\wedge,\vee,\rightarrow,\leftrightarrow}$、辅助符号$(,)$&lt;/li&gt;
+&lt;li&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集{$\neg,\wedge,\vee,\rightarrow,\leftrightarrow$}、辅助符号$(,)$&lt;/li&gt;
 &lt;li&gt;形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义&lt;/li&gt;
 &lt;li&gt;公理：设$A$为可以表达任意命题公式的语法变元，$\Gamma$是一个公式集，在ND中只有一个公理（也有人把这个公理变形为推理规则，这样的ND的公理集就是$\varnothing$）：
 $\Gamma;A\vdash A(\in)$&lt;/li&gt;
@@ -413,14 +1098,17 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;h2 id=&#34;逻辑推理相关的基本定义&#34;&gt;逻辑推理相关的基本定义
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;演绎&lt;/strong&gt;：在ND中，若有$\Gamma\vdash_{ND}A$，即存在序列：$\Gamma_1\vdash A_1,\Gamma_2\vdash A_2,\cdots,\Gamma_m\vdash A_m$使得$\Gamma_i\vdash A_i$或为ND的公理，或为$\Gamma_i\vdash A_i(j&amp;lt; i)$，或为$\Gamma_{j_1}\vdash A_{j_1},\cdots,\Gamma_{j_k}\vdash A_{j_k}(j_1,\cdots,j_k&amp;lt; i)$使用推理规则导出的。当$\Gamma=\varnothing$时我们记作$\vdash_{ND}A$，称$A$为ND的&lt;strong&gt;定理&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;例：证明$A\vdash_{ND}B\rightarrow A$（这个定理说明了我们对一个定理增添前件后任旧是一个定理）。也就是说我们已经知道$A$成立了，现在要推出$B\rightarrow A$也成立，这个过程都要在ND中进行，故我们要在ND中构造一个演绎序列使得最后一个是$\vdash A\rightarrow(B\rightarrow A)$，一个可行的序列如下：&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A,B\vdash A$,$(\in)$                                    （这是公理$(\in)$）&lt;/li&gt;
 &lt;li&gt;$A\vdash B\rightarrow A$,$(\rightarrow+)(1)$             （对$(1)$使用$\rightarrow+$规则）&lt;/li&gt;
 &lt;li&gt;$\vdash A\rightarrow(B\rightarrow A)$,$(\rightarrow)(2)$ （对$(2)$使用$\rightarrow+$规则）&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;nd中的基本定理&#34;&gt;ND中的基本定理
 &lt;/h2&gt;&lt;p&gt;在ND中直接使用公理和推理规则得出ND中的定理会非常繁琐，其中有不少步骤遵循相同的模式，下列总结了ND中10个基本定理，用于帮助寻找ND的定理：&lt;/p&gt;
 &lt;p&gt;$Th1$：$\vdash_{ND}A\vee\neg A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\vdash A\wedge\neg A$,$(\vee+)(1)$&lt;/li&gt;
@@ -428,7 +1116,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\vdash A\vee\neg A$,$(\vee+)(3)$&lt;/li&gt;
 &lt;li&gt;$\vdash A\vee\neg A$,$(-)(2)(4)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th2$：$\vdash_{ND}\neg(A\vee B)\leftrightarrow(\neg A\wedge\neg B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg(A\vee B),A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg(A\vee B),A\vdash A\vee B$,$(\vee+)(1)$&lt;/li&gt;
@@ -456,7 +1146,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\vdash(\neg A\wedge\neg B)\rightarrow\neg(A\vee B)$,$(\rightarrow+)(23)$&lt;/li&gt;
 &lt;li&gt;$\vdash\neg(A\vee B)\leftrightarrow(\neg A\wedge\neg B)$,$(\leftrightarrow+)(10)(24)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th3$：$\vdash_{ND}\neg(A\wedge B)\leftrightarrow(\neg A\vee\neg B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg(A\wedge B),A,B\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg(A\wedge B),A,B\vdash B$,$(\in)$&lt;/li&gt;
@@ -481,7 +1173,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\vdash(\neg A\vee\neg B)\rightarrow\neg(A\wedge B)$,$(\rightarrow+)(20)$&lt;/li&gt;
 &lt;li&gt;$\vdash(\neg A\vee\neg b)\leftrightarrow\neg(A\wedge B)$,$(\leftrightarrow+)(10)(21)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th4$：$\neg A\rightarrow B\vdash\dashv_{ND} A\vee B$，这里的$P\vdash\dashv_{ND}Q$当且仅当$P\vdash_{ND}Q$且$Q\vdash_{ND}P$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow B,\neg A\vdash\neg A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow B,\neg A\vdash\neg A\rightarrow B$,$(\in)$&lt;/li&gt;
@@ -498,7 +1192,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$A\vee B,\neg A\vdash B$,$(\vee-)(8)(11)(12)$&lt;/li&gt;
 &lt;li&gt;$A\vee B\vdash \neg A\rightarrow B$,$(\rightarrow+)(13)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th5$：$A\rightarrow B\vdash\dashv_{ND}\neg A\vee B$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow B,A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow B,A\vdash A\rightarrow B$,$(\in)$&lt;/li&gt;
@@ -515,7 +1211,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\vee B,A\vdash B$,$(\vee-)(8)(11)(12)$&lt;/li&gt;
 &lt;li&gt;$\neg A\vee B\vdash A\rightarrow B$,$(\rightarrow+)(13)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th6$：$\vdash_{ND}A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\wedge(B\vee C),B\vdash A\wedge(B\vee C)$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\wedge(B\vee C),B\vdash A$,$(\wedge-)(1)$&lt;/li&gt;
@@ -546,7 +1244,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\vdash(A\wedge B)\vee(A\wedge C)\rightarrow A\wedge(B\vee C)$,$(\rightarrow+)(26)$&lt;/li&gt;
 &lt;li&gt;$\vdash A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$,$(\leftrightarrow+)(14)(27)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th7$：$\vdash_{HD}A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash B\wedge C$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash B$,$(\wedge-)(1)$&lt;/li&gt;
@@ -581,14 +1281,18 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\vdash(A\vee B)\wedge(A\vee C)\rightarrow A\vee(B\wedge C)$,$(\rightarrow+)(30)$&lt;/li&gt;
 &lt;li&gt;$\vdash A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$,$(\leftrightarrow+)(13)(31)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;从上面的7个定理的证明中我们可以发现，和PC相比，ND的证明思路更加符合我们的思维模式，事实上能通过PC证明的定理在ND中也可以证明出来，为了证明这个事实，我们不妨在ND中尝试证明PC中使用到的3个公理。&lt;/p&gt;
 &lt;p&gt;$Th8$：$\vdash_{ND}A\rightarrow(B\rightarrow A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A,B\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\vdash B\rightarrow A$,$(\rightarrow+)(1)$&lt;/li&gt;
 &lt;li&gt;$\vdash A\rightarrow(B\rightarrow A)$,$(\rightarrow+)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th9$：$\vdash_{ND}(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A\rightarrow B$,$(\in)$&lt;/li&gt;
@@ -600,7 +1304,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow C),\vdash(A\rightarrow B)\rightarrow(A\rightarrow C)$,$(\rightarrow+)(7)$&lt;/li&gt;
 &lt;li&gt;$\vdash(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$(\rightarrow+)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th10$：$\vdash_{ND}(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash\neg A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash\neg A\rightarrow\neg B$,$(\in)$&lt;/li&gt;
@@ -612,6 +1318,7 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow\neg B\vdash B\rightarrow A$,$(\rightarrow+)(7)$&lt;/li&gt;
 &lt;li&gt;$\vdash(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$,$(\rightarrow+)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;nd定理证明习题选&#34;&gt;ND定理证明习题选
 &lt;/h2&gt;&lt;p&gt;下面给出了六道ND定理习题供读者练习使用：&lt;/p&gt;
@@ -624,7 +1331,6 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;证明：$\vdash_{ND}(A\leftrightarrow\neg B)\leftrightarrow\neg(A\leftrightarrow B)$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -635,7 +1341,8 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
         <guid>https://0x3a0x29.github.io/p/propositionalcalculus/</guid>
         <description>&lt;img src="https://0x3a0x29.github.io/p/propositionalcalculus/23.png" alt="Featured image of post PC(命题逻辑演算形式系统)及其相关定理" /&gt;&lt;h1 id=&#34;pc及其相关定理&#34;&gt;PC及其相关定理
 &lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
-&lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
+&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;基础知识&#34;&gt;基础知识
 &lt;/h2&gt;&lt;p&gt;命题：能唯一确定真假值的陈述句。&lt;/p&gt;
@@ -659,39 +1366,52 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;h2 id=&#34;命题逻辑演算形式系统pc的简单介绍&#34;&gt;命题逻辑演算形式系统PC的简单介绍
 &lt;/h2&gt;&lt;p&gt;命题逻辑演算形式系统PC（propositional calculus）是一种形式系统，我们先简单介绍一下PC的组成部分：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集${\neg,\rightarrow}$、辅助符号$(,)$&lt;/li&gt;
-&lt;li&gt;形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义&lt;/li&gt;
-&lt;li&gt;公理：设$A,B,C$为可以表达任意命题公式的语法变元，那么PC中有三个公理
-$A1:A\rightarrow (B\rightarrow A)$
-$A2:(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$
-$A3:(\neg A\rightarrow\neg B)\rightarrow (B\rightarrow A)$
-$A1$的含义是：如果$A$成立，那么已知$B$成立的前提下$A$任旧成立。
-$A2$的含义是：如果$A$成立能使得只需要$B$成立那么$C$就会成立，那么如果$A$能推出$B$、$A$就能推出$C$。
-$A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就能推出$A$成立。&lt;/li&gt;
-&lt;li&gt;推理规则：用于从已有的公理和已推出的结论来推理另一结论。
+&lt;li&gt;
+&lt;p&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集{$\neg,\rightarrow$}、辅助符号$(,)$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;公理：设$A,B,C$为可以表达任意命题公式的语法变元，那么PC中有三个公理
+$A1:A\rightarrow (B\rightarrow A)$&lt;/p&gt;
+&lt;p&gt;$A2:(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;$A3:(\neg A\rightarrow\neg B)\rightarrow (B\rightarrow A)$&lt;/p&gt;
+&lt;p&gt;$A1$的含义是：如果$A$成立，那么已知$B$成立的前提下$A$任旧成立。&lt;/p&gt;
+&lt;p&gt;$A2$的含义是：如果$A$成立能使得只需要$B$成立那么$C$就会成立，那么如果$A$能推出$B$、$A$就能推出$C$。&lt;/p&gt;
+&lt;p&gt;$A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就能推出$A$成立。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;推理规则：用于从已有的公理和已推出的结论来推理另一结论。
 在PC中只有分离规则$r_{mp}$：即若有$A$和$A\rightarrow B$成立，那么$B$也成立，形式化的推理序列为：$A,A\rightarrow B,B$。
-可以记作$\displaystyle{\frac{A,A\rightarrow B}{B}}$&lt;/li&gt;
-&lt;li&gt;定理推导：包括所有的推理结论及其推理过程。&lt;/li&gt;
+可以记作$\displaystyle{\frac{A,A\rightarrow B}{B}}$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;定理推导：包括所有的推理结论及其推理过程。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;逻辑推理相关的基本定义&#34;&gt;逻辑推理相关的基本定义
 &lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;证明&lt;/strong&gt;：称以下公式序列为公式$A$在PC中的一个证明：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过形成规则得到的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;证明&lt;/strong&gt;：称以下公式序列为公式$A$在PC中的一个证明：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过推理规则得到的。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;定理&lt;/strong&gt;：公式$A$在PC中有一个证明序列，那么它就是PC的定理，我们记为$\vdash_{PC}A$。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;演绎&lt;/strong&gt;：设$\Gamma$为PC中若干公式构成的公式集，则称下列公式序列为公式$A$以$\Gamma$为前提的演绎：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$\Gamma$中的成员、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过分离规则得到的。我们可以记为$\Gamma\vdash_{PC}A$。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;例：证明$A\vdash_{PC}B\rightarrow A$（这个定理说明了我们对一个定理增添前件后任旧是一个定理）。也就是说我们已经知道$A$成立了，现在要推出$B\rightarrow A$也成立，这个过程都要在PC中进行，故我们要在PC中构造一个演绎序列使得最后一个公式是$B\rightarrow A$，一个可行的公式序列如下：&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A$                              （$A$是演绎前提中的成员）&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow A)$,$A1$  （$A\rightarrow(B\rightarrow A)$是公理中的$A1$）&lt;/li&gt;
 &lt;li&gt;$B\rightarrow A$,$r_{mp}(1)(2)$   （对公式序列中的$(1)(2)$使用分离规则得到结论$B\rightarrow A$）&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;上面我们成功构造了一个符合演绎要求的公式序列，也就是说有$A\vdash_{PC}B\rightarrow A$，我们完成了这个例子的证明。&lt;/p&gt;
 &lt;p&gt;实际上我们可以证明PC有合理性、一致性、完备性，这表明PC中的定理是永真的、从$\Gamma$演绎出$A$就会有$\Gamma\Rightarrow A$（合理性），PC不会推出相互矛盾的结论（一致性），任何PC中的永真式都是PC的定理（完备性）。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;pc的基本定理&#34;&gt;PC的基本定理
 &lt;/h2&gt;&lt;p&gt;在PC中直接使用公理和推理规则得出PC中的定理会非常繁琐，其中有不少步骤遵循相同的模式，下列总结了PC中35个基本定理（其中7个定理较为重要），用于帮助寻找PC的定理：&lt;/p&gt;
 &lt;p&gt;$Th1$：$\vdash_{PC}A\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow A)$,$A1$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow((B\rightarrow A)\rightarrow A)$,$A1$&lt;/li&gt;
@@ -699,8 +1419,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(A\rightarrow(B\rightarrow A))\rightarrow(A\rightarrow A)$,$r_{mp}(2)(3)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow A$,$r_{mp}(1)(4)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;前件互换定理&#34;&gt;前件互换定理
 &lt;/h3&gt;&lt;p&gt;$Th2$：若$\vdash_{PC}A\rightarrow(B\rightarrow C)$，则$\vdash_{PC}B\rightarrow(A\rightarrow C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow C)$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A2$&lt;/li&gt;
@@ -712,7 +1434,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$B\rightarrow(A\rightarrow B)$,$A1$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow(A\rightarrow C)$,$r_{mp}(7)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th3$：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A1$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))$,$Th2$（因为这是PC中的一个定理，所以它存在一个对应的证明序列，这里实际上是一种简写，不将这个定理对应的证明序列写出，后续的证明中我们也这样简写）&lt;/li&gt;
@@ -724,8 +1448,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$B\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))$,$r_{mp}(6)(7)$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$,$Th2$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;加前件定理&#34;&gt;加前件定理
 &lt;/h3&gt;&lt;p&gt;$Th4$：$\vdash_{PC}(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A2$&lt;/li&gt;
 &lt;li&gt;$((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))\rightarrow((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))))$,$A1$&lt;/li&gt;
@@ -735,14 +1461,18 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C)))$,$A1$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$r_{mp}(5)(6)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;加后件定理&#34;&gt;加后件定理
 &lt;/h3&gt;&lt;p&gt;$Th5$：$\vdash_{PC}(A\rightarrow B)\rightarrow((B\rightarrow C)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow((B\rightarrow C)\rightarrow(A\rightarrow C))$,$Th2$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;三段论定理&#34;&gt;三段论定理
 &lt;/h3&gt;&lt;p&gt;$Th6$：$\vdash_{PC}A\rightarrow B,\vdash_{PC}B\rightarrow C$，那么$\vdash_{PC}A\rightarrow C$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow C$&lt;/li&gt;
@@ -750,18 +1480,24 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$A\rightarrow B$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow C$,$r_{mp}(3)(4)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th7$：$\vdash_{PC}\neg A\rightarrow (A\rightarrow B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow(\neg B\rightarrow\neg A)$,$A1$&lt;/li&gt;
 &lt;li&gt;$(\neg B\rightarrow\neg A)\rightarrow (A\rightarrow B)$,$A3$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow(A\rightarrow B)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th8$：$\vdash_{PC}A\rightarrow(\neg A\rightarrow B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow (A\rightarrow B)$,$Th7$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(\neg A\rightarrow B)$,$Th2$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th9$：$\vdash_{PC}(\neg A\rightarrow A)\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow(A\rightarrow\neg(\neg A\rightarrow A))$,$Th7$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow(A\rightarrow\neg(\neg A\rightarrow A)))\rightarrow((\neg A\rightarrow A)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow A)))$,$A2$&lt;/li&gt;
@@ -773,7 +1509,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow A)\rightarrow(\neg A\rightarrow A)$,$Th1$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow A)\rightarrow A$,$r_{mp}(7)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th10$：$\vdash_{PC}\neg\neg A\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg\neg A\rightarrow(\neg A\rightarrow\neg\neg\neg A)$,$Th7$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow\neg\neg\neg A)\rightarrow(\neg\neg A\rightarrow A)$,$A3$&lt;/li&gt;
@@ -783,7 +1521,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$\neg\neg A\rightarrow\neg\neg A$,$Th1$&lt;/li&gt;
 &lt;li&gt;$\neg\neg A\rightarrow A$,$r_{mp}(5)(6)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th11$：$\vdash_{PC}(A\rightarrow\neg A)\rightarrow\neg A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg\neg A\rightarrow A$,$Th10$&lt;/li&gt;
 &lt;li&gt;$(\neg\neg A\rightarrow A)\rightarrow((A\rightarrow\neg A)\rightarrow(\neg\neg A\rightarrow\neg A))$,$Th5$&lt;/li&gt;
@@ -791,13 +1531,17 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg\neg A\rightarrow\neg A)\rightarrow\neg A$,$Th9$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow\neg A)\rightarrow\neg A$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th12$：$\vdash_{PC}A\rightarrow\neg\neg A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(\neg A\rightarrow\neg\neg A)$,$Th8$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow\neg\neg A)\rightarrow\neg\neg A$,$Th11$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\neg\neg A$,$r_{mp}(1)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th13$：$\vdash_{PC}(A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg\neg A\rightarrow\neg\neg B)\rightarrow(\neg B\rightarrow\neg A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow\neg\neg B$,$Th12$&lt;/li&gt;
@@ -809,7 +1553,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(A\rightarrow B)\rightarrow(\neg\neg A\rightarrow B)$,$r_{mp}(6)(7)$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th14$：$\vdash_{PC}(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg A\rightarrow\neg\neg B)\rightarrow(\neg B\rightarrow A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow\neg\neg B$,$Th12$&lt;/li&gt;
@@ -817,7 +1563,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg\neg B)$,$r_{mp}(2)(3)$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th15$：$\vdash_{PC}(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg\neg A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$\neg\neg A\rightarrow A$,$Th10$&lt;/li&gt;
@@ -825,8 +1573,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(A\rightarrow\neg B)\rightarrow(\neg\neg A\rightarrow\neg B)$,$r_{mp}(2)(3)$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;反证法&#34;&gt;反证法
 &lt;/h3&gt;&lt;p&gt;$Th16$：$\vdash_{PC}(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$Th2$&lt;/li&gt;
@@ -838,7 +1588,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th17$：$\vdash_{PC}(A\rightarrow B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow\neg B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th15$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th3$&lt;/li&gt;
@@ -850,8 +1602,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(A\rightarrow\neg(A\rightarrow\neg B))\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th15$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;拆分&#34;&gt;→拆分
 &lt;/h3&gt;&lt;p&gt;$Th18$：$\vdash_{PC}\neg A\rightarrow C,\vdash_{PC}B\rightarrow C$当且仅当$\vdash_{PC}(A\rightarrow B)\rightarrow C$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;当$\vdash_{PC}(A\rightarrow B)\rightarrow C$时：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow C$&lt;/li&gt;
@@ -874,15 +1628,21 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg C\rightarrow C)\rightarrow C$,$Th9$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow C$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th19$：定义$A\vee B =_ {df}\neg A\rightarrow B$，$\vdash_{PC}A\rightarrow A\vee B$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(\neg A\rightarrow B)$,$Th8$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th20$：$\vdash_{PC}A\rightarrow B\vee A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(\neg B\rightarrow A)$,$A1$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th21$：如果$\vdash_{PC}P\rightarrow Q,\vdash_{PC}R\rightarrow S$，那么$\vdash_{PC}(Q\rightarrow R)\rightarrow(P\rightarrow S)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$P\rightarrow Q$&lt;/li&gt;
 &lt;li&gt;$(P\rightarrow Q)\rightarrow((Q\rightarrow R)\rightarrow(P\rightarrow R))$,$Th5$&lt;/li&gt;
@@ -892,7 +1652,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(P\rightarrow R)\rightarrow(P\rightarrow S)$,$r_{mp}(4)(5)$&lt;/li&gt;
 &lt;li&gt;$(Q\rightarrow R)\rightarrow(P\rightarrow S)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th22$：$\vdash_{PC}(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow((A\vee B)\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow B)$,$Th1$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow((\neg A\rightarrow B)\rightarrow B)$,$Th2$&lt;/li&gt;
@@ -911,8 +1673,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((\neg C\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))\rightarrow(\neg C\rightarrow\neg B))\rightarrow((B\rightarrow C)\rightarrow((\neg A\rightarrow B)\rightarrow C))$,$Th21$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow((\neg A\rightarrow B)\rightarrow C))$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th23$：
 定义$A\wedge B =_ {df} \neg(A\rightarrow\neg B)$，那么$\vdash_{PC}A\wedge B\rightarrow C$当且仅当$\vdash_{PC}A\rightarrow(B\rightarrow C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;当$\vdash_{PC}A\wedge B\rightarrow C$时：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow C$&lt;/li&gt;
@@ -931,24 +1695,32 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg C\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow C)$,$Th14$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow C$,$r_{mp}(4)(5)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th24$：$\vdash_{PC}A\wedge B\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow(A\rightarrow\neg B)$,$Th7$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow A)$,$Th14$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow A$,$r_{mp}(1)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th25$：$\vdash_{PC}B\wedge A\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg B\rightarrow(A\rightarrow\neg B)$,$A1$&lt;/li&gt;
 &lt;li&gt;$(\neg B\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow B)$,$Th14$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow B$,$r_{mp}(1)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th26$：$\vdash_{PC}A\rightarrow(B\rightarrow A\wedge B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\wedge B\rightarrow A\wedge B$,$Th1$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow A\wedge B)$,$Th23$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th27$：$\vdash_{PC}(A\rightarrow B)\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$B\rightarrow(C\rightarrow B\wedge C)$,$Th26$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow(C\rightarrow B\wedge C))\rightarrow(A\rightarrow(B\rightarrow(C\rightarrow B\wedge C)))$,$A1$&lt;/li&gt;
@@ -959,17 +1731,23 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((A\rightarrow B)\rightarrow(C\rightarrow B\wedge C))\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$,$A2$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th28$：我们将$\vdash_{PC}P\rightarrow Q,\vdash_{PC}Q\rightarrow P$记作$\vdash_{PC}P\leftrightarrow Q$，那么有$\vdash_{PC}A\vee B\leftrightarrow B\vee A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$Th14$&lt;/li&gt;
 &lt;li&gt;$(\neg B\rightarrow A)\rightarrow(\neg A\rightarrow B)$,$Th14$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th29$：$\vdash_{PC}A\wedge B\leftrightarrow B\wedge A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$Th15$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow\neg A)\rightarrow(A\rightarrow\neg B)$,$Th15$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th30$：$\vdash_{PC}(A\vee B)\vee C\leftrightarrow A\vee(B\vee C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$B\rightarrow(\neg B\rightarrow C)$,$Th8$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow(\neg B\rightarrow C))\rightarrow((\neg A\rightarrow B)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C)))$,$A2$&lt;/li&gt;
@@ -996,7 +1774,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$\neg\neg A\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$Th6$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow C)$,$Th18$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th31$：$\vdash_{PC}(A\wedge B)\wedge C\leftrightarrow A\wedge(B\wedge C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(B\rightarrow\neg C)\rightarrow(C\rightarrow\neg B)$,$Th15$&lt;/li&gt;
 &lt;li&gt;$((B\rightarrow\neg C)\rightarrow(C\rightarrow\neg B))\rightarrow((A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow(C\rightarrow\neg B)))$,$Th4$&lt;/li&gt;
@@ -1025,7 +1805,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C)))\rightarrow(\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C))$,$Th13$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C)$,$r_{mp}(24)(25)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th32$：$\vdash_{PC}A\wedge(A\vee B)\leftrightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(A\vee B\rightarrow A)$,$A1$&lt;/li&gt;
 &lt;li&gt;$A\wedge(A \vee B)\rightarrow A$,$Th23$&lt;/li&gt;
@@ -1039,7 +1821,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((A\rightarrow\neg(\neg A\rightarrow B))\rightarrow\neg A)\rightarrow(A\rightarrow\neg(A\rightarrow\neg(\neg A\rightarrow B)))$,$Th15$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\neg(A\rightarrow\neg(\neg A\rightarrow B))$,$r_{mp}(9)(10)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th33$：$\vdash_{PC}A\vee(A\wedge B)\leftrightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(\neg A\rightarrow(A\wedge B))$,$Th8$&lt;/li&gt;
 &lt;li&gt;$A\wedge B\rightarrow A$,$Th24$&lt;/li&gt;
@@ -1048,7 +1832,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow A)\rightarrow A$,$Th9$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow(A\wedge B))\rightarrow A$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th34$：$\vdash_{PC}A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$B\rightarrow(\neg B\rightarrow C)$,$Th8$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg B\rightarrow C)\rightarrow\neg B)$,$Th13$&lt;/li&gt;
@@ -1078,7 +1864,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$r_{mp}(24)(25)$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th35$：$\vdash_{PC}A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$B\wedge C\rightarrow B$,$Th24$&lt;/li&gt;
 &lt;li&gt;$(B\wedge C\rightarrow B)\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B))$,$Th4$&lt;/li&gt;
@@ -1092,16 +1880,20 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow C)\rightarrow(\neg A\rightarrow B\wedge C))$,$Th27$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\wedge(\neg A\rightarrow C)\rightarrow(\neg A\rightarrow B\wedge C)$,$Th23$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;上述的35个PC的定理都是十分重要和有用的，其中定理$Th16$（反证法）和$Th18$（→拆分法）可以帮助我们将定理更加系统地证明，下面我们举两个例子进行说明。&lt;/p&gt;
 &lt;h2 id=&#34;pc的基本定理的运用&#34;&gt;PC的基本定理的运用
 &lt;/h2&gt;&lt;p&gt;运用$Th16$证明：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;如果我们要运用$Th16$，我们就需要假设这个定理不成立从而推出矛盾，不妨证明：&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}\neg(((A\rightarrow B)\rightarrow A)\rightarrow A)\rightarrow(A\rightarrow B)$&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}\neg(((A\rightarrow B)\rightarrow A)\rightarrow A)\rightarrow\neg(A\rightarrow B)$&lt;/p&gt;
 &lt;p&gt;后者即证：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow((A\rightarrow B)\rightarrow A)$，结论是显然的。&lt;/p&gt;
 &lt;p&gt;前者即证：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow(\neg(A\rightarrow B)\rightarrow A)$&lt;/p&gt;
 &lt;p&gt;后件可以由$\neg A\rightarrow(A\rightarrow B)$变形得到，所以得证。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;运用$Th18$证明：$\vdash_{PC}(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;运用$Th18$证明这个定理等价于证明：&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}\neg A\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}C\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
@@ -1110,7 +1902,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;p&gt;现在我们只需要证明：$\vdash_{PC}\neg A\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;即证：$\vdash_{PC}(B\rightarrow C)\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;再次运用$Th18$，即证：&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$\vdash_{PC}\neg B\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;$\vdash_{PC}C\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;后者即证$\vdash_{PC}\neg A\rightarrow(C\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;其后件是$A1$，故结论是显然的。&lt;/p&gt;
@@ -1127,33 +1921,35 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;p&gt;$\vdash_{PC}\neg A\rightarrow(A\rightarrow B)$&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}(A\rightarrow B)\rightarrow(\neg C\rightarrow(A\rightarrow B))$&lt;/p&gt;
 &lt;p&gt;按照上述思路将对应的证明序列写出即可证明该定理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;演绎定理&#34;&gt;演绎定理
 &lt;/h2&gt;&lt;p&gt;证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(C\rightarrow D)\rightarrow((B\rightarrow C)\rightarrow(B\rightarrow D))$,$Th4$&lt;/li&gt;
 &lt;li&gt;$((B\rightarrow C)\rightarrow(B\rightarrow D))\rightarrow((A\rightarrow(B\rightarrow C))\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th4$&lt;/li&gt;
 &lt;li&gt;$(C\rightarrow D)\rightarrow((A\rightarrow(B\rightarrow C))\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th6$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th2$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;上面这个例子表明，在PC中证明定理的这个过程中的公式序列的公式长度通常较长，为了缩短公式序列的长度，我们现在给出PC中一个重要方便的定理：&lt;strong&gt;演绎定理&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;演绎定理&lt;/strong&gt;：对PC中任意公式集合$\Gamma$和公式$A,B$，$\Gamma\cup{A}\vdash_{PC}B$（或记为$\Gamma;A\vdash_{PC}B$）当且仅当$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
-&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;演绎定理&lt;/strong&gt;：对PC中任意公式集合$\Gamma$和公式$A,B$，$\Gamma\cup${$A$}$\vdash_{PC}B$（或记为$\Gamma;A\vdash_{PC}B$）当且仅当$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：（充分性）&lt;/p&gt;
 &lt;p&gt;已知$\Gamma\vdash_{PC}A\rightarrow B$&lt;/p&gt;
 &lt;p&gt;从$\Gamma$出发在PC可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$&lt;/p&gt;
-&lt;p&gt;从$\Gamma\cup{A}$出发在PC也可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$&lt;/p&gt;
-&lt;p&gt;从$\Gamma\cup{A}$出发在PC中可以得到$B$的一个演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B),A,B$&lt;/p&gt;
-&lt;p&gt;也就是说有$\Gamma;A\vdash_{PC}B$。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;证明：（必要性）&lt;/p&gt;
-&lt;p&gt;已知$\Gamma\cup{A}\vdash_{PC}B$&lt;/p&gt;
-&lt;p&gt;从$\Gamma\cup{A}$出发在PC可以得到一个$B$的演绎序列$B_1,B_2,\cdots,B_k(=B)$，我们对演绎序列的长度$k$使用数学归纳法：&lt;/p&gt;
-&lt;p&gt;当$k=1$时可知$B$或是公理、或有$B\in\Gamma\cup{A}$：&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup${$A$}出发在PC也可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup${$A$}出发在PC中可以得到$B$的一个演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B),A,B$&lt;/p&gt;
+&lt;p&gt;也就是说有$\Gamma;A\vdash_{PC}B$。
+证明：（必要性）&lt;/p&gt;
+&lt;p&gt;已知$\Gamma\cup${$A$}$\vdash_{PC}B$&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup${$A$}出发在PC可以得到一个$B$的演绎序列$B_1,B_2,\cdots,B_k(=B)$，我们对演绎序列的长度$k$使用数学归纳法：&lt;/p&gt;
+&lt;p&gt;当$k=1$时可知$B$或是公理、或有$B\in\Gamma\cup${$A$}：&lt;/p&gt;
 &lt;p&gt;当$B$是公理时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;当$B\in\Gamma$时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;当$B=A$时，$A\rightarrow B$也即$A\rightarrow A$，也就是$Th1$，那么有$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;假设$k&amp;lt; n$时原命题成立，那么对于$B$的演绎序列中的公式有$\Gamma\vdash_{PC}A\rightarrow B_i,i&amp;lt; n$。&lt;/p&gt;
-&lt;p&gt;那么$k=n$时$B$或为公理、或有$B\in\Gamma\cup{A}$，或由$B_i,B_j(i,j&amp;lt; n)$通过$r_{mp}$得到。&lt;/p&gt;
+&lt;p&gt;那么$k=n$时$B$或为公理、或有$B\in\Gamma\cup${$A$}，或由$B_i,B_j(i,j&amp;lt; n)$通过$r_{mp}$得到。&lt;/p&gt;
 &lt;p&gt;当$B$是公理时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;当$B\in\Gamma$时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;当$B=A$时，$A\rightarrow B$也即$A\rightarrow A$，也就是$Th1$，那么有$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
@@ -1162,8 +1958,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;p&gt;也就是说：$\Gamma\vdash_{PC}A\rightarrow B_i,\Gamma\vdash_{PC}A\rightarrow(B_i\rightarrow B)$&lt;/p&gt;
 &lt;p&gt;由$A2$知：$(A\rightarrow(B_i\rightarrow B))\rightarrow((A\rightarrow B_i)\rightarrow(A\rightarrow B))$&lt;/p&gt;
 &lt;p&gt;故：$\vdash_{PC}(A\rightarrow B_i)\rightarrow(A\rightarrow B)$，则$\Gamma\vdash_{PC}A\rightarrow B$&lt;/p&gt;
-&lt;hr&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我们现在回到上面那个例子，现在使用演绎定理解决这个问题。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$&lt;/p&gt;
 &lt;p&gt;即证：$A\rightarrow(B\rightarrow C)\vdash_{PC}(C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D))$&lt;/p&gt;
 &lt;p&gt;即证：$A\rightarrow(B\rightarrow C),C\rightarrow D\vdash_{PC}A\rightarrow(B\rightarrow D)$&lt;/p&gt;
@@ -1178,6 +1975,7 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$C\rightarrow D$&lt;/li&gt;
 &lt;li&gt;$D$,$r_{mp}(5)(6)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;不难发现，在使用了演绎定理之后，我们的证明过程中涉及的公式变得更加简单了。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;pc定理证明习题选&#34;&gt;PC定理证明习题选
@@ -1191,7 +1989,6 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;证明：$\vdash_{PC}((B\rightarrow C)\rightarrow(D\rightarrow E))\rightarrow(((B\rightarrow C)\rightarrow(G\rightarrow H))\rightarrow(((A\rightarrow B)\rightarrow C)\rightarrow\neg(((E\rightarrow G)\rightarrow(D\rightarrow H))\rightarrow\neg((G\rightarrow\neg H)\rightarrow\neg G))))$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
 </description>
         </item>
         <item>

@@ -15,13 +15,16 @@
         <guid>https://0x3a0x29.github.io/p/firstorderpredicatecalculus/</guid>
         <description>&lt;img src="https://0x3a0x29.github.io/p/firstorderpredicatecalculus/image.png" alt="Featured image of post FC(一阶谓词演算系统)及其相关定理" /&gt;&lt;h1 id=&#34;fc及其相关定理&#34;&gt;FC及其相关定理
 &lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
-&lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
+&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
 &lt;p&gt;在先前已经给出了命题逻辑的相关介绍，但是命题逻辑存在着不可避免的缺陷，在命题逻辑中我们将原子命题看成是不可再分的基本单位，这就体现不出命题中研究对象的特性以及研究对象之间的逻辑关系，而有些推理的正确性依赖于命题的内部结构，我们以著名的苏格拉底三段论为例：&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;所有的人都是要死的。&lt;/li&gt;
 &lt;li&gt;苏格拉底是人。&lt;/li&gt;
 &lt;li&gt;所以苏格拉底是要死的。&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我们引入三个命题变元$P,Q,R$，我们可以写出推理的命题形式：$P\wedge Q\rightarrow R$，但是很明显这个公式并非永真式，我们不能看出原来正确的推理。
 为此，我们必须引入谓词逻辑，以帮助我们研究相关的推理形式和规律。&lt;/p&gt;
 &lt;hr&gt;
@@ -87,7 +90,7 @@
 &lt;p&gt;（3）对每一n元谓词$P^{(n)}$指定为$D$上的一个n元关系，记为$I(P^{(n)})$，简记为$\overline{P}^{(n)}$。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;指派&#34;&gt;指派
-&lt;/h3&gt;&lt;p&gt;一阶谓词演算中的&lt;strong&gt;指派&lt;/strong&gt;是对个体变元指定为论域$D$中的个体作为其取值，即为映射$s:{v_1,v_2,\cdots}\rightarrow D$。即对任一变元$v_i,s(v_i)\in D$。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;一阶谓词演算中的&lt;strong&gt;指派&lt;/strong&gt;是对个体变元指定为论域$D$中的个体作为其取值，即为映射$s:${$v_1,v_2,\cdots$}$\rightarrow D$。即对任一变元$v_i,s(v_i)\in D$。&lt;/p&gt;
 &lt;p&gt;指派$s$可以扩展为从项集合到个体域的映射$\overline{s}$：对于任意的项$t$，&lt;/p&gt;
 &lt;p&gt;（1）$\overline{s}(t)=s(v)$，当$t$为变元$v$时。&lt;/p&gt;
 &lt;p&gt;（2）$\overline{s}(t)=\overline{a}$，当$t$为常元$a$时。&lt;/p&gt;
@@ -139,33 +142,46 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;/h2&gt;&lt;h3 id=&#34;fc的定理&#34;&gt;FC的定理
 &lt;/h3&gt;&lt;p&gt;下列总结了FC中12个基本定理，并给出了部分证明：&lt;/p&gt;
 &lt;p&gt;$Th1$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}\forall vA\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\forall vA\rightarrow A^v_v$,$A4$，后者即$A$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th2$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}A\rightarrow\neg\forall v\neg A$，即$\vdash_{FC}A\rightarrow\exists vA$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\forall v\neg A\rightarrow\neg A$,$A4$&lt;/li&gt;
 &lt;li&gt;$(\forall v\neg A\rightarrow\neg A)\rightarrow(A\rightarrow\neg\forall v\neg A)$,$PC$中的定理&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\neg\forall v\neg A$,$r_{mp}(1)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th3$：对于FC中的任何公式$A$和变元$v$，$\vdash_{FC}\forall vA\rightarrow\exists vA$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\forall vA\rightarrow A$,$Th1$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\exists vA$,$Th2$&lt;/li&gt;
 &lt;li&gt;$\forall vA\rightarrow\exists vA$,三段论&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th4$：（&lt;strong&gt;普化定理&lt;/strong&gt;/全称推广定理）对于FC中的任何公式$A$和变元$v$，如果$\vdash_{FC}A$，那么$\vdash_{FC}\forall vA$
 需要注意的是$\vdash_{FC}A\rightarrow\forall vA$并不一定成立，故在$A6$中我们作出了额外的要求：$v$在$A$中无自由出现。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：设$A_1,A_2,\cdots,A_n(=A)$是FC中公式$A$的证明序列，对证明的长度n使用归纳法。
 （1）当n=1时，$A$只能是公理。若$v$在$A$中自由出现，那么$\forall vA$也是公理；若$v$不在$A$中自由出现，则$A\rightarrow\forall vA$为公理，由$r_{mp}$知$\forall vA$为公理。
 （2）当n&amp;gt;1时，若$A$为公理，仿照（1）的证明可知$\forall vA$为定理。若$A_n$为$A_j(i&amp;lt; n)$，则由归纳假设可知$\forall vA_j=\forall vA$为定理。若$A_n$是由$A_i,A_j$通过$r_{mp}$推得，不妨设$A_j=A_i\rightarrow A$，则由归纳假设$\forall vA_i,\forall v(A_i\rightarrow A)$都是定理。再由公理$\forall v(A_i\rightarrow A)\rightarrow(\forall vA_i\rightarrow\forall vA)$知$\forall vA_i\rightarrow\forall vA$为定理，使用$r_{mp}$则知$\forall vA$为定理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th5$：对于FC中的任何公式集合$\Gamma$，公式$A$和不在$\Gamma$的任意公式中自由出现的变元$v$，对$Th4$进行推广，得到：如果$\Gamma\vdash_{FC}A$，那么$\Gamma\vdash_{FC}\forall vA$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：设$A_1,A_2,\cdots,A_n(=A)$是FC中公式$A$的演绎序列，对证明的长度n使用归纳法。
 （1）当n=1时，若$A$是公理。若$v$在$A$中自由出现，那么$\forall vA$也是公理；若$v$不在$A$中自由出现，则$A\rightarrow\forall vA$为公理，由$r_{mp}$知$\forall vA$为公理。于是当$A$为公理时，都有$\Gamma\vdash\forall vA$。若$A\in\Gamma$，则$v$不在$A$中自由出现，从而$A\rightarrow\forall vA$为公理，从而由$r_{mp}$知$\Gamma\vdash\forall vA$。
 （2）当n&amp;gt;1时，若$A$为公理或者$A\in\Gamma$，仿照（1）的证明可知$\forall vA$为定理。若$A_n$为$A_j(i&amp;lt; n)$，则由归纳假设可知$\forall vA_j=\forall vA$为定理。若$A_n$是由$A_i,A_j$通过$r_{mp}$推得，不妨设$A_j=A_i\rightarrow A$，则由归纳假设$\forall vA_i,\forall v(A_i\rightarrow A)$都是定理。再由公理$\forall v(A_i\rightarrow A)\rightarrow(\forall vA_i\rightarrow\forall vA)$知$\forall vA_i\rightarrow\forall vA$为定理，使用$r_{mp}$则知$\forall vA$为定理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th6$：（&lt;strong&gt;演绎定理&lt;/strong&gt;）在FC中演绎定理也成立，对于FC中任何公式集合$\Gamma$和FC中的任意两个公式$A,B$，那么$\Gamma;A\vdash_{FC}B$当且仅当$\Gamma\vdash_{FC}A\rightarrow B$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：类似于在PC中演绎定理的证明，在此不作说明。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th7$：设$\Gamma$为FC中的任一公式集合，$A,B$为FC中任意两个公式，$\Gamma;A\vdash_{FC}\neg B$当且仅当$\Gamma;B\vdash_{FC}\neg A$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\Gamma;A\vdash\neg B$&lt;/li&gt;
 &lt;li&gt;$\Gamma\vdash A\rightarrow\neg B$,$Th6$&lt;/li&gt;
@@ -173,9 +189,13 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\Gamma\vdash B\rightarrow\neg A$,$r_{mp}(2)(3)$&lt;/li&gt;
 &lt;li&gt;$\Gamma;B\vdash\neg A$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;$Th8$：（反证法）如果FC中的公式集合$\Gamma\cup{A}$是不一致的，则$\Gamma\vdash_{FC}\neg A$。&lt;/p&gt;
-&lt;p&gt;证明：由于$\Gamma\cup{A}$不一致，则存在公式$B$使得$\Gamma;A\vdash B$和$\Gamma;A\vdash\neg B$。由于$\neg B\rightarrow(B\rightarrow\neg A)$为定理，所以$\Gamma;A\vdash\neg A$，由演绎定理得$\Gamma\vdash A\rightarrow\neg A$，又因为$(A\rightarrow\neg A)\rightarrow\neg A$为定理，从而$\Gamma\vdash\neg A$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;$Th8$：（反证法）如果FC中的公式集合$\Gamma\cup${$A$}是不一致的，则$\Gamma\vdash_{FC}\neg A$。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;证明：由于$\Gamma\cup${$A$}不一致，则存在公式$B$使得$\Gamma;A\vdash B$和$\Gamma;A\vdash\neg B$。由于$\neg B\rightarrow(B\rightarrow\neg A)$为定理，所以$\Gamma;A\vdash\neg A$，由演绎定理得$\Gamma\vdash A\rightarrow\neg A$，又因为$(A\rightarrow\neg A)\rightarrow\neg A$为定理，从而$\Gamma\vdash\neg A$。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th9$：设$\Gamma$为FC中的任一公式集合，$A,B$为FC中的任意两个公式，并且变元$v$不在$\Gamma$的任何公式里面自由出现，那么$\Gamma;A\vdash_{FC}B$蕴含$\Gamma;\forall vA\vdash_{FC}B$和$\Gamma;\forall vA\vdash_{FC}\forall vB$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\Gamma;A\vdash B$&lt;/li&gt;
 &lt;li&gt;$\Gamma\vdash A\rightarrow B$,$Th6$&lt;/li&gt;
@@ -185,7 +205,9 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\Gamma;\forall vA\vdash\forall vB$,$Th6$&lt;/li&gt;
 &lt;li&gt;$\Gamma;\forall vA\vdash B$,$Th1$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th10$：（&lt;strong&gt;存在消除&lt;/strong&gt;）设$\Gamma$为FC中的任一公式集合，$A,B$为FC中的任意两个公式，并且变元$v$不在$\Gamma$的任何公式以及公式$B$里面自由出现，那么由$\Gamma\vdash_{FC}\exists vA$以及$\Gamma;A\vdash_{FC}B$可以推出$\Gamma\vdash_{FC}B$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\Gamma;A\vdash B$&lt;/li&gt;
 &lt;li&gt;$\Gamma\vdash A\rightarrow B$&lt;/li&gt;
@@ -200,13 +222,19 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\Gamma\vdash\exists vA$&lt;/li&gt;
 &lt;li&gt;$\Gamma\vdash B$,$r_{mp}(10)(11)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th11$：（替换原理）设$A,B$为FC的公式，且满足$A\vdash\dashv_{FC}B$，$A$是$C$的子公式，$D$是将$C$中$A$的若干出现换为公式$B$得到的公式，则$C\vdash\dashv_{FC}D$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：略&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th12$：（改名定理）在FC中若$A&amp;rsquo;$是$A$的改名式，且$A&amp;rsquo;$改用的变元不在$A$中出现，则$A\vdash\dashv_{FC}A&amp;rsquo;$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：略&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;例题&#34;&gt;例题
 &lt;/h3&gt;&lt;p&gt;证明：$\vdash A\rightarrow B$且变元$v$在$B$中无自由出现，则$\vdash\exists vA\rightarrow B$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\vdash A\rightarrow B$&lt;/li&gt;
 &lt;li&gt;$\vdash\neg B\rightarrow\neg A$,$PC$中的定理&lt;/li&gt;
@@ -218,7 +246,9 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\vdash(\neg B\rightarrow\forall v\neg A)\rightarrow(\neg\forall v\neg A\rightarrow B)$,$PC$中的定理&lt;/li&gt;
 &lt;li&gt;$\vdash\neg\forall v\neg A\rightarrow B$,$r_{mp}(7)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;证明：$\vdash(A\rightarrow\exists vB)\rightarrow\exists v(A\rightarrow B)$，其中$v$在$A$中无自由出现。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\forall v\neg(A\rightarrow B)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\exists vB,\forall v\neg(A\rightarrow B)\vdash\neg(A\rightarrow B)$,$Th1$&lt;/li&gt;
@@ -234,6 +264,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$A\rightarrow\exists vB\vdash\exists v(A\rightarrow B)$&lt;/li&gt;
 &lt;li&gt;$\vdash(A\rightarrow\exists vB)\rightarrow\exists v(A\rightarrow B)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;其他形式的一阶谓词演算系统&#34;&gt;其他形式的一阶谓词演算系统
 &lt;/h2&gt;&lt;p&gt;FC的形式是简洁的，但是正如PC所具有的问题那样，在实际应用中FC并不方便，因为它所使用的联结词、量词和公理数量太少了。故类似于先前在介绍完PC后引入了ND，本文将引入FCM和FND两个形式系统，以便让我们的推理更加直观。&lt;/p&gt;
@@ -286,6 +317,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;hr&gt;
 &lt;h3 id=&#34;例题-1&#34;&gt;例题
 &lt;/h3&gt;&lt;p&gt;证明：$\exists x(A\vee B)\vdash\dashv\exists xA\vee\exists xB$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\exists x(A\vee B),A\vee B,A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\exists x(A\vee B),A\vee B,A\vdash\exists xA$,$(\exists+)(1)$&lt;/li&gt;
@@ -311,6 +343,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;$\exists xA\vee\exists xB\vdash\exists x(A\vee B)$,$(\vee-)(15)(20)(21)$&lt;/li&gt;
 &lt;li&gt;$\exists x(A\vee B)\vdash\dashv\exists xA\vee\exists xB$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;fc定理证明习题选&#34;&gt;FC定理证明习题选
 &lt;/h2&gt;&lt;p&gt;下面给出了八道FC定理习题供读者练习使用：&lt;/p&gt;
@@ -319,13 +352,12 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;li&gt;证明: $\vdash\exists v(A\rightarrow B)\rightarrow(A\rightarrow\exists vB)$，其中$v$在$A$中无自由出现。&lt;/li&gt;
 &lt;li&gt;证明：存在一种方法能击败所有敌人，那么所有敌人都存在一种方法让其被击败。&lt;/li&gt;
 &lt;li&gt;证明：$\exists x(A\wedge B)\vdash\exists xA\wedge\exists xB$&lt;/li&gt;
-&lt;li&gt;证明：$\Gamma={\exists x(P(x)\wedge\forall y(D(y)\rightarrow L(x,y))),\forall x\forall y(P(x)\wedge Q(y)\rightarrow\neg L(x,y))}$，则有$\Gamma\vdash\forall y(D(y)\rightarrow\neg Q(y))$。&lt;/li&gt;
-&lt;li&gt;证明：$\Gamma={P(Sam),G(Clyde)\wedge L(Clyde,Oscar),(P(Oscar)\oplus G(Oscar))\wedge L(Oscar,Sam)}$，则有$\Gamma\vdash\exists x\exists y(G(x)\wedge P(y)\wedge L(x,y))$，注：$\oplus$表示联结词中的“异或”。&lt;/li&gt;
-&lt;li&gt;证明：$\Gamma={\forall x(N(x)\rightarrow E(x)\oplus O(x)),\forall x(N(x)\rightarrow(E(x)\leftrightarrow G(x))),\neg\forall x(N(x)\rightarrow G(x))}$，则有$\Gamma\vdash\exists x(N(x)\wedge O(x))$。&lt;/li&gt;
+&lt;li&gt;证明：$\Gamma=${$\exists x(P(x)\wedge\forall y(D(y)\rightarrow L(x,y))),\forall x\forall y(P(x)\wedge Q(y)\rightarrow\neg L(x,y))$}，则有$\Gamma\vdash\forall y(D(y)\rightarrow\neg Q(y))$。&lt;/li&gt;
+&lt;li&gt;证明：$\Gamma=${$P(Sam),G(Clyde)\wedge L(Clyde,Oscar),(P(Oscar)\oplus G(Oscar))\wedge L(Oscar,Sam)$}，则有$\Gamma\vdash\exists x\exists y(G(x)\wedge P(y)\wedge L(x,y))$，注：$\oplus$表示联结词中的“异或”。&lt;/li&gt;
+&lt;li&gt;证明：$\Gamma=${$\forall x(N(x)\rightarrow E(x)\oplus O(x)),\forall x(N(x)\rightarrow(E(x)\leftrightarrow G(x))),\neg\forall x(N(x)\rightarrow G(x))$}，则有$\Gamma\vdash\exists x(N(x)\wedge O(x))$。&lt;/li&gt;
 &lt;li&gt;证明：有二元关系$R$，若$R$是传递且反自反的，那么它是非对称的。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -336,7 +368,8 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
         <guid>https://0x3a0x29.github.io/p/naturaldeduction/</guid>
         <description>&lt;img src="https://0x3a0x29.github.io/p/naturaldeduction/image.png" alt="Featured image of post ND(自然演绎推理系统)及其相关定理" /&gt;&lt;h1 id=&#34;nd及其相关定理&#34;&gt;ND及其相关定理
 &lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
-&lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
+&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;基础知识&#34;&gt;基础知识
 &lt;/h2&gt;&lt;p&gt;命题：能唯一确定真假值的陈述句。&lt;/p&gt;
@@ -360,7 +393,7 @@ FC的公理包含上述六个公理模式和他们对应的全称化，同时后
 &lt;h2 id=&#34;自然演绎推理系统nd的简单介绍&#34;&gt;自然演绎推理系统ND的简单介绍
 &lt;/h2&gt;&lt;p&gt;与之前介绍的PC一样，自然演绎推理系统ND（natural deduction）也是一种形式系统，相较于PC而言，ND是一个更加实用、比较符合人的思维模式的推理演算系统，ND的规则和直观含义都比较明显，我们先简单介绍一下ND的组成部分：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集${\neg,\wedge,\vee,\rightarrow,\leftrightarrow}$、辅助符号$(,)$&lt;/li&gt;
+&lt;li&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集{$\neg,\wedge,\vee,\rightarrow,\leftrightarrow$}、辅助符号$(,)$&lt;/li&gt;
 &lt;li&gt;形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义&lt;/li&gt;
 &lt;li&gt;公理：设$A$为可以表达任意命题公式的语法变元，$\Gamma$是一个公式集，在ND中只有一个公理（也有人把这个公理变形为推理规则，这样的ND的公理集就是$\varnothing$）：
 $\Gamma;A\vdash A(\in)$&lt;/li&gt;
@@ -405,14 +438,17 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;h2 id=&#34;逻辑推理相关的基本定义&#34;&gt;逻辑推理相关的基本定义
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;演绎&lt;/strong&gt;：在ND中，若有$\Gamma\vdash_{ND}A$，即存在序列：$\Gamma_1\vdash A_1,\Gamma_2\vdash A_2,\cdots,\Gamma_m\vdash A_m$使得$\Gamma_i\vdash A_i$或为ND的公理，或为$\Gamma_i\vdash A_i(j&amp;lt; i)$，或为$\Gamma_{j_1}\vdash A_{j_1},\cdots,\Gamma_{j_k}\vdash A_{j_k}(j_1,\cdots,j_k&amp;lt; i)$使用推理规则导出的。当$\Gamma=\varnothing$时我们记作$\vdash_{ND}A$，称$A$为ND的&lt;strong&gt;定理&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;例：证明$A\vdash_{ND}B\rightarrow A$（这个定理说明了我们对一个定理增添前件后任旧是一个定理）。也就是说我们已经知道$A$成立了，现在要推出$B\rightarrow A$也成立，这个过程都要在ND中进行，故我们要在ND中构造一个演绎序列使得最后一个是$\vdash A\rightarrow(B\rightarrow A)$，一个可行的序列如下：&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A,B\vdash A$,$(\in)$                                    （这是公理$(\in)$）&lt;/li&gt;
 &lt;li&gt;$A\vdash B\rightarrow A$,$(\rightarrow+)(1)$             （对$(1)$使用$\rightarrow+$规则）&lt;/li&gt;
 &lt;li&gt;$\vdash A\rightarrow(B\rightarrow A)$,$(\rightarrow)(2)$ （对$(2)$使用$\rightarrow+$规则）&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;nd中的基本定理&#34;&gt;ND中的基本定理
 &lt;/h2&gt;&lt;p&gt;在ND中直接使用公理和推理规则得出ND中的定理会非常繁琐，其中有不少步骤遵循相同的模式，下列总结了ND中10个基本定理，用于帮助寻找ND的定理：&lt;/p&gt;
 &lt;p&gt;$Th1$：$\vdash_{ND}A\vee\neg A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\vdash A\wedge\neg A$,$(\vee+)(1)$&lt;/li&gt;
@@ -420,7 +456,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\vdash A\vee\neg A$,$(\vee+)(3)$&lt;/li&gt;
 &lt;li&gt;$\vdash A\vee\neg A$,$(-)(2)(4)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th2$：$\vdash_{ND}\neg(A\vee B)\leftrightarrow(\neg A\wedge\neg B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg(A\vee B),A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg(A\vee B),A\vdash A\vee B$,$(\vee+)(1)$&lt;/li&gt;
@@ -448,7 +486,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\vdash(\neg A\wedge\neg B)\rightarrow\neg(A\vee B)$,$(\rightarrow+)(23)$&lt;/li&gt;
 &lt;li&gt;$\vdash\neg(A\vee B)\leftrightarrow(\neg A\wedge\neg B)$,$(\leftrightarrow+)(10)(24)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th3$：$\vdash_{ND}\neg(A\wedge B)\leftrightarrow(\neg A\vee\neg B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg(A\wedge B),A,B\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg(A\wedge B),A,B\vdash B$,$(\in)$&lt;/li&gt;
@@ -473,7 +513,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\vdash(\neg A\vee\neg B)\rightarrow\neg(A\wedge B)$,$(\rightarrow+)(20)$&lt;/li&gt;
 &lt;li&gt;$\vdash(\neg A\vee\neg b)\leftrightarrow\neg(A\wedge B)$,$(\leftrightarrow+)(10)(21)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th4$：$\neg A\rightarrow B\vdash\dashv_{ND} A\vee B$，这里的$P\vdash\dashv_{ND}Q$当且仅当$P\vdash_{ND}Q$且$Q\vdash_{ND}P$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow B,\neg A\vdash\neg A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow B,\neg A\vdash\neg A\rightarrow B$,$(\in)$&lt;/li&gt;
@@ -490,7 +532,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$A\vee B,\neg A\vdash B$,$(\vee-)(8)(11)(12)$&lt;/li&gt;
 &lt;li&gt;$A\vee B\vdash \neg A\rightarrow B$,$(\rightarrow+)(13)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th5$：$A\rightarrow B\vdash\dashv_{ND}\neg A\vee B$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow B,A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow B,A\vdash A\rightarrow B$,$(\in)$&lt;/li&gt;
@@ -507,7 +551,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\vee B,A\vdash B$,$(\vee-)(8)(11)(12)$&lt;/li&gt;
 &lt;li&gt;$\neg A\vee B\vdash A\rightarrow B$,$(\rightarrow+)(13)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th6$：$\vdash_{ND}A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\wedge(B\vee C),B\vdash A\wedge(B\vee C)$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\wedge(B\vee C),B\vdash A$,$(\wedge-)(1)$&lt;/li&gt;
@@ -538,7 +584,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\vdash(A\wedge B)\vee(A\wedge C)\rightarrow A\wedge(B\vee C)$,$(\rightarrow+)(26)$&lt;/li&gt;
 &lt;li&gt;$\vdash A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$,$(\leftrightarrow+)(14)(27)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th7$：$\vdash_{HD}A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash B\wedge C$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\vee(B\wedge C),B\wedge C\vdash B$,$(\wedge-)(1)$&lt;/li&gt;
@@ -573,14 +621,18 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\vdash(A\vee B)\wedge(A\vee C)\rightarrow A\vee(B\wedge C)$,$(\rightarrow+)(30)$&lt;/li&gt;
 &lt;li&gt;$\vdash A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$,$(\leftrightarrow+)(13)(31)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;从上面的7个定理的证明中我们可以发现，和PC相比，ND的证明思路更加符合我们的思维模式，事实上能通过PC证明的定理在ND中也可以证明出来，为了证明这个事实，我们不妨在ND中尝试证明PC中使用到的3个公理。&lt;/p&gt;
 &lt;p&gt;$Th8$：$\vdash_{ND}A\rightarrow(B\rightarrow A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A,B\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\vdash B\rightarrow A$,$(\rightarrow+)(1)$&lt;/li&gt;
 &lt;li&gt;$\vdash A\rightarrow(B\rightarrow A)$,$(\rightarrow+)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th9$：$\vdash_{ND}(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow C),A\rightarrow B,A\vdash A\rightarrow B$,$(\in)$&lt;/li&gt;
@@ -592,7 +644,9 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow C),\vdash(A\rightarrow B)\rightarrow(A\rightarrow C)$,$(\rightarrow+)(7)$&lt;/li&gt;
 &lt;li&gt;$\vdash(A\rightarrow(B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$(\rightarrow+)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th10$：$\vdash_{ND}(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash\neg A$,$(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow\neg B,\neg A,B\vdash\neg A\rightarrow\neg B$,$(\in)$&lt;/li&gt;
@@ -604,6 +658,7 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow\neg B\vdash B\rightarrow A$,$(\rightarrow+)(7)$&lt;/li&gt;
 &lt;li&gt;$\vdash(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$,$(\rightarrow+)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;nd定理证明习题选&#34;&gt;ND定理证明习题选
 &lt;/h2&gt;&lt;p&gt;下面给出了六道ND定理习题供读者练习使用：&lt;/p&gt;
@@ -616,7 +671,6 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;li&gt;证明：$\vdash_{ND}(A\leftrightarrow\neg B)\leftrightarrow\neg(A\leftrightarrow B)$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -627,7 +681,8 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
         <guid>https://0x3a0x29.github.io/p/propositionalcalculus/</guid>
         <description>&lt;img src="https://0x3a0x29.github.io/p/propositionalcalculus/23.png" alt="Featured image of post PC(命题逻辑演算形式系统)及其相关定理" /&gt;&lt;h1 id=&#34;pc及其相关定理&#34;&gt;PC及其相关定理
 &lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
-&lt;/h2&gt;&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
+&lt;p&gt;本篇所述皆来自于笔者于23年学校开设的《数理逻辑》课程中讲解内容。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;基础知识&#34;&gt;基础知识
 &lt;/h2&gt;&lt;p&gt;命题：能唯一确定真假值的陈述句。&lt;/p&gt;
@@ -651,39 +706,52 @@ $\Gamma;A\vdash A(\in)$&lt;/li&gt;
 &lt;h2 id=&#34;命题逻辑演算形式系统pc的简单介绍&#34;&gt;命题逻辑演算形式系统PC的简单介绍
 &lt;/h2&gt;&lt;p&gt;命题逻辑演算形式系统PC（propositional calculus）是一种形式系统，我们先简单介绍一下PC的组成部分：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集${\neg,\rightarrow}$、辅助符号$(,)$&lt;/li&gt;
-&lt;li&gt;形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义&lt;/li&gt;
-&lt;li&gt;公理：设$A,B,C$为可以表达任意命题公式的语法变元，那么PC中有三个公理
-$A1:A\rightarrow (B\rightarrow A)$
-$A2:(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$
-$A3:(\neg A\rightarrow\neg B)\rightarrow (B\rightarrow A)$
-$A1$的含义是：如果$A$成立，那么已知$B$成立的前提下$A$任旧成立。
-$A2$的含义是：如果$A$成立能使得只需要$B$成立那么$C$就会成立，那么如果$A$能推出$B$、$A$就能推出$C$。
-$A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就能推出$A$成立。&lt;/li&gt;
-&lt;li&gt;推理规则：用于从已有的公理和已推出的结论来推理另一结论。
+&lt;li&gt;
+&lt;p&gt;字符集：包括原子变元符$p_1,p_2,\cdots,p_n,\cdots$、联结词完备集{$\neg,\rightarrow$}、辅助符号$(,)$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;形成规则：由原子变元符及联结词形成命题公式的规则，即上文提到的命题公式的定义&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;公理：设$A,B,C$为可以表达任意命题公式的语法变元，那么PC中有三个公理
+$A1:A\rightarrow (B\rightarrow A)$&lt;/p&gt;
+&lt;p&gt;$A2:(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;p&gt;$A3:(\neg A\rightarrow\neg B)\rightarrow (B\rightarrow A)$&lt;/p&gt;
+&lt;p&gt;$A1$的含义是：如果$A$成立，那么已知$B$成立的前提下$A$任旧成立。&lt;/p&gt;
+&lt;p&gt;$A2$的含义是：如果$A$成立能使得只需要$B$成立那么$C$就会成立，那么如果$A$能推出$B$、$A$就能推出$C$。&lt;/p&gt;
+&lt;p&gt;$A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就能推出$A$成立。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;推理规则：用于从已有的公理和已推出的结论来推理另一结论。
 在PC中只有分离规则$r_{mp}$：即若有$A$和$A\rightarrow B$成立，那么$B$也成立，形式化的推理序列为：$A,A\rightarrow B,B$。
-可以记作$\displaystyle{\frac{A,A\rightarrow B}{B}}$&lt;/li&gt;
-&lt;li&gt;定理推导：包括所有的推理结论及其推理过程。&lt;/li&gt;
+可以记作$\displaystyle{\frac{A,A\rightarrow B}{B}}$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;定理推导：包括所有的推理结论及其推理过程。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;逻辑推理相关的基本定义&#34;&gt;逻辑推理相关的基本定义
 &lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;证明&lt;/strong&gt;：称以下公式序列为公式$A$在PC中的一个证明：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过形成规则得到的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;证明&lt;/strong&gt;：称以下公式序列为公式$A$在PC中的一个证明：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过推理规则得到的。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;定理&lt;/strong&gt;：公式$A$在PC中有一个证明序列，那么它就是PC的定理，我们记为$\vdash_{PC}A$。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;演绎&lt;/strong&gt;：设$\Gamma$为PC中若干公式构成的公式集，则称下列公式序列为公式$A$以$\Gamma$为前提的演绎：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$\Gamma$中的成员、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过分离规则得到的。我们可以记为$\Gamma\vdash_{PC}A$。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;例：证明$A\vdash_{PC}B\rightarrow A$（这个定理说明了我们对一个定理增添前件后任旧是一个定理）。也就是说我们已经知道$A$成立了，现在要推出$B\rightarrow A$也成立，这个过程都要在PC中进行，故我们要在PC中构造一个演绎序列使得最后一个公式是$B\rightarrow A$，一个可行的公式序列如下：&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A$                              （$A$是演绎前提中的成员）&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow A)$,$A1$  （$A\rightarrow(B\rightarrow A)$是公理中的$A1$）&lt;/li&gt;
 &lt;li&gt;$B\rightarrow A$,$r_{mp}(1)(2)$   （对公式序列中的$(1)(2)$使用分离规则得到结论$B\rightarrow A$）&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;上面我们成功构造了一个符合演绎要求的公式序列，也就是说有$A\vdash_{PC}B\rightarrow A$，我们完成了这个例子的证明。&lt;/p&gt;
 &lt;p&gt;实际上我们可以证明PC有合理性、一致性、完备性，这表明PC中的定理是永真的、从$\Gamma$演绎出$A$就会有$\Gamma\Rightarrow A$（合理性），PC不会推出相互矛盾的结论（一致性），任何PC中的永真式都是PC的定理（完备性）。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;pc的基本定理&#34;&gt;PC的基本定理
 &lt;/h2&gt;&lt;p&gt;在PC中直接使用公理和推理规则得出PC中的定理会非常繁琐，其中有不少步骤遵循相同的模式，下列总结了PC中35个基本定理（其中7个定理较为重要），用于帮助寻找PC的定理：&lt;/p&gt;
 &lt;p&gt;$Th1$：$\vdash_{PC}A\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow A)$,$A1$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow((B\rightarrow A)\rightarrow A)$,$A1$&lt;/li&gt;
@@ -691,8 +759,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(A\rightarrow(B\rightarrow A))\rightarrow(A\rightarrow A)$,$r_{mp}(2)(3)$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow A$,$r_{mp}(1)(4)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;前件互换定理&#34;&gt;前件互换定理
 &lt;/h3&gt;&lt;p&gt;$Th2$：若$\vdash_{PC}A\rightarrow(B\rightarrow C)$，则$\vdash_{PC}B\rightarrow(A\rightarrow C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow C)$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A2$&lt;/li&gt;
@@ -704,7 +774,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$B\rightarrow(A\rightarrow B)$,$A1$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow(A\rightarrow C)$,$r_{mp}(7)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th3$：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A1$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))$,$Th2$（因为这是PC中的一个定理，所以它存在一个对应的证明序列，这里实际上是一种简写，不将这个定理对应的证明序列写出，后续的证明中我们也这样简写）&lt;/li&gt;
@@ -716,8 +788,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$B\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow(A\rightarrow C))$,$r_{mp}(6)(7)$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow(B\rightarrow(A\rightarrow C))$,$Th2$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;加前件定理&#34;&gt;加前件定理
 &lt;/h3&gt;&lt;p&gt;$Th4$：$\vdash_{PC}(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$A2$&lt;/li&gt;
 &lt;li&gt;$((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C)))\rightarrow((B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C))\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))))$,$A1$&lt;/li&gt;
@@ -727,14 +801,18 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow (B\rightarrow C)))$,$A1$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$r_{mp}(5)(6)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;加后件定理&#34;&gt;加后件定理
 &lt;/h3&gt;&lt;p&gt;$Th5$：$\vdash_{PC}(A\rightarrow B)\rightarrow((B\rightarrow C)\rightarrow(A\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow((B\rightarrow C)\rightarrow(A\rightarrow C))$,$Th2$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;三段论定理&#34;&gt;三段论定理
 &lt;/h3&gt;&lt;p&gt;$Th6$：$\vdash_{PC}A\rightarrow B,\vdash_{PC}B\rightarrow C$，那么$\vdash_{PC}A\rightarrow C$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(B\rightarrow C)\rightarrow((A\rightarrow B)\rightarrow(A\rightarrow C))$,$Th4$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow C$&lt;/li&gt;
@@ -742,18 +820,24 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$A\rightarrow B$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow C$,$r_{mp}(3)(4)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th7$：$\vdash_{PC}\neg A\rightarrow (A\rightarrow B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow(\neg B\rightarrow\neg A)$,$A1$&lt;/li&gt;
 &lt;li&gt;$(\neg B\rightarrow\neg A)\rightarrow (A\rightarrow B)$,$A3$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow(A\rightarrow B)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th8$：$\vdash_{PC}A\rightarrow(\neg A\rightarrow B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow (A\rightarrow B)$,$Th7$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(\neg A\rightarrow B)$,$Th2$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th9$：$\vdash_{PC}(\neg A\rightarrow A)\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow(A\rightarrow\neg(\neg A\rightarrow A))$,$Th7$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow(A\rightarrow\neg(\neg A\rightarrow A)))\rightarrow((\neg A\rightarrow A)\rightarrow(\neg A\rightarrow\neg(\neg A\rightarrow A)))$,$A2$&lt;/li&gt;
@@ -765,7 +849,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow A)\rightarrow(\neg A\rightarrow A)$,$Th1$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow A)\rightarrow A$,$r_{mp}(7)(8)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th10$：$\vdash_{PC}\neg\neg A\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg\neg A\rightarrow(\neg A\rightarrow\neg\neg\neg A)$,$Th7$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow\neg\neg\neg A)\rightarrow(\neg\neg A\rightarrow A)$,$A3$&lt;/li&gt;
@@ -775,7 +861,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$\neg\neg A\rightarrow\neg\neg A$,$Th1$&lt;/li&gt;
 &lt;li&gt;$\neg\neg A\rightarrow A$,$r_{mp}(5)(6)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th11$：$\vdash_{PC}(A\rightarrow\neg A)\rightarrow\neg A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg\neg A\rightarrow A$,$Th10$&lt;/li&gt;
 &lt;li&gt;$(\neg\neg A\rightarrow A)\rightarrow((A\rightarrow\neg A)\rightarrow(\neg\neg A\rightarrow\neg A))$,$Th5$&lt;/li&gt;
@@ -783,13 +871,17 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg\neg A\rightarrow\neg A)\rightarrow\neg A$,$Th9$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow\neg A)\rightarrow\neg A$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th12$：$\vdash_{PC}A\rightarrow\neg\neg A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(\neg A\rightarrow\neg\neg A)$,$Th8$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow\neg\neg A)\rightarrow\neg\neg A$,$Th11$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\neg\neg A$,$r_{mp}(1)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th13$：$\vdash_{PC}(A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg\neg A\rightarrow\neg\neg B)\rightarrow(\neg B\rightarrow\neg A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow\neg\neg B$,$Th12$&lt;/li&gt;
@@ -801,7 +893,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(A\rightarrow B)\rightarrow(\neg\neg A\rightarrow B)$,$r_{mp}(6)(7)$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow(\neg B\rightarrow\neg A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th14$：$\vdash_{PC}(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg A\rightarrow\neg\neg B)\rightarrow(\neg B\rightarrow A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow\neg\neg B$,$Th12$&lt;/li&gt;
@@ -809,7 +903,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow\neg\neg B)$,$r_{mp}(2)(3)$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th15$：$\vdash_{PC}(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg\neg A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$\neg\neg A\rightarrow A$,$Th10$&lt;/li&gt;
@@ -817,8 +913,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(A\rightarrow\neg B)\rightarrow(\neg\neg A\rightarrow\neg B)$,$r_{mp}(2)(3)$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;反证法&#34;&gt;反证法
 &lt;/h3&gt;&lt;p&gt;$Th16$：$\vdash_{PC}(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg A\rightarrow\neg B)\rightarrow(B\rightarrow A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$Th2$&lt;/li&gt;
@@ -830,7 +928,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow\neg(\neg A\rightarrow\neg B))\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$A3$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow\neg B)\rightarrow A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th17$：$\vdash_{PC}(A\rightarrow B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow\neg B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th15$&lt;/li&gt;
 &lt;li&gt;$B\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th3$&lt;/li&gt;
@@ -842,8 +942,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(A\rightarrow\neg(A\rightarrow\neg B))\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th15$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow((A\rightarrow\neg B)\rightarrow\neg A)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;拆分&#34;&gt;→拆分
 &lt;/h3&gt;&lt;p&gt;$Th18$：$\vdash_{PC}\neg A\rightarrow C,\vdash_{PC}B\rightarrow C$当且仅当$\vdash_{PC}(A\rightarrow B)\rightarrow C$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;当$\vdash_{PC}(A\rightarrow B)\rightarrow C$时：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow C$&lt;/li&gt;
@@ -866,15 +968,21 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg C\rightarrow C)\rightarrow C$,$Th9$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow B)\rightarrow C$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th19$：定义$A\vee B =_ {df}\neg A\rightarrow B$，$\vdash_{PC}A\rightarrow A\vee B$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(\neg A\rightarrow B)$,$Th8$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th20$：$\vdash_{PC}A\rightarrow B\vee A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(\neg B\rightarrow A)$,$A1$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th21$：如果$\vdash_{PC}P\rightarrow Q,\vdash_{PC}R\rightarrow S$，那么$\vdash_{PC}(Q\rightarrow R)\rightarrow(P\rightarrow S)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$P\rightarrow Q$&lt;/li&gt;
 &lt;li&gt;$(P\rightarrow Q)\rightarrow((Q\rightarrow R)\rightarrow(P\rightarrow R))$,$Th5$&lt;/li&gt;
@@ -884,7 +992,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(P\rightarrow R)\rightarrow(P\rightarrow S)$,$r_{mp}(4)(5)$&lt;/li&gt;
 &lt;li&gt;$(Q\rightarrow R)\rightarrow(P\rightarrow S)$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th22$：$\vdash_{PC}(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow((A\vee B)\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg A\rightarrow B)$,$Th1$&lt;/li&gt;
 &lt;li&gt;$\neg A\rightarrow((\neg A\rightarrow B)\rightarrow B)$,$Th2$&lt;/li&gt;
@@ -903,8 +1013,10 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((\neg C\rightarrow(\neg C\rightarrow\neg(\neg A\rightarrow B)))\rightarrow(\neg C\rightarrow\neg B))\rightarrow((B\rightarrow C)\rightarrow((\neg A\rightarrow B)\rightarrow C))$,$Th21$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow((\neg A\rightarrow B)\rightarrow C))$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th23$：
 定义$A\wedge B =_ {df} \neg(A\rightarrow\neg B)$，那么$\vdash_{PC}A\wedge B\rightarrow C$当且仅当$\vdash_{PC}A\rightarrow(B\rightarrow C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;当$\vdash_{PC}A\wedge B\rightarrow C$时：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow C$&lt;/li&gt;
@@ -923,24 +1035,32 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg C\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow C)$,$Th14$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow C$,$r_{mp}(4)(5)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th24$：$\vdash_{PC}A\wedge B\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg A\rightarrow(A\rightarrow\neg B)$,$Th7$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow A)$,$Th14$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow A$,$r_{mp}(1)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th25$：$\vdash_{PC}B\wedge A\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$\neg B\rightarrow(A\rightarrow\neg B)$,$A1$&lt;/li&gt;
 &lt;li&gt;$(\neg B\rightarrow(A\rightarrow\neg B))\rightarrow(\neg(A\rightarrow\neg B)\rightarrow B)$,$Th14$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg B)\rightarrow B$,$r_{mp}(1)(2)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th26$：$\vdash_{PC}A\rightarrow(B\rightarrow A\wedge B)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\wedge B\rightarrow A\wedge B$,$Th1$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow(B\rightarrow A\wedge B)$,$Th23$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th27$：$\vdash_{PC}(A\rightarrow B)\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$B\rightarrow(C\rightarrow B\wedge C)$,$Th26$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow(C\rightarrow B\wedge C))\rightarrow(A\rightarrow(B\rightarrow(C\rightarrow B\wedge C)))$,$A1$&lt;/li&gt;
@@ -951,17 +1071,23 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((A\rightarrow B)\rightarrow(C\rightarrow B\wedge C))\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$,$A2$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow((A\rightarrow C)\rightarrow(A\rightarrow B\wedge C))$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th28$：我们将$\vdash_{PC}P\rightarrow Q,\vdash_{PC}Q\rightarrow P$记作$\vdash_{PC}P\leftrightarrow Q$，那么有$\vdash_{PC}A\vee B\leftrightarrow B\vee A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow(\neg B\rightarrow A)$,$Th14$&lt;/li&gt;
 &lt;li&gt;$(\neg B\rightarrow A)\rightarrow(\neg A\rightarrow B)$,$Th14$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th29$：$\vdash_{PC}A\wedge B\leftrightarrow B\wedge A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(A\rightarrow\neg B)\rightarrow(B\rightarrow\neg A)$,$Th15$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow\neg A)\rightarrow(A\rightarrow\neg B)$,$Th15$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th30$：$\vdash_{PC}(A\vee B)\vee C\leftrightarrow A\vee(B\vee C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$B\rightarrow(\neg B\rightarrow C)$,$Th8$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow(\neg B\rightarrow C))\rightarrow((\neg A\rightarrow B)\rightarrow(\neg A\rightarrow(\neg B\rightarrow C)))$,$A2$&lt;/li&gt;
@@ -988,7 +1114,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$\neg\neg A\rightarrow(\neg(\neg A\rightarrow B)\rightarrow\neg A)$,$Th6$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg A\rightarrow B)\rightarrow C)$,$Th18$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th31$：$\vdash_{PC}(A\wedge B)\wedge C\leftrightarrow A\wedge(B\wedge C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(B\rightarrow\neg C)\rightarrow(C\rightarrow\neg B)$,$Th15$&lt;/li&gt;
 &lt;li&gt;$((B\rightarrow\neg C)\rightarrow(C\rightarrow\neg B))\rightarrow((A\rightarrow(B\rightarrow\neg C))\rightarrow(A\rightarrow(C\rightarrow\neg B)))$,$Th4$&lt;/li&gt;
@@ -1017,7 +1145,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((\neg(A\rightarrow\neg B)\rightarrow\neg C)\rightarrow(A\rightarrow\neg\neg(B\rightarrow\neg C)))\rightarrow(\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C))$,$Th13$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg\neg(B\rightarrow\neg C))\rightarrow\neg(\neg(A\rightarrow\neg B)\rightarrow\neg C)$,$r_{mp}(24)(25)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th32$：$\vdash_{PC}A\wedge(A\vee B)\leftrightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(A\vee B\rightarrow A)$,$A1$&lt;/li&gt;
 &lt;li&gt;$A\wedge(A \vee B)\rightarrow A$,$Th23$&lt;/li&gt;
@@ -1031,7 +1161,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((A\rightarrow\neg(\neg A\rightarrow B))\rightarrow\neg A)\rightarrow(A\rightarrow\neg(A\rightarrow\neg(\neg A\rightarrow B)))$,$Th15$&lt;/li&gt;
 &lt;li&gt;$A\rightarrow\neg(A\rightarrow\neg(\neg A\rightarrow B))$,$r_{mp}(9)(10)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th33$：$\vdash_{PC}A\vee(A\wedge B)\leftrightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$A\rightarrow(\neg A\rightarrow(A\wedge B))$,$Th8$&lt;/li&gt;
 &lt;li&gt;$A\wedge B\rightarrow A$,$Th24$&lt;/li&gt;
@@ -1040,7 +1172,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow A)\rightarrow A$,$Th9$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow(A\wedge B))\rightarrow A$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th34$：$\vdash_{PC}A\wedge(B\vee C)\leftrightarrow(A\wedge B)\vee(A\wedge C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$B\rightarrow(\neg B\rightarrow C)$,$Th8$&lt;/li&gt;
 &lt;li&gt;$(B\rightarrow(\neg B\rightarrow C))\rightarrow(\neg(\neg B\rightarrow C)\rightarrow\neg B)$,$Th13$&lt;/li&gt;
@@ -1070,7 +1204,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$((A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$r_{mp}(24)(25)$&lt;/li&gt;
 &lt;li&gt;$\neg(A\rightarrow\neg(\neg B\rightarrow C))\rightarrow(\neg\neg(A\rightarrow\neg B)\rightarrow\neg(A\rightarrow\neg C))$,$Th6$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$Th35$：$\vdash_{PC}A\vee(B\wedge C)\leftrightarrow(A\vee B)\wedge(A\vee C)$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$B\wedge C\rightarrow B$,$Th24$&lt;/li&gt;
 &lt;li&gt;$(B\wedge C\rightarrow B)\rightarrow((\neg A\rightarrow(B\wedge C))\rightarrow(\neg A\rightarrow B))$,$Th4$&lt;/li&gt;
@@ -1084,16 +1220,20 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$(\neg A\rightarrow B)\rightarrow((\neg A\rightarrow C)\rightarrow(\neg A\rightarrow B\wedge C))$,$Th27$&lt;/li&gt;
 &lt;li&gt;$(\neg A\rightarrow B)\wedge(\neg A\rightarrow C)\rightarrow(\neg A\rightarrow B\wedge C)$,$Th23$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;上述的35个PC的定理都是十分重要和有用的，其中定理$Th16$（反证法）和$Th18$（→拆分法）可以帮助我们将定理更加系统地证明，下面我们举两个例子进行说明。&lt;/p&gt;
 &lt;h2 id=&#34;pc的基本定理的运用&#34;&gt;PC的基本定理的运用
 &lt;/h2&gt;&lt;p&gt;运用$Th16$证明：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow A$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;如果我们要运用$Th16$，我们就需要假设这个定理不成立从而推出矛盾，不妨证明：&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}\neg(((A\rightarrow B)\rightarrow A)\rightarrow A)\rightarrow(A\rightarrow B)$&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}\neg(((A\rightarrow B)\rightarrow A)\rightarrow A)\rightarrow\neg(A\rightarrow B)$&lt;/p&gt;
 &lt;p&gt;后者即证：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow((A\rightarrow B)\rightarrow A)$，结论是显然的。&lt;/p&gt;
 &lt;p&gt;前者即证：$\vdash_{PC}((A\rightarrow B)\rightarrow A)\rightarrow(\neg(A\rightarrow B)\rightarrow A)$&lt;/p&gt;
 &lt;p&gt;后件可以由$\neg A\rightarrow(A\rightarrow B)$变形得到，所以得证。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;运用$Th18$证明：$\vdash_{PC}(A\rightarrow C)\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;运用$Th18$证明这个定理等价于证明：&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}\neg A\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}C\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
@@ -1102,7 +1242,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;p&gt;现在我们只需要证明：$\vdash_{PC}\neg A\rightarrow((B\rightarrow C)\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;即证：$\vdash_{PC}(B\rightarrow C)\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;再次运用$Th18$，即证：&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;$\vdash_{PC}\neg B\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;$\vdash_{PC}C\rightarrow(\neg A\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;后者即证$\vdash_{PC}\neg A\rightarrow(C\rightarrow(((A\rightarrow B)\rightarrow B)\rightarrow C))$&lt;/p&gt;
 &lt;p&gt;其后件是$A1$，故结论是显然的。&lt;/p&gt;
@@ -1119,33 +1261,35 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;p&gt;$\vdash_{PC}\neg A\rightarrow(A\rightarrow B)$&lt;/p&gt;
 &lt;p&gt;$\vdash_{PC}(A\rightarrow B)\rightarrow(\neg C\rightarrow(A\rightarrow B))$&lt;/p&gt;
 &lt;p&gt;按照上述思路将对应的证明序列写出即可证明该定理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;演绎定理&#34;&gt;演绎定理
 &lt;/h2&gt;&lt;p&gt;证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;$(C\rightarrow D)\rightarrow((B\rightarrow C)\rightarrow(B\rightarrow D))$,$Th4$&lt;/li&gt;
 &lt;li&gt;$((B\rightarrow C)\rightarrow(B\rightarrow D))\rightarrow((A\rightarrow(B\rightarrow C))\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th4$&lt;/li&gt;
 &lt;li&gt;$(C\rightarrow D)\rightarrow((A\rightarrow(B\rightarrow C))\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th6$&lt;/li&gt;
 &lt;li&gt;$(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$,$Th2$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;上面这个例子表明，在PC中证明定理的这个过程中的公式序列的公式长度通常较长，为了缩短公式序列的长度，我们现在给出PC中一个重要方便的定理：&lt;strong&gt;演绎定理&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;演绎定理&lt;/strong&gt;：对PC中任意公式集合$\Gamma$和公式$A,B$，$\Gamma\cup{A}\vdash_{PC}B$（或记为$\Gamma;A\vdash_{PC}B$）当且仅当$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
-&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;演绎定理&lt;/strong&gt;：对PC中任意公式集合$\Gamma$和公式$A,B$，$\Gamma\cup${$A$}$\vdash_{PC}B$（或记为$\Gamma;A\vdash_{PC}B$）当且仅当$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：（充分性）&lt;/p&gt;
 &lt;p&gt;已知$\Gamma\vdash_{PC}A\rightarrow B$&lt;/p&gt;
 &lt;p&gt;从$\Gamma$出发在PC可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$&lt;/p&gt;
-&lt;p&gt;从$\Gamma\cup{A}$出发在PC也可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$&lt;/p&gt;
-&lt;p&gt;从$\Gamma\cup{A}$出发在PC中可以得到$B$的一个演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B),A,B$&lt;/p&gt;
-&lt;p&gt;也就是说有$\Gamma;A\vdash_{PC}B$。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;证明：（必要性）&lt;/p&gt;
-&lt;p&gt;已知$\Gamma\cup{A}\vdash_{PC}B$&lt;/p&gt;
-&lt;p&gt;从$\Gamma\cup{A}$出发在PC可以得到一个$B$的演绎序列$B_1,B_2,\cdots,B_k(=B)$，我们对演绎序列的长度$k$使用数学归纳法：&lt;/p&gt;
-&lt;p&gt;当$k=1$时可知$B$或是公理、或有$B\in\Gamma\cup{A}$：&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup${$A$}出发在PC也可以得到一个$A\rightarrow B$的演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B)$&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup${$A$}出发在PC中可以得到$B$的一个演绎序列$A_1,A_2,\cdots,A_n(=A\rightarrow B),A,B$&lt;/p&gt;
+&lt;p&gt;也就是说有$\Gamma;A\vdash_{PC}B$。
+证明：（必要性）&lt;/p&gt;
+&lt;p&gt;已知$\Gamma\cup${$A$}$\vdash_{PC}B$&lt;/p&gt;
+&lt;p&gt;从$\Gamma\cup${$A$}出发在PC可以得到一个$B$的演绎序列$B_1,B_2,\cdots,B_k(=B)$，我们对演绎序列的长度$k$使用数学归纳法：&lt;/p&gt;
+&lt;p&gt;当$k=1$时可知$B$或是公理、或有$B\in\Gamma\cup${$A$}：&lt;/p&gt;
 &lt;p&gt;当$B$是公理时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;当$B\in\Gamma$时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;当$B=A$时，$A\rightarrow B$也即$A\rightarrow A$，也就是$Th1$，那么有$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;假设$k&amp;lt; n$时原命题成立，那么对于$B$的演绎序列中的公式有$\Gamma\vdash_{PC}A\rightarrow B_i,i&amp;lt; n$。&lt;/p&gt;
-&lt;p&gt;那么$k=n$时$B$或为公理、或有$B\in\Gamma\cup{A}$，或由$B_i,B_j(i,j&amp;lt; n)$通过$r_{mp}$得到。&lt;/p&gt;
+&lt;p&gt;那么$k=n$时$B$或为公理、或有$B\in\Gamma\cup${$A$}，或由$B_i,B_j(i,j&amp;lt; n)$通过$r_{mp}$得到。&lt;/p&gt;
 &lt;p&gt;当$B$是公理时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;当$B\in\Gamma$时，$A\rightarrow B$有演绎序列$B,B\rightarrow(A\rightarrow B),A\rightarrow B$。&lt;/p&gt;
 &lt;p&gt;当$B=A$时，$A\rightarrow B$也即$A\rightarrow A$，也就是$Th1$，那么有$\Gamma\vdash_{PC}A\rightarrow B$。&lt;/p&gt;
@@ -1154,8 +1298,9 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;p&gt;也就是说：$\Gamma\vdash_{PC}A\rightarrow B_i,\Gamma\vdash_{PC}A\rightarrow(B_i\rightarrow B)$&lt;/p&gt;
 &lt;p&gt;由$A2$知：$(A\rightarrow(B_i\rightarrow B))\rightarrow((A\rightarrow B_i)\rightarrow(A\rightarrow B))$&lt;/p&gt;
 &lt;p&gt;故：$\vdash_{PC}(A\rightarrow B_i)\rightarrow(A\rightarrow B)$，则$\Gamma\vdash_{PC}A\rightarrow B$&lt;/p&gt;
-&lt;hr&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我们现在回到上面那个例子，现在使用演绎定理解决这个问题。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;证明：$\vdash_{PC}(A\rightarrow(B\rightarrow C))\rightarrow((C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D)))$&lt;/p&gt;
 &lt;p&gt;即证：$A\rightarrow(B\rightarrow C)\vdash_{PC}(C\rightarrow D)\rightarrow(A\rightarrow(B\rightarrow D))$&lt;/p&gt;
 &lt;p&gt;即证：$A\rightarrow(B\rightarrow C),C\rightarrow D\vdash_{PC}A\rightarrow(B\rightarrow D)$&lt;/p&gt;
@@ -1170,6 +1315,7 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;$C\rightarrow D$&lt;/li&gt;
 &lt;li&gt;$D$,$r_{mp}(5)(6)$&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;不难发现，在使用了演绎定理之后，我们的证明过程中涉及的公式变得更加简单了。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;pc定理证明习题选&#34;&gt;PC定理证明习题选
@@ -1183,7 +1329,6 @@ $A3$的含义是：如果$A$不成立能推出$B$不成立，那么$B$成立就�
 &lt;li&gt;证明：$\vdash_{PC}((B\rightarrow C)\rightarrow(D\rightarrow E))\rightarrow(((B\rightarrow C)\rightarrow(G\rightarrow H))\rightarrow(((A\rightarrow B)\rightarrow C)\rightarrow\neg(((E\rightarrow G)\rightarrow(D\rightarrow H))\rightarrow\neg((G\rightarrow\neg H)\rightarrow\neg G))))$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;水平有限，存在的错误和不足请大家指正。&lt;/p&gt;
 </description>
         </item>
         
