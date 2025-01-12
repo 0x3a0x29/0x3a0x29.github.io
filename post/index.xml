@@ -1385,7 +1385,7 @@ $A1:A\rightarrow (B\rightarrow A)$&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;逻辑推理相关的基本定义&#34;&gt;逻辑推理相关的基本定义
 &lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;证明&lt;/strong&gt;：称以下公式序列为公式$A$在PC中的一个证明：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过推理规则得到的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;证明&lt;/strong&gt;：称以下公式序列为公式$A$在PC中的一个证明：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过形成规则得到的。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;定理&lt;/strong&gt;：公式$A$在PC中有一个证明序列，那么它就是PC的定理，我们记为$\vdash_{PC}A$。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;演绎&lt;/strong&gt;：设$\Gamma$为PC中若干公式构成的公式集，则称下列公式序列为公式$A$以$\Gamma$为前提的演绎：$A_1,A_2,\cdots,A_{m-1},A$，其中$A_i$或为PC的公理、或为$\Gamma$中的成员、或为$A_j(j&amp;lt; i)$、或为$A_j,A_k(j,k&amp;lt; i)$通过分离规则得到的。我们可以记为$\Gamma\vdash_{PC}A$。&lt;/li&gt;
 &lt;/ol&gt;
